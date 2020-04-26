@@ -3,26 +3,26 @@ import {
   Request,
   HtmlResponse
 } from '../../deps.ts'
-import Page from '../view/page.ts'
+import Page from '../pages/page.ts'
 
 export function get (request: Request): HtmlResponse {
-  return new Page('Search', [
+  return new Page({ section: 'Search', main: [
     new Element('h1', { innerHTML: 'Search' }),
     searchForm(request)
-  ])
+  ] })
 }
 
 export async function post (request: Request): Promise<HtmlResponse> {
   const params = await request.postParams()
 
-  return new Page('Search', [
+  return new Page({ section: 'Search', main: [
     new Element('h1', { innerHTML: 'Search' }),
     searchForm(request),
     new Element('pre', {
       css: { 'white-space': 'pre-wrap' },
       innerHTML: `text: ${params.get('text')}, query11: ${params.get('query11')}`
     })
-  ])
+  ] })
 }
 
 function searchForm (request: Request): Element {

@@ -1,12 +1,7 @@
-import * as colours from './colours.ts'
-import * as fonts from './fonts.ts'
+import * as colours from '../style/colours.ts'
+import * as fonts from '../style/fonts.ts'
 
 export default `
-${fonts.GFSDidot}
-${fonts.IMFell}
-${fonts.IMFellItalic}
-${fonts.IMFellSC}
-
 * {
   box-sizing: border-box;
 }
@@ -25,46 +20,6 @@ body {
   line-height: 1.5;
   background: ${colours.offwhite};
   color: ${colours.black};
-}
-
-header {
-  padding: 1em 1em .5em;
-  font-family: ${fonts.old};
-  font-size: 2em;
-  font-weight: 600;
-  text-align: center;
-}
-
-nav section {
-  display: flex;
-  justify-content: space-around;
-}
-
-nav {
-  margin: -0.5em 0;
-}
-
-nav a {
-  padding: .25em 2em;
-  border-bottom: .125em solid transparent;
-}
-
-nav a.active, nav a:hover {
-  border-color: ${colours.blue};
-  text-decoration: none;
-}
-
-main {}
-
-footer {
-  background: ${colours.gray};
-  color: ${colours.darkgray};
-}
-
-section {
-  padding: 1em;
-  max-width: 56em;
-  margin: 0 auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -106,8 +61,19 @@ input[type="text"], select {
   font: inherit;
 }
 
+button {
+  font: inherit;
+  border: 0;
+  outline: 0;
+  padding: .5em 1em;
+  background: ${colours.blue};
+  color: #fff;
+  cursor: pointer;
+}
+
 a {
   color: ${colours.blue};
+  cursor: pointer;
   text-decoration: none;
 }
 
@@ -118,4 +84,4 @@ a:hover {
 b {
   font-weight: 600;
 }
-`.replace(/\n/g, '').replace(/\s\s+/g, ' ')
+`

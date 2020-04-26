@@ -3,37 +3,43 @@ import {
   Request,
   HtmlResponse
 } from '../../deps.ts'
-import Page from '../view/page.ts'
+import Page from '../pages/page.ts'
 
 export function index (request: Request): HtmlResponse {
-  return new Page('About', [
+  return new Page({ section: 'About', main: [
     new Element('h1', { innerHTML: 'General Information' }),
     new Element('p', { innerHTML: '<i>English Philosophical Texts Online</i> is part of a project at the <a href="https://www.ox.ac.uk">University of Oxford</a>, and aims to provide high-quality digital editions of a broad canon of English language philosophical works published in Britain between 1650 and 1830, to make them freely available in one place, and to provide intuitive software for performing sophisticated searches and stylometric analyses of these texts.' }),
     new Element('p', { innerHTML: 'Roughly half of our target texts have already been digitised, through projects like the <a href="http://www.textcreationpartnership.org/">Text Creation Partnership</a>, the <a href="http://oll.libertyfund.org/">Online Library of Liberty</a>, and <a href="https://www.gutenberg.org/">Project Gutenberg</a>. However, these works can be difficult to locate unless you already know where to look, and the fact that they are spread out over multiple sites prohibits systematic searching and comparative analysis. Furthermore, the editions on these sites do not include universal paragraph references, making them of limited use to scholars of philosophy and the history of ideas. By combining these works with new digitisations of as many other texts, including several by often neglected female writers, we hope to provide a lasting scholarly resource of unparalleled size.' }),
     new Element('p', { innerHTML: 'Thanks to the <a href="https://innovation.ox.ac.uk/award-details/john-fell-fund/">John Fell Fund</a>, we conducted a pilot project last year (2018-19), the principal aim of which was to locate the best publicly available digital editions of our target works, and to estimate the cost and feasibility of converting these texts into a consistent format and of digitizing those that remain. We are now preparing a detailed application to the Leverhulme Trust for the necessary funds to see the project through to completion. We continue to seek input from scholars, teachers, and other interested parties, so please <a href="/contact">contact us</a> with any suggestions, queries, or expressions of interest.' })
-  ])
+  ] })
+}
+
+export function corpus (request: Request): HtmlResponse {
+  return new Page({ section: 'About', main: [
+    new Element('h1', { innerHTML: 'Corpus Details' })
+  ] })
 }
 
 export function principles (request: Request): HtmlResponse {
-  return new Page('About', [
+  return new Page({ section: 'About', main: [
     new Element('h1', { innerHTML: 'Editorial Principles' })
-  ])
+  ] })
 }
 
 export function permissions (request: Request): HtmlResponse {
-  return new Page('About', [
+  return new Page({ section: 'About', main: [
     new Element('h1', { innerHTML: 'Permissions' })
-  ])
+  ] })
 }
 
 export function contact (request: Request): HtmlResponse {
-  return new Page('About', [
+  return new Page({ section: 'About', main: [
     new Element('h1', { innerHTML: 'Contact Us' })
-  ])
+  ] })
 }
 
 export function support (request: Request): HtmlResponse {
-  return new Page('About', [
+  return new Page({ section: 'About', main: [
     new Element('h1', { innerHTML: 'Statements of Support' }),
     new Element('div', { children: statements.map(x => {
       return new Element('div', { children: [
@@ -41,7 +47,7 @@ export function support (request: Request): HtmlResponse {
         new Element('cite', { innerHTML: `${x.from}, ${x.affiliation}` })
       ] })
     }) })
-  ])
+  ] })
 }
 
 const statements = [

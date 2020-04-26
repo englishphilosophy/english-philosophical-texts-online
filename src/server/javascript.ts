@@ -15,7 +15,7 @@ export default async function index (request: Request): Promise<JavascriptRespon
   const [diagnostics, javascript] = await Deno.bundle(filePath, undefined, compilerOptions)
 
   if (diagnostics) {
-    throw new HttpError(500, `Bad javascript.`)
+    throw new HttpError(500, `<p>Bad javascript.</p> <pre>${JSON.stringify(diagnostics, null, 2)}</pre>`)
   }
 
   return new JavascriptResponse(javascript)

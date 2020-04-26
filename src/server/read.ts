@@ -1,31 +1,30 @@
 import {
   existsSync,
-  readJsonSync
+  readJsonSync,
+  Author,
+  Text
 } from '../../deps.ts'
-import Author from '../data/author.ts'
-import Text from '../data/text.ts'
 
-const dataDir = '../english-philosophical-texts/build/texts'
+const dataDir = '../english-philosophical-texts/build'
 
 export function authors (): Author[] {
-  const data = readJsonSync(`${dataDir}/index.json`) as any
-  return data.texts.map((x: any) => new Author(x))
+  return (readJsonSync(`${dataDir}/index.json`) as any).texts as Author[]
 }
 
-export function author (id: string): Author|null {
-  const data = readJsonSync(`${dataDir}/index.json`) as any
-  const author = data.texts.find((x: any) => x.id.toLowerCase() === id.toLowerCase())
-  return author ? new Author(author) : null
+export function author (id: string): Author|undefined {
+  return authors().find((x: any) => x.id.toLowerCase() === id.toLowerCase())
 }
 
-export function text(id: string): Text|null {
-  const path1 = `${dataDir}/${id.toLowerCase().replace(/\./, '/')}.json`
-  const path2 = path1.replace(/\.json$/, '/index.json')
-  if (existsSync(path1)) {
-    return new Text(readJsonSync(path1))
+export function text(id: string, type: 'texts'|'html'|'search' = 'texts'): Text|undefined {
+  let path = `${dataDir}/${type}/${id.toLowerCase().replace(/\./g, '/')}.json`
+  if (!existsSync(path)) {
+    path = path.replace(/\.json$/, '/index.json')
   }
-  if (existsSync(path2)) {
-    return new Text(readJsonSync(path2))
-  }
-  return null
+  return existsSync(path) ? readJsonSync(path) as Text : undefined
+}
+
+export function ancestors (id: string): Text[] {
+  return id.split('.')
+    .map((value, index, array) => array.slice(0, index + 1).join('.'))
+    .map(id => text(id)) as Text[]
 }
