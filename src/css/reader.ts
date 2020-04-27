@@ -5,12 +5,18 @@ export default `
   padding: .5em;
 }
 
+.reader .title,
+.reader .content {
+  max-width: 40em;
+  margin: 0 auto;
+}
+
 @media (min-width: 60em) {
   .reader {
     grid-template-columns: 1fr 1fr;
   }
 
-  .blocks:first-child .block {
+  .reader .title {
     position: sticky;
     top: 3em;
   }

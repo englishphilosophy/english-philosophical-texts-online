@@ -10,3 +10,9 @@ export {
   Block
 // } from 'https://raw.githubusercontent.com/englishphilosophy/english-philosophical-texts/bin/type/library.ts'
 } from '../english-philosophical-texts/bin/types/library.ts'
+
+export {
+  Analysis,
+  Lemma
+// } from 'https://raw.githubusercontent.com/englishphilosophy/english-philosophical-texts/master/bin/types/analysis.ts'
+} from '../english-philosophical-texts/bin/types/analysis.ts'
