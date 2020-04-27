@@ -26,7 +26,7 @@ export function index (request: Request): HtmlResponse {
   return new ReaderPage({type: 'Text', value: text }, read.ancestors(text.id))
 }
 
-export function analysis (request: Request): HtmlResponse {
+export function usage (request: Request): HtmlResponse {
   const urlBits = request.path.split('/').slice(2, -1)
 
   if (urlBits.length === 1) {
@@ -44,4 +44,18 @@ export function analysis (request: Request): HtmlResponse {
     throw new HttpError(Status.NotFound, 'Text not found.')
   }
   return new ReaderPage({ type: 'Text', value: text }, read.ancestors(text.id), analysis)
+}
+
+export function about (request: Request): HtmlResponse {
+  const urlBits = request.path.split('/').slice(2, -1)
+
+  if (urlBits.length === 1) {
+    throw new HttpError(Status.NotFound, 'Author not found.')
+  }
+
+  const text = read.text(urlBits.join('/'), 'html')
+  if (!text || !text.imported) {
+    throw new HttpError(Status.NotFound, 'Text not found.')
+  }
+  return new ReaderPage({type: 'About', value: text }, read.ancestors(text.id))
 }

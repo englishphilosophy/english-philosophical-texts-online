@@ -11,7 +11,8 @@ import errorHandler from './error.ts'
 const app = new App()
 
 app.route('GET', '/', home)
-app.route('GET', '/texts/.*/analysis', texts.analysis)
+app.route('GET', '/texts/.*/usage', texts.usage)
+app.route('GET', '/texts/.*/about', texts.about)
 app.route('GET', '/texts/.*', texts.index)
 app.route('GET', '/search', search.get)
 app.route('POST', '/search', search.post)

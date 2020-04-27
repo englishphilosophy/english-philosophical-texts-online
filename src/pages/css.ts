@@ -5,6 +5,7 @@ import breadcrumb from '../css/breadcrumb.ts'
 import controls from '../css/controls.ts'
 import header from '../css/header.ts'
 import library from '../css/library.ts'
+import links from '../css/links.ts'
 import main from '../css/main.ts'
 import misc from '../css/misc.ts'
 import nav from '../css/nav.ts'
@@ -22,6 +23,7 @@ ${breadcrumb}
 ${controls}
 ${header}
 ${library}
+${links}
 ${main}
 ${misc}
 ${nav}

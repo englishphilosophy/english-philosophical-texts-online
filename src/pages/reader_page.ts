@@ -14,19 +14,28 @@ import toc from '../elements/toc.ts'
 import blocks from '../elements/blocks.ts'
 import lemmas from '../elements/lemmas.ts'
 
-type Data = { type: 'Author', value: Author } | { type: 'Text', value: Text }
+type Data = { type: 'Author', value: Author }
+          | { type: 'Text', value: Text }
+          | { type: 'About', value: Text }
 
 export default class ReaderPage extends Page {
   constructor (data: Data, ancestors: (Author|Text)[], analysis?: Analysis) {
     const title = (data.type === 'Author') ? authorTitle(data.value) : textTitle(data.value)
-    const content = [links(data.value)]
+    const section = analysis ? 'Usage' : data.type
+    const content = [links(data.value, section)]
     if (analysis) {
       content.push(...analysisContent(analysis))
     } else {
-      if (data.type === 'Author') {
-        content.push(...authorContent(data.value))
-      } else {
-        content.push(...textContent(data.value))
+      switch (data.type) {
+        case 'Author':
+          content.push(...authorContent(data.value))
+          break
+        case 'Text':
+          content.push(...textContent(data.value))
+          break
+        case 'About':
+          content.push(...aboutContent(data.value))
+          break
       }
     }
 
@@ -61,6 +70,19 @@ function textContent (text: Text): Element[] {
   }
 
   return [blocks(text.blocks.slice(1))]
+}
+
+function aboutContent(text: Text): Element[] {
+  return [
+    new Element('h2', { innerHTML: 'First published' }),
+    new Element('p', { innerHTML: text.published }),
+    new Element('h2', { innerHTML: 'Copytext' }),
+    new Element('p', { innerHTML: text.copytext }),
+    new Element('h2', { innerHTML: 'Source' }),
+    new Element('p', { innerHTML: text.sourceUrl || 'none' }),
+    new Element('h2', { innerHTML: 'Comments' }),
+    new Element('p', { innerHTML: text.sourceDesc })
+  ]
 }
 
 function analysisContent (analysis: Analysis): Element[] {
