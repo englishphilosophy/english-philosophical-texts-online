@@ -12,6 +12,7 @@ import nav from '../css/nav.ts'
 import reader from '../css/reader.ts'
 import summary from '../css/summary.ts'
 import toc from '../css/toc.ts'
+import usage from '../css/usage.ts'
 
 export default `
 ${fonts.GFSDidot}
@@ -30,4 +31,5 @@ ${nav}
 ${reader}
 ${summary}
 ${toc}
+${usage}
 `.replace(/\n/g, '').replace(/\s\s+/g, ' ')

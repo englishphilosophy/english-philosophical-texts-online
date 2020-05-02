@@ -1,4 +1,4 @@
-const nav = document.querySelector('.nav') as HTMLElement
+const nav = document.querySelector('.nav')
 
 if (nav) {
   const offsetTop = nav.offsetTop

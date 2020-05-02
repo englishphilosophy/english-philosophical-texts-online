@@ -84,4 +84,27 @@ a:hover {
 b {
   font-weight: 600;
 }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  overflow-x: auto;
+}
+
+thead tr {
+  background: ${colours.lightgray};
+}
+
+tbody tr {
+  border-top: 1px solid ${colours.darkgray};
+}
+
+th {
+  text-align: left;
+  font-weight: 600;
+}
+
+th, td {
+  padding: .25em .5em;
+}
 `

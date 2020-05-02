@@ -9,6 +9,7 @@ export default `
   flex: 1;
   padding: .5em 1em;
   border: 1px solid ${colours.blue};
+  transition: all .2s ease-in-out;
 }
 
 .links a:not(:last-child) {
@@ -19,5 +20,6 @@ export default `
 .links a.active {
   background: ${colours.blue};
   color: #fff;
+  text-decoration: none;
 }
 `
