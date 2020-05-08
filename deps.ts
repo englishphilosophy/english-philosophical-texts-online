@@ -3,7 +3,7 @@ export {
   readFileStrSync,
   readJsonSync,
   writeFileStrSync
-} from 'https://deno.land/std@v0.41.0/fs/mod.ts'
+} from 'https://deno.land/std@v0.42.0/fs/mod.ts'
 
 export {
   App,
