@@ -17,11 +17,10 @@ type T_Sections = [T_Section, T_Section, T_Section]
 type A_Section = 'about'|'works'|'search'|'summary'|'names'|'citations'|'foreign'|'lemmas'
 type A_Sections = [A_Section, A_Section, A_Section]
 
-export function text (text: Text, analysis: Analysis, sections: T_Sections): Element {
+export function text (text: Text, analysis: Analysis): Element {
   return new Element('div', { class: 'reader', children: [
-    section(textSelect(text, sections[0]), textContent(text, analysis, sections[0])),
-    section(textSelect(text, sections[1]), textContent(text, analysis, sections[1])),
-    section(textSelect(text, sections[2]), textContent(text, analysis, sections[2]))
+    section(textContent(text, analysis, 'title')),
+    section(textContent(text, analysis, 'content'), textSelect(text, 'content'))
   ] })
 }
 
@@ -56,11 +55,10 @@ export function textContent (text: Text, analysis: Analysis, section: T_Section)
   }
 }
 
-export function author (author: Author, analysis: Analysis, sections: A_Sections): Element {
+export function author (author: Author, analysis: Analysis): Element {
   return new Element('div', { class: 'reader', children: [
-    section(authorSelect(author, sections[0]), authorContent(author, analysis, sections[0])),
-    section(authorSelect(author, sections[1]), authorContent(author, analysis, sections[1])),
-    section(authorSelect(author, sections[2]), authorContent(author, analysis, sections[2]))
+    section(authorContent(author, analysis, 'about')),
+    section(authorContent(author, analysis, 'works'), authorSelect(author, 'works'))
   ] })
 }
 
@@ -92,16 +90,15 @@ export function authorContent (author: Author, analysis: Analysis, section: A_Se
   }
 }
 
-function section (select: Element, content: Element): Element {
+function section (content: Element, select?: Element): Element {
   return new Element('div', { class: 'section-wrapper', children: [
-    new Element('div', { class: 'section', children: [select, content] })
+    new Element('div', { class: 'section', children: select ? [select, content] : [content] })
   ] })
 }
 
 function textSelect (text: Text, section: T_Section): Element {
   return new Element('select', { class: 'section-menu', 'data-text': text.id, children: [
     new Element('optgroup', { label: 'Text', children: [
-      option('Title', 'title', section === 'title'),
       option((text.texts.length > 0 ? 'Table of Contents' : 'Text'), 'content', section === 'content'),
       option('Search', 'search', section === 'search')
     ] }),
@@ -121,7 +118,6 @@ function textSelect (text: Text, section: T_Section): Element {
 function authorSelect (author: Author, section: A_Section): Element {
   return new Element('select', { class: 'section-menu', 'data-author': author.id, children: [
     new Element('optgroup', { label: 'Author', children: [
-      option('About', 'about', section === 'about'),
       option('Works', 'works', section === 'works'),
       option('Search', 'search', section === 'search')
     ] }),

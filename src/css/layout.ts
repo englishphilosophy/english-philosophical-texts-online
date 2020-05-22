@@ -67,10 +67,26 @@ header nav a:hover, header nav a.active {
   text-decoration: none;
 }
 
-body > nav {}
+body > nav {
+  background-image: url('${images.leviathan}');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 4em;
+}
 
-body > nav h1 {
-  margin: 1rem 1rem 0;
+body > nav hgroup {
+  flex: 1;
+  background: ${colours.transblack};
+  color: ${colours.white};
+}
+
+body > nav hgroup h1 {
+  max-width: 83em;
+  margin: 0 auto;
+  padding: 1rem;
+  font-size: 1.375em;
 }
 
 main {}
@@ -78,7 +94,7 @@ main {}
 footer {
   background: ${colours.black};
   color: ${colours.white};
-  padding: 8em 0 2em;
+  padding: 8em 0 0;
 }
 
 footer section {
@@ -88,12 +104,16 @@ footer section {
 }
 
 footer p {
-  flex-basis: 40em;
+  flex-basis: 38em;
 }
 
 footer ul {
   margin: 0;
   list-style-type: none;
+}
+
+footer a {
+  color: ${colours.beige};
 }
 
 section {
@@ -123,22 +143,8 @@ main section, footer section {
     margin-bottom: 0
   }
 
-  body > nav {
-    height: 18em;
-    background-image: url('${images.leviathan}');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 1em;
-  }
-
-  body > nav h1 {
-    margin: 0;
-    padding: 1rem;
-    background: ${colours.blue};
-    color: ${colours.white};
+  body.home > nav {
+    padding: 10em 1em 1em;
   }
 
   main section, footer section {

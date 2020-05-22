@@ -48,7 +48,7 @@ function head (options: Options): Element {
 
 /** Generates the body element. */
 function body (options: Options): Element {
-  return new Element('body', { children: [
+  return new Element('body', { class: options.bodyClass, children: [
     header(options.section),
     nav(options.nav || []),
     main(options.main),
@@ -61,7 +61,7 @@ function header (section: string): Element {
   return new Element('header', { children: [
     new Element('hgroup', { children: [
       new Element('h1', { innerHTML: 'English Philosophical Texts Online' }),
-      new Element('h2', { innerHTML: 'An online library of early modern English-language philosophical texts' })
+      new Element('h2', { innerHTML: 'An free online library of early modern English-language philosophical texts' })
     ] }),
     new Element('nav', { children: [
       sectionLink('/', 'Texts', section),
@@ -78,9 +78,7 @@ function sectionLink (href: string, innerHTML: string, section: string): Element
 
 /** Generates the nav element. */
 function nav (children: Element[]): Element {
-  return new Element('nav', { children: [
-    new Element('section', { children })
-  ] })
+  return new Element('nav', { children })
 }
 
 /** Generates the main element. */

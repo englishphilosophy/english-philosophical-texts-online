@@ -3,11 +3,11 @@ export {
   readFileStrSync,
   readJsonSync,
   writeFileStrSync
-} from 'https://deno.land/std@v0.51.0/fs/mod.ts'
+} from 'https://deno.land/std@v0.52.0/fs/mod.ts'
 
 export {
   parse as parseYaml
-} from 'https://deno.land/std@v0.51.0/encoding/yaml.ts'
+} from 'https://deno.land/std@v0.52.0/encoding/yaml.ts'
 
 export {
   App,

@@ -38,7 +38,7 @@ export async function leviathan (request: Request): Promise<FileResponse> {
 /** Returns the home page. */
 export function home (request: Request): HtmlResponse {
   const authors = read.authors()
-  return new Page({ section: 'Texts', nav: [controls()], main: [library(authors)] })
+  return new Page({ section: 'Texts', bodyClass: 'home', nav: [controls()], main: [library(authors)] })
 }
 
 /** Returns the page for an author or text (or a 404 error). */
@@ -52,7 +52,7 @@ export function text (request: Request): HtmlResponse {
     }
     return new Page({
       section: 'Texts',
-      main: [reader.author(author, analysis, ['about', 'works', 'search'])],
+      main: [reader.author(author, analysis)],
       nav: [breadcrumb([author])]
     })
   } else {
@@ -63,7 +63,7 @@ export function text (request: Request): HtmlResponse {
     }
     return new Page({
       section: 'Texts',
-      main: [reader.text(text, analysis, ['title', 'content', 'search'])],
+      main: [reader.text(text, analysis)],
       nav: [breadcrumb(read.ancestors(text.id)), context(read.previous(text.id), read.next(text.id))]
     })
   }
@@ -102,7 +102,7 @@ export function about (request: Request): HtmlResponse {
         : page.content
       return new Page({
         section: 'About',
-        nav: [new Element('h1', { innerHTML: page.title })],
+        nav: [new Element('hgroup', { children: [new Element('h1', { innerHTML: `About: ${page.title}` })] })],
         main: [info(pageId, aboutPages, content)]
       })
     }
@@ -118,7 +118,7 @@ export function research (request: Request): HtmlResponse {
     if (pageId === page.id) {
       return new Page({
         section: 'Research',
-        nav: [new Element('h1', { innerHTML: page.title })],
+        nav: [new Element('hgroup', { children: [new Element('h1', { innerHTML: `Research: ${page.title}` })] })],
         main: [info(pageId, researchPages, page.content)]
       })
     }
