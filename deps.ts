@@ -3,7 +3,11 @@ export {
   readFileStrSync,
   readJsonSync,
   writeFileStrSync
-} from 'https://deno.land/std@v0.42.0/fs/mod.ts'
+} from 'https://deno.land/std@v0.51.0/fs/mod.ts'
+
+export {
+  parse as parseYaml
+} from 'https://deno.land/std@v0.51.0/encoding/yaml.ts'
 
 export {
   App,
@@ -14,17 +18,20 @@ export {
   HtmlResponse,
   JavascriptResponse,
   JsonResponse,
+  FileResponse,
   Status,
   TagName
 // } from 'https://raw.githubusercontent.com/merivale/elementary/master/mod.ts'
 } from '../elementary/mod.ts'
 
+import Author from '../english-philosophical-texts/bin/types/author.ts'
+import Block from '../english-philosophical-texts/bin/types/block.ts'
+import Text from '../english-philosophical-texts/bin/types/text.ts'
 export {
   Author,
-  Text,
-  Block
-// } from 'https://raw.githubusercontent.com/englishphilosophy/english-philosophical-texts/bin/type/library.ts'
-} from '../english-philosophical-texts/bin/types/library.ts'
+  Block,
+  Text
+}
 
 export {
   Analysis,

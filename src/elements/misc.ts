@@ -1,22 +1,23 @@
 import {
   Author,
-  Text
+  Text,
+  Block
 } from '../../deps_client.ts'
 
-export function textLink (text: Text): string {
-  return `<a href="${url(text)}">${textTitle(text)}</a>`
+export function link (data: Author|Text|Block): string {
+  if (data instanceof Author) {
+    return `<a href="${url(data)}">${fullname(data)}</a>`
+  }
+  if (data instanceof Text) {
+    return `<a href="${url(data)}">${title(data)}</a>`
+  }
+  return `<a href="${url(data)}">${data.id}</a>`
 }
 
-export function authorLink (author: Author): string {
-  return `<a href="${url(author)}">${fullname(author)}</a>`
-}
-
-export function url (data: Author|Text): string {
-  return `/texts/${data.id.toLowerCase().replace(/\./g, '/')}`
-}
-
-export function textTitle (text: Text): string {
-  return `${text.title} (${text.published})`
+export function url (data: Author|Text|Block): string {
+  return (data instanceof Block && data.type !== 'title')
+    ? `/texts/${data.id.toLowerCase().replace(/\.([^\.]*)$/, '#$1').replace(/\./g, '/')}`
+    : `/texts/${data.id.toLowerCase().replace(/\./g, '/')}`
 }
 
 export function fullname (author: Author, search?: string): string {
@@ -27,6 +28,10 @@ export function fullname (author: Author, search?: string): string {
   return (search && search.length > 0)
     ? fullname.replace(regexp(search), '<mark>$1</mark>')
     : fullname
+}
+
+export function title (text: Text): string {
+  return `${text.title} (${text.published.map(x => x.toString(10)).join(', ')})`
 }
 
 export function regexp (search: string): RegExp {

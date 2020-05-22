@@ -1,56 +1,10 @@
-import {
-  Element,
-  Request,
-  HtmlResponse
-} from '../../deps.ts'
-import Page from '../pages/page.ts'
-
-export function index (request: Request): HtmlResponse {
-  return new Page({ section: 'About', main: [
-    new Element('h1', { innerHTML: 'General Information' }),
-    new Element('p', { innerHTML: '<i>English Philosophical Texts Online</i> is part of a project at the <a href="https://www.ox.ac.uk">University of Oxford</a>, and aims to provide high-quality digital editions of a broad canon of English language philosophical works published in Britain between 1650 and 1830, to make them freely available in one place, and to provide intuitive software for performing sophisticated searches and stylometric analyses of these texts.' }),
-    new Element('p', { innerHTML: 'Roughly half of our target texts have already been digitised, through projects like the <a href="http://www.textcreationpartnership.org/">Text Creation Partnership</a>, the <a href="http://oll.libertyfund.org/">Online Library of Liberty</a>, and <a href="https://www.gutenberg.org/">Project Gutenberg</a>. However, these works can be difficult to locate unless you already know where to look, and the fact that they are spread out over multiple sites prohibits systematic searching and comparative analysis. Furthermore, the editions on these sites do not include universal paragraph references, making them of limited use to scholars of philosophy and the history of ideas. By combining these works with new digitisations of as many other texts, including several by often neglected female writers, we hope to provide a lasting scholarly resource of unparalleled size.' }),
-    new Element('p', { innerHTML: 'Thanks to the <a href="https://innovation.ox.ac.uk/award-details/john-fell-fund/">John Fell Fund</a>, we conducted a pilot project last year (2018-19), the principal aim of which was to locate the best publicly available digital editions of our target works, and to estimate the cost and feasibility of converting these texts into a consistent format and of digitizing those that remain. We are now preparing a detailed application to the Leverhulme Trust for the necessary funds to see the project through to completion. We continue to seek input from scholars, teachers, and other interested parties, so please <a href="/contact">contact us</a> with any suggestions, queries, or expressions of interest.' })
-  ] })
+type Statement = {
+  text: string
+  from: string
+  affiliation?: string
 }
 
-export function corpus (request: Request): HtmlResponse {
-  return new Page({ section: 'About', main: [
-    new Element('h1', { innerHTML: 'Corpus Details' })
-  ] })
-}
-
-export function principles (request: Request): HtmlResponse {
-  return new Page({ section: 'About', main: [
-    new Element('h1', { innerHTML: 'Editorial Principles' })
-  ] })
-}
-
-export function permissions (request: Request): HtmlResponse {
-  return new Page({ section: 'About', main: [
-    new Element('h1', { innerHTML: 'Permissions' })
-  ] })
-}
-
-export function contact (request: Request): HtmlResponse {
-  return new Page({ section: 'About', main: [
-    new Element('h1', { innerHTML: 'Contact Us' })
-  ] })
-}
-
-export function support (request: Request): HtmlResponse {
-  return new Page({ section: 'About', main: [
-    new Element('h1', { innerHTML: 'Statements of Support' }),
-    new Element('div', { children: statements.map(x => {
-      return new Element('div', { children: [
-        new Element('blockquote', { innerHTML: x.text }),
-        new Element('cite', { innerHTML: `${x.from}, ${x.affiliation}` })
-      ] })
-    }) })
-  ] })
-}
-
-const statements = [
+const statements: Statement[] = [
   {
     text: '<i>Hume Texts Online</i> was an invaluable resource for me when writing my book on Hume, to be published by Princeton University Press in 2021. To have a wider range of such texts available at <i>English Philosophical Texts Online</i> would vastly improve the ability of academics and writers around the world to conduct their research more easily and more thoroughly.',
     from: 'Julian Baggini',
@@ -72,7 +26,7 @@ const statements = [
     affiliation: 'University of Wisconsin, USA'
   },
   {
-    text: 'I am writing you to express my support to the project <i>English Philosophical Texts Online</i>. I am an Argentinian Hume scholar and the site Hume Texts Online was of immense help during the writing of my PhD Dissertation back in 2016-2017. To count on accurate editions of essential philosophical works such as Hume’s, Locke’s, Berkeley’s and other Enlightenment figures is of the utmost relevance for our daily research. This is especially so in my case, because due to the vulnerable situation of my country, it is difficult to access quality editions of this great philosopher’s writings. Thank you very much, and congratulations for running such an amazing and useful website.',
+    text: 'I am writing you to express my support to the project <i>English Philosophical Texts Online</i>. I am an Argentinian Hume scholar and the site <i>Hume Texts Online</i> was of immense help during the writing of my PhD Dissertation back in 2016-2017. To count on accurate editions of essential philosophical works such as Hume’s, Locke’s, Berkeley’s and other Enlightenment figures is of the utmost relevance for our daily research. This is especially so in my case, because due to the vulnerable situation of my country, it is difficult to access quality editions of this great philosopher’s writings. Thank you very much, and congratulations for running such an amazing and useful website.',
     from: 'Sofía Calvente',
     affiliation: 'La Plata National University, Argentina'
   },
@@ -83,8 +37,7 @@ const statements = [
   },
   {
     text: 'I’m extremely grateful to you for your work on <i>Hume Texts Online</i>. I used the website almost every day during the years I was writing my dissertation on Hume. The website is so beautifully designed and easy to use that I would use it even though I often had print copies of Hume with me; it was of course also very convenient to be able to access Hume’s texts on the go. I will definitely be making a lot of use of <i>English Philosophical Texts Online</i> in my teaching and research. It would be especially helpful for teaching, as a way of assigning easy-to-access readings to students. I am often hesitant to assign online content to students because often it is not properly edited and has no page numbers, but <i>Hume Texts Online</i> avoids all these issues. This semester I had a student in my early modern class who had a visual disability, and I had some difficulty finding OCR-enabled content for some of the readings (especially of lesser known early modern figures). The website would be an excellent resource for teachers and students in similar situations.',
-    from: 'Maité Cruz',
-    affiliation: null
+    from: 'Maité Cruz'
   },
   {
     text: 'This project is a real blessing to those focusing their research on the philosophical legacy of English-speaking authors. The extremely refined and constantly improving search functions of <i>English Philosophical Texts Online</i> improve scholarly productivity much more than standard electronic resources can. Beyond this primary virtue, this project will prove outright indispensable to scholars and students who can rely only on impoverished research infrastructures, and have limited access to critical editions and electronic resources.',
@@ -128,8 +81,7 @@ const statements = [
   },
   {
     text: 'The ability to search these texts online moves their utility to a new level. To cover the field of available authors would amplify that value by an order of magnitude. Fingers crossed for the funding to make it happen. Many thanks for your wonderful project.',
-    from: 'John Larocque',
-    affiliation: null
+    from: 'John Larocque'
   },
   {
     text: 'I have found <i>English Philosophical Texts Online</i>, and above all <i>Hume Texts Online</i>, an indispensable resource both for doing research in the field and for teaching more accessible courses. The texts are carefully edited, fully searchable, easy to cross-reference and – which is rare when it comes to online texts – eminently readable on the screen.',
@@ -222,3 +174,5 @@ const statements = [
     affiliation: 'University of Alberta, Canada'
   }
 ]
+
+export default statements

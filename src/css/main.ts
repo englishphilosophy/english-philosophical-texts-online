@@ -1,5 +1,7 @@
 export default `
 .main {
-  padding: 0 .5em .5em;
+  max-width: 86em;
+  margin: 0 auto;
+  padding: 1em;
 }
 `

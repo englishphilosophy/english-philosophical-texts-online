@@ -11,7 +11,8 @@ export default function breadcrumb (ancestors: (Author|Text)[]): Element {
 }
 
 function crumb (data: Author|Text): Element {
+  const innerHTML = (data as Text).breadcrumb || data.id
   return new Element('div', { children: [
-    new Element('a', { href: misc.url(data), innerHTML: (data as Text).breadcrumb || data.id })
+    new Element('a', { href: misc.url(data), innerHTML })
   ] })
 }

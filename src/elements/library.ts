@@ -30,18 +30,13 @@ export default function library (authors: Author[], search?: string, order: stri
 }
 
 function author (author: Author, search?: string): Element {
-  return new Element('section', {
+  return new Element('a', { class: 'author', href: misc.url(author),
     children: [
-      new Element('h6', { children: [
-        new Element('a', {
-          href: misc.url(author),
-          innerHTML: `${misc.fullname(author, search)} (${author.birth}-${author.death})`
-        })
-      ] }),
+      new Element('h6', { innerHTML: `${misc.fullname(author, search)} (${author.birth}-${author.death})` }),
       new Element('div', { class: 'details', children: [
-          new Element('div', { innerHTML: `Nationality: ${author.nationality}` }),
-          new Element('div', { innerHTML: `Sex: ${author.sex}` }),
-          new Element('div', { innerHTML: `Texts in library: ${author.texts.filter(x => x.imported).length} / ${author.texts.length}` })
+        new Element('div', { innerHTML: `Nationality: ${author.nationality}` }),
+        new Element('div', { innerHTML: `Sex: ${author.sex}` }),
+        new Element('div', { innerHTML: `Texts in library: ${author.texts.filter(x => x.imported).length} / ${author.texts.length}` })
       ] })
     ]
   })

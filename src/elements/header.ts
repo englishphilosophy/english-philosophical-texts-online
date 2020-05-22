@@ -4,14 +4,13 @@ import {
 
 export default function header (section: string): Element {
   return new Element('header', { class: 'header', children: [
-    new Element('div', { children: [
+    new Element('div', { class: 'title', children: [
       new Element('h1', { innerHTML: 'English Philosophical Texts Online' }),
-      new Element('button', { innerHTML: '<svg width="24" height="24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>' })
+      new Element('h2', { innerHTML: 'An online library of early modern English-language philosophical texts' })
     ] }),
-    new Element('nav', { children: [
+    new Element('nav', { class: 'links', children: [
       sectionLink('/', 'Texts', section),
-      sectionLink('/search', 'Search', section),
-      sectionLink('/compare', 'Compare', section),
+      sectionLink('/research', 'Research', section),
       sectionLink('/about', 'About', section)
     ] })
   ] })

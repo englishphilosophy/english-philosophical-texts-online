@@ -1,14 +1,140 @@
 import {
-  Element
+  Element,
+  Author,
+  Analysis,
+  Text
 } from '../../deps_client.ts'
 
-export default function reader(title: Element[], content: Element[]): Element {
+import blocks from './blocks.ts'
+import toc from './toc.ts'
+import * as search from './search.ts'
+import * as about from './about.ts'
+import * as usage from './usage.ts'
+
+type T_Section = 'title'|'content'|'search'|'summary'|'names'|'citations'|'foreign'|'lemmas'|'about'
+type T_Sections = [T_Section, T_Section, T_Section]
+
+type A_Section = 'about'|'works'|'search'|'summary'|'names'|'citations'|'foreign'|'lemmas'
+type A_Sections = [A_Section, A_Section, A_Section]
+
+export function text (text: Text, analysis: Analysis, sections: T_Sections): Element {
   return new Element('div', { class: 'reader', children: [
-    new Element('div', { children: [
-      new Element('div', { class: 'title', children: title })
+    section(textSelect(text, sections[0]), textContent(text, analysis, sections[0])),
+    section(textSelect(text, sections[1]), textContent(text, analysis, sections[1])),
+    section(textSelect(text, sections[2]), textContent(text, analysis, sections[2]))
+  ] })
+}
+
+export function textContent (text: Text, analysis: Analysis, section: T_Section): Element {
+  switch (section) {
+    case 'title':
+      return blocks(text.blocks.slice(0, 1))
+
+    case 'content':
+      return text.texts.length ? toc(text) : blocks(text.blocks.slice(1))
+
+    case 'search':
+      return search.element(text.id)
+
+    case 'summary':
+      return usage.summary(analysis)
+
+    case 'names':
+      return usage.names(analysis)
+
+    case 'citations':
+      return usage.citations(analysis)
+
+    case 'foreign':
+      return usage.foreignText(analysis)
+
+    case 'lemmas':
+      return usage.lemmas(analysis)
+
+    case 'about':
+      return about.text(text)
+  }
+}
+
+export function author (author: Author, analysis: Analysis, sections: A_Sections): Element {
+  return new Element('div', { class: 'reader', children: [
+    section(authorSelect(author, sections[0]), authorContent(author, analysis, sections[0])),
+    section(authorSelect(author, sections[1]), authorContent(author, analysis, sections[1])),
+    section(authorSelect(author, sections[2]), authorContent(author, analysis, sections[2]))
+  ] })
+}
+
+export function authorContent (author: Author, analysis: Analysis, section: A_Section): Element {
+  switch (section) {
+    case 'about':
+      return about.author(author)
+  
+    case 'works':
+      return toc(author)
+
+    case 'search':
+      return search.element(author.id)
+
+    case 'summary':
+      return usage.summary(analysis)
+
+    case 'names':
+      return usage.names(analysis)
+
+    case 'citations':
+      return usage.citations(analysis)
+
+    case 'foreign':
+      return usage.foreignText(analysis)
+
+    case 'lemmas':
+      return usage.lemmas(analysis)
+  }
+}
+
+function section (select: Element, content: Element): Element {
+  return new Element('div', { class: 'section-wrapper', children: [
+    new Element('div', { class: 'section', children: [select, content] })
+  ] })
+}
+
+function textSelect (text: Text, section: T_Section): Element {
+  return new Element('select', { class: 'section-menu', 'data-text': text.id, children: [
+    new Element('optgroup', { label: 'Text', children: [
+      option('Title', 'title', section === 'title'),
+      option((text.texts.length > 0 ? 'Table of Contents' : 'Text'), 'content', section === 'content'),
+      option('Search', 'search', section === 'search')
     ] }),
-    new Element('div', { children: [
-      new Element('div', { class: 'content', children: content })
+    new Element('optgroup', { label: 'Analysis', children: [
+      option('Word usage summary', 'summary', section === 'summary'),
+      option('Named people', 'names', section === 'names'),
+      option('Citations', 'citations', section === 'citations'),
+      option('Foreign text', 'foreign', section === 'foreign'),
+      option('Lemmas', 'lemmas', section === 'lemmas')
+    ] }),
+    new Element('optgroup', { label: 'About', children: [
+      option('About', 'about', section === 'about')
     ] })
   ] })
+}
+
+function authorSelect (author: Author, section: A_Section): Element {
+  return new Element('select', { class: 'section-menu', 'data-author': author.id, children: [
+    new Element('optgroup', { label: 'Author', children: [
+      option('About', 'about', section === 'about'),
+      option('Works', 'works', section === 'works'),
+      option('Search', 'search', section === 'search')
+    ] }),
+    new Element('optgroup', { label: 'Analysis', children: [
+      option('Word usage summary', 'summary', section === 'summary'),
+      option('Named people', 'names', section === 'names'),
+      option('Citations', 'citations', section === 'citations'),
+      option('Foreign text', 'foreign', section === 'foreign'),
+      option('Lemmas', 'lemmas', section === 'lemmas')
+    ] })
+  ] })
+}
+
+function option (innerHTML: string, value: string, selected: boolean): Element {
+  return new Element('option', { value, innerHTML, selected: selected ? 'selected' : undefined })
 }

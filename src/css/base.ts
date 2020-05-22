@@ -1,25 +1,8 @@
 import * as colours from '../style/colours.ts'
-import * as fonts from '../style/fonts.ts'
 
 export default `
 * {
   box-sizing: border-box;
-}
-
-html {
-  margin: 0;
-  padding: 0;
-  overflow-y: scroll;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-size: 16px;
-  font-family: ${fonts.sans};
-  line-height: 1.5;
-  background: ${colours.white};
-  color: ${colours.black};
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -58,6 +41,7 @@ p {
 input[type="text"], select {
   background: #fff;
   padding: .25em .5em;
+  height: 2.5em;
   font: inherit;
   border: 2px solid ${colours.gray};
   outline: none;
@@ -78,6 +62,7 @@ button {
   border: 0;
   outline: 0;
   padding: .5em 1em;
+  height: 2.5em;
   background: ${colours.blue};
   color: #fff;
   cursor: pointer;

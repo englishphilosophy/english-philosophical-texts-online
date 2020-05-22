@@ -1,16 +1,17 @@
 import * as fonts from '../style/fonts.ts'
 
+import base from '../css/base.ts'
+import layout from '../css/layout.ts'
+import about from '../css/about.ts'
 import blocks from '../css/blocks.ts'
 import breadcrumb from '../css/breadcrumb.ts'
+import context from '../css/context.ts'
 import controls from '../css/controls.ts'
-import header from '../css/header.ts'
+import info from '../css/info.ts'
 import library from '../css/library.ts'
-import links from '../css/links.ts'
-import main from '../css/main.ts'
 import misc from '../css/misc.ts'
-import nav from '../css/nav.ts'
 import reader from '../css/reader.ts'
-import summary from '../css/summary.ts'
+import search from '../css/search.ts'
 import toc from '../css/toc.ts'
 import usage from '../css/usage.ts'
 
@@ -19,17 +20,18 @@ ${fonts.GFSDidot}
 ${fonts.IMFell}
 ${fonts.IMFellItalic}
 ${fonts.IMFellSC}
+${base}
+${layout}
+${controls}
+${library}
+${reader}
+${about}
 ${blocks}
 ${breadcrumb}
-${controls}
-${header}
-${library}
-${links}
-${main}
+${context}
+${info}
 ${misc}
-${nav}
-${reader}
-${summary}
+${search}
 ${toc}
 ${usage}
 `.replace(/\n/g, '').replace(/\s\s+/g, ' ')

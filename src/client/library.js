@@ -1,7 +1,7 @@
 import library from '../elements/library.ts'
 import * as read from './read.ts'
 
-async function init () {
+export default async function init () {
   const searchInput = document.querySelector('[data-action="filter-authors"]')
   const orderSelect = document.querySelector('[data-action="order-authors"]')
   const libraryDiv = document.getElementById('library')
@@ -18,5 +18,3 @@ async function init () {
     update()
   }
 }
-
-init()

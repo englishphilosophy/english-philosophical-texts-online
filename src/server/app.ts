@@ -1,30 +1,19 @@
 import { App } from '../../deps.ts'
-import home from './home.ts'
-import * as texts from './texts.ts'
-import * as search from './search.ts'
-import compare from './compare.ts'
-import * as about from './about.ts'
-import javascript from './javascript.ts'
-import data from './data.ts'
-import errorHandler from './error.ts'
+import * as routes from './routes.ts'
 
+/** The web application. */
 const app = new App()
 
-app.route('GET', '/', home)
-app.route('GET', '/texts/.*/usage', texts.usage)
-app.route('GET', '/texts/.*/about', texts.about)
-app.route('GET', '/texts/.*', texts.index)
-app.route('GET', '/search', search.get)
-app.route('POST', '/search', search.post)
-app.route('GET', '/compare', compare)
-app.route('GET', '/about', about.index)
-app.route('GET', '/about/corpus', about.corpus)
-app.route('GET', '/about/principles', about.principles)
-app.route('GET', '/about/permissions', about.permissions)
-app.route('GET', '/about/contact', about.contact)
-app.route('GET', '/about/support', about.support)
-app.route('GET', '/js/.*', javascript)
-app.route('GET', '/data/.*', data)
-app.error(errorHandler)
+app.route('GET',  '/', routes.home)
+app.route('GET',  '/research', routes.research)
+app.route('GET',  '/research(/.*?)', routes.research)
+app.route('GET',  '/about(/.*)?', routes.about)
+app.route('GET',  '/favicon.ico', routes.favicon)
+app.route('GET',  '/leviathan.jpg', routes.leviathan)
+app.route('GET',  '/js/.*', routes.javascript)
+app.route('GET',  '/data/.*', routes.data)
+app.route('POST',  '/search', routes.search)
+app.route('GET',  '/texts/.*', routes.text)
+app.error(routes.error)
 
 export default app

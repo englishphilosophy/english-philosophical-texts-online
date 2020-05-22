@@ -2,26 +2,13 @@ import * as colours from '../style/colours.ts'
 import * as fonts from '../style/fonts.ts'
 
 export default `
-.blocks h1,
-.blocks h2,
-.blocks h3,
-.blocks h4,
-.blocks h5,
-.blocks h6 {
-  text-align: center;
-}
-
-
-.blocks del {
-  display: none;
-}
-
-.blocks ins {
-  text-decoration: none;
+.blocks {
+  margin: 1em;
 }
 
 .block {
-  margin-bottom: 1em;
+  padding-top: 3em;
+  margin: -3em 0 1em;
 }
 
 .block .id {
@@ -36,18 +23,49 @@ export default `
   text-align: justify;
 }
 
-/*
-@media (min-width: 40em) {
-  .block {
-    display: flex;
-  }
-  
-  .block .id {
-    flex-basis: 16em;
-  }
-  
-  .block .content {
-    flex: 1;
-  }
-}*/
+.block .content h1,
+.block .content h2,
+.block .content h3,
+.block .content h4,
+.block .content h5,
+.block .content h6 {
+  font-weight: normal;
+  text-align: center;
+  line-height: 1.25;
+}
+
+.block .content .page-break {
+  display: none;
+}
+
+.block .content .small-capitals {
+  font-family: ${fonts.oldSC};
+}
+
+.block .content .name {
+  text-decoration: underline;
+}
+
+.block .content .foreign {
+  font-style: italic;
+}
+
+.block .content .margin-comment {
+  float: right;
+  background: ${colours.beige};
+  font-size: .875em;
+  line-height: 1.6;
+  text-align: right;
+  padding: 0 .25em;
+  margin-left: 1em;
+  max-width: 10em;
+}
+
+.block .content del {
+  display: none;
+}
+
+.block .content ins {
+  text-decoration: none;
+}
 `
