@@ -1,12 +1,10 @@
 import { results } from '../elements/search.ts'
 
 export default function init () {
-  const searchForms = Array.from(document.querySelectorAll('.search-form'))
+  const searchForm = document.querySelector('.search-form')
   
   async function search (event) {
     event.preventDefault()
-
-    const searchForm = event.currentTarget
 
     const evaluableInputs = Array.from(searchForm.querySelectorAll('input[type="text"], input[type="hidden"], select'))
     const checkableInputs = Array.from(searchForm.querySelectorAll('input[type="checkbox"]'))
@@ -31,8 +29,7 @@ export default function init () {
     }
   }
   
-  for (const searchForm of searchForms) {
-    searchForm.removeEventListener('submit', search) // stop it being added multiple times
+  if (searchForm) {
     searchForm.addEventListener('submit', search)
   }
 }

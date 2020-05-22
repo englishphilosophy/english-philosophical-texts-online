@@ -10,6 +10,7 @@ export default `
 .reader .section {
   border: 1px solid ${colours.gray};
   background: #fff;
+  min-height: 100%;
   max-width: 40em;
   margin: 0 auto;
 }

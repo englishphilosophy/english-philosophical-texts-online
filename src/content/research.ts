@@ -4,6 +4,7 @@ import {
 
 /** Content for the main research page. */
 const research = new Element('div', { class: 'content', children: [
+  new Element('h1', { innerHTML: 'Introduction' }),
   new Element('p', { innerHTML: 'In addition to providing high-quality critical texts for each of the works listed on this site, we also plan to develop software for searching and analysing these texts in a variety of useful ways, and to pursue research illustrating the scholarly application and value of these tools. So far, it is possible to run complex Boolean searches, in the Search area for each text, and to view (provisional) word usage analysis in the several Analysis areas. (When reading a text, select the area of interest from the blue dropdown menu.) Our project is still in the early stages, with many more features planned if we secure funding to take things further. In the meantime, details are available here of some preliminary tests we have run so far.' }),
   new Element('h2', { innerHTML: 'Sophisticated searches' }),
   new Element('p', { innerHTML: 'In the Search area for each author and text, you can perform complex Boolean searches, optionally limiting your search to whole words, with or without checking for punctuation. It is also possible to expand your search to include variant spellings of your search terms. This is made possible by our growing dictionary, which will in due course contain a record of <em>every</em> word in <em>every</em> text in our corpus. Note that this dictionary is still under construction, and hence that not all variant spellings will be matched yet.' }),
@@ -16,12 +17,14 @@ const research = new Element('div', { class: 'content', children: [
 
 /** Content for the similarity page. */
 const similarity = new Element('div', { class: 'content', children: [
-  new Element('p', { innerHTML: 'Details...' }),
+  new Element('h1', { innerHTML: 'Semantic Similarity' }),
+  new Element('p', { innerHTML: 'Details to be added soon.' }),
 ] })
 
 /** Content for the topics page. */
 const topics = new Element('div', { class: 'content', children: [
-  new Element('p', { innerHTML: 'Details...' }),
+  new Element('h1', { innerHTML: 'Topic Frequency' }),
+  new Element('p', { innerHTML: 'Details to be added soon.' }),
 ] })
 
 /** An array of research pages. */

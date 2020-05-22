@@ -2,7 +2,7 @@ import * as colours from '../style/colours.ts'
 
 export default `
 .controls {
-  margin: 10em auto 0;
+  margin: 0 auto;
   width: 100%;
   max-width: 83em;
   background: ${colours.transblack};

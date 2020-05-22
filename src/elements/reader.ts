@@ -97,7 +97,7 @@ function section (content: Element, select?: Element): Element {
 }
 
 function textSelect (text: Text, section: T_Section): Element {
-  return new Element('select', { class: 'section-menu', 'data-text': text.id, children: [
+  return new Element('select', { class: 'section-menu', disabled: true, 'data-text': text.id, children: [
     new Element('optgroup', { label: 'Text', children: [
       option((text.texts.length > 0 ? 'Table of Contents' : 'Text'), 'content', section === 'content'),
       option('Search', 'search', section === 'search')
@@ -116,7 +116,7 @@ function textSelect (text: Text, section: T_Section): Element {
 }
 
 function authorSelect (author: Author, section: A_Section): Element {
-  return new Element('select', { class: 'section-menu', 'data-author': author.id, children: [
+  return new Element('select', { class: 'section-menu', disabled: true, 'data-author': author.id, children: [
     new Element('optgroup', { label: 'Author', children: [
       option('Works', 'works', section === 'works'),
       option('Search', 'search', section === 'search')

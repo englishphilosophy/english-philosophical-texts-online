@@ -5,5 +5,6 @@ export default function init () {
     selectMenu.addEventListener('change', () => {
       window.location.pathname = selectMenu.value
     })
+    selectMenu.removeAttribute('disabled')
   }
 }

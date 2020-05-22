@@ -5,7 +5,7 @@ import search from './search.js'
 export default async function init () {
   const authorMenus = Array.from(document.querySelectorAll('.section-menu[data-author]'))
   const textMenus = Array.from(document.querySelectorAll('.section-menu[data-text]'))
-  
+
   if (authorMenus.length > 0) {
     const author = await read.author(authorMenus[0].dataset.author)
     const analysis = await read.analysis(authorMenus[0].dataset.author)
@@ -13,7 +13,9 @@ export default async function init () {
     authorMenus.forEach((select) => {
       select.addEventListener('change', () => {
         select.nextElementSibling.outerHTML = authorContent(author, analysis, select.value).outerHTML
+        search() // initialise search functionality
       })
+      select.removeAttribute('disabled')
     })
   }
 
@@ -24,8 +26,9 @@ export default async function init () {
     textMenus.forEach((select) => {
       select.addEventListener('change', () => {
         select.nextElementSibling.outerHTML = textContent(text, analysis, select.value).outerHTML
-        search() // reinitialise search functionality
+        search() // initialise search functionality
       })
+      select.removeAttribute('disabled')
     })
   }
 }

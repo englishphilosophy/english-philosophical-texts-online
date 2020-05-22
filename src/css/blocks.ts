@@ -40,6 +40,7 @@ export default `
 
 .block .content .small-capitals {
   font-family: ${fonts.oldSC};
+  font-style: normal;
 }
 
 .block .content .name {

@@ -16,7 +16,7 @@ export default `
 .info .content {
   background: #fff;
   border: 1px solid ${colours.gray};
-  padding: 1em 2em;
+  padding: 1em;
 }
 
 .info .content blockquote {
@@ -29,6 +29,12 @@ export default `
   margin-top: .25em;
   margin-bottom: 1.5em;
   color: ${colours.blue};
+}
+
+@media (min-width: 58rem) {
+  .info .content {
+    padding: 1em 2em;
+  }
 }
 
 @media (min-width: 64rem) {
@@ -44,7 +50,7 @@ export default `
 
   .info nav.submenu {
     display: block;
-    min-width: 16em;
+    min-width: 18em;
   }
 
   .info nav.submenu div {

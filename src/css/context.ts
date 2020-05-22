@@ -11,8 +11,9 @@ export default `
 }
 
 .context a {
-  display: block;
+  display: inline-block;
   padding: .25em .5em;
+  white-space: nowrap;
   color: inherit;
 }
 `

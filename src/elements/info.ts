@@ -11,6 +11,7 @@ type Page = {
 export default function info (pageId: string, pages: Page[], content: Element): Element {
   return new Element('div', { class: 'info', children: [
     new Element('select', {
+      disabled: true,
       class: 'submenu',
       children: pages.map(x => option(x, pageId))
     }),

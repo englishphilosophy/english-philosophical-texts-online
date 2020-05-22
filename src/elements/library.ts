@@ -25,7 +25,9 @@ export default function library (authors: Author[], search?: string, order: stri
   return new Element('div', {
     id: 'library',
     class: 'library',
-    children: authors.map(x => author(x, search))
+    children: (authors.length > 0)
+      ? authors.map(x => author(x, search))
+      : [new Element('p', { innerHTML: 'No matching authors.' })]
   })
 }
 

@@ -9,6 +9,7 @@ import statements from './statements.ts'
 
 /** Content for the main about page. */
 const about = new Element('div', { class: 'content', children: [
+  new Element('h1', { innerHTML: 'General Information' }),
   new Element('p', { innerHTML: '<i>English Philosophical Texts Online</i> is part of a project at the <a href="https://www.ox.ac.uk">University of Oxford</a>. Our aim is to provide high-quality digital editions of a broad canon of English language philosophical works published in Britain between 1650 and 1830, to make them freely available in one place, and to provide intuitive software for performing sophisticated searches and computational analyses of these works. For more information about the analytical software we have planned, see the <a href="/research">Research</a> section of this site.' }),
   new Element('p', { innerHTML: 'Roughly 40% our target works have already been digitised, through projects like the <a href="http://www.textcreationpartnership.org/">Text Creation Partnership</a>, the <a href="http://oll.libertyfund.org/">Online Library of Liberty</a>, and <a href="https://www.gutenberg.org/">Project Gutenberg</a>. However, these works can be difficult to locate unless you already know where to look, and the fact that they are spread out over multiple sites prohibits systematic searching and comparative computational analysis. Furthermore, the editions on these sites do not include universal paragraph references, making them of limited use to historians of philosophy. By combining these works with new digitisations of as many other works, including several by often neglected female writers, we hope to provide a lasting scholarly resource of unparalleled size in this field.' }),
   new Element('p', { innerHTML: 'Thanks to the <a href="https://innovation.ox.ac.uk/award-details/john-fell-fund/">John Fell Fund</a>, we conducted a pilot project last year (2018-19), the principal aim of which was to draw up a list of works, locate the best publicly available digital editions of those works, and to estimate the cost and feasibility of converting these editions into a consistent format and of digitizing the works that remain. We are now applying to the Leverhulme Trust for the necessary funds to see the project through to completion. We continue to seek input from scholars, teachers, and other interested parties, so please <a href="/contact">contact us</a> with any suggestions, queries, or expressions of interest.' })
@@ -31,6 +32,7 @@ function corpus (authors: Author[]): Element {
   }, '')
 
   return new Element('div', { class: 'content', children: [
+    new Element('h1', { innerHTML: 'Corpus Details' }),
     new Element('p', { innerHTML: `The corpus on this site contains ${texts.length - (duplicatedTexts.length / 2)} English-language philosophical texts published in Britain between 1650 and 1830, by ${authors.length} authors (${maleAuthors.length} male and ${femaleAuthors.length} female). Our aim is to provide free and high-quality digital critical texts for all of the works in our corpus, alongside tools for performing sophisticated searches and comparative textual analyses. Note however that this project is still in the early stages. So far we have prepared ${importedTexts.length} texts by ${authorsWithTextsList}.` }),
     new Element('p', { innerHTML: 'Our selection is based on the following general considerations:' }),
     new Element('ol', { children: [
@@ -45,6 +47,7 @@ function corpus (authors: Author[]): Element {
 
 /** Content for the editorial principles page. */
 const principles = new Element('div', { class: 'content', children: [
+  new Element('h1', { innerHTML: 'Editorial Principles' }),
   new Element('p', { innerHTML: 'The purpose of this project is to make a broad canon of English philosophical texts easily and freely available for students and scholars to read, search, and coputationally analyse and compare. To this end, and to keep things within reasonable bounds, we aim to provide just one <em>critical text</em> for each work, but a critical text without any textual apparatus or commentary. In other words, we aim to identify the most authoritative copytext – typically the last edition the author saw through the press – and then to silently ‘correct’ it according to our best judgement (e.g. by incorporating variants from another edition or manuscript that seem preferable, or implementing changes noted in any published ERRATA sheets).' }),
   new Element('p', { innerHTML: 'A silently edited critical text, without any accompanying critical apparatus, is of course of limited use for serious textual scholarship. But the editions provided on this site are not intended for that purpose.' }),
   new Element('p', { innerHTML: 'Though our <em>aim</em> is to provide (silently edited) critical texts, we expect to be striving towards this goal for some time, and we will provide imperfect editions along the way. In practice, we will be constrained by the quality of the publicly available digital editions that we have to start with, and by our own limited time and resources. We would be enormously grateful if, while using the texts on this site, you could keep an eye out for potential errors and inform us of any that you notice.' }),
@@ -60,18 +63,21 @@ const principles = new Element('div', { class: 'content', children: [
 
 /** Content for the permissions page. */
 const permissions = new Element('div', { class: 'content', children: [
+  new Element('h1', { innerHTML: 'Permissions' }),
   new Element('p', { innerHTML: 'The works on this site are all in the public domain. The digital critical texts made available here, insofar as they consitute new intellectual property (in virtue of the digitization itself, editorial interventions, and metatextual markup), are all made available under a Creative Commons <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 License</a>. In plain terms, you are free to use and adapt these materials however you like, as long as you are not making a profit, you acknowledge this web site as their source, and you make whatever you produce available under the same terms.' }),
   new Element('p', { innerHTML: 'In several cases these texts here derive from digitized texts from other sources. We have only started from texts that are either in the public domain (such as those from the <i>Text Creation Partnership</i>) or have a suitably generous copyright (such as those from the <i>Online Library of Liberty</i>, which are free to use for educational and academic purposes). Details of the providence of each text are available via the About section for that text.' })
 ] })
 
 /** Content for the contact page. */
 const contact = new Element('div', { class: 'content', children: [
+  new Element('h1', { innerHTML: 'Contact Us' }),
   new Element('p', { innerHTML: '<i>English Philosophical Texts Online</i> is being developed by <a href="https://merivale.uk">Amyas Merivale</a> and <a href="http://www.millican.org">Peter Millican</a> at the <a href="https://www.ox.ac.uk">University of Oxford</a>. We are philosophers and historians of 18th century philosophy, with a keen interest in digital humanities and in the value of high-quality digital texts. We developed <a href="https://davidhume.org">Hume Texts Online</a>, a site providing free digital editions of the complete works of David Hume. With this larger project we hope to provide a similar resource encompassing the works of many more British philosophers.' }),
   new Element('p', { innerHTML: 'For suggestions or queries, please contact Amyas Merivale at <a href="mailto:amyas.merivale@philosophy.ox.ac.uk">amyas.merivale@philosophy.ox.ac.uk</a>.' })
 ] })
 
 /** Content for the support page (using statements of support from `statements.ts`). */
 const support = new Element('div', { class: 'content', children: [
+  new Element('h1', { innerHTML: 'Statements of Support' }),
   new Element('div', { children: statements.map(x => {
     const innerHTML = x.affiliation
       ? `${x.from}, ${x.affiliation}`

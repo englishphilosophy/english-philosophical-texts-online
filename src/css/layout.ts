@@ -86,34 +86,7 @@ body > nav hgroup h1 {
   max-width: 83em;
   margin: 0 auto;
   padding: 1rem;
-  font-size: 1.375em;
-}
-
-main {}
-
-footer {
-  background: ${colours.black};
-  color: ${colours.white};
-  padding: 8em 0 0;
-}
-
-footer section {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-footer p {
-  flex-basis: 38em;
-}
-
-footer ul {
-  margin: 0;
-  list-style-type: none;
-}
-
-footer a {
-  color: ${colours.beige};
+  font-size: 1.37em;
 }
 
 section {
@@ -122,8 +95,39 @@ section {
   margin: 0 auto;
 }
 
-main section, footer section {
+main {
+  padding-bottom: 3em;
+}
+
+main section {
   padding: .5em;
+}
+
+footer {
+  background: ${colours.black};
+  color: ${colours.white};
+  padding-top: 2em;
+}
+
+footer section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+footer p {
+  flex-basis: 38em;
+}
+
+footer ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+footer a {
+  color: ${colours.beige};
 }
 
 @media (min-width: 58rem) {
@@ -147,8 +151,16 @@ main section, footer section {
     padding: 10em 1em 1em;
   }
 
-  main section, footer section {
+  main section {
     padding: 1em;
+  }
+
+  footer {
+    padding-top: 6em;
+  }
+
+  footer section {
+    padding: 2em 3em;
   }
 }
 `
