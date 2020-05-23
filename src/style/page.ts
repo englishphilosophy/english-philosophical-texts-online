@@ -40,8 +40,8 @@ function head (options: Options): Element {
     new Element('title', { innerHTML: title }),
     new Element('style', { type: 'text/css', innerHTML: css }),
     new Element('link', { rel: 'shortcut icon', href: '/favicon.ico' }),
-    // new Element('script', { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=UA-23731986-3' }),
-    // new Element('script', { innerHTML: 'window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag(\'js\', new Date());gtag(\'config\', \'UA-23731986-3\');' }),
+    new Element('script', { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=UA-23731986-3' }),
+    new Element('script', { innerHTML: 'window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag(\'js\', new Date());gtag(\'config\', \'UA-23731986-3\');' }),
     new Element('script', { defer: true, module: true, src: '/js/client/app.js' })
   ]})
 }
