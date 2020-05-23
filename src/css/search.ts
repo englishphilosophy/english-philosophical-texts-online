@@ -51,6 +51,10 @@ export default `
   border-top: 1px solid ${colours.gray};
 }
 
+.results.hidden {
+  display: none;
+}
+
 .results .title {
   margin-bottom: 0;
 }

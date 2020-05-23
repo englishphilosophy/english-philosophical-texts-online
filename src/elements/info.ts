@@ -13,6 +13,7 @@ export default function info (pageId: string, pages: Page[], content: Element): 
     new Element('select', {
       disabled: true,
       class: 'submenu',
+      'aria-label': 'Page',
       children: pages.map(x => option(x, pageId))
     }),
     content,

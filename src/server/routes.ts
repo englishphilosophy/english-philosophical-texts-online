@@ -15,7 +15,6 @@ import Page from '../style/page.ts'
 import controls from '../elements/controls.ts'
 import library from '../elements/library.ts'
 import breadcrumb from '../elements/breadcrumb.ts'
-import context from '../elements/context.ts'
 import * as reader from '../elements/reader.ts'
 import info from '../elements/info.ts'
 import aboutPages from '../content/about.ts'
@@ -64,7 +63,7 @@ export function text (request: Request): HtmlResponse {
     return new Page({
       section: 'Texts',
       main: [reader.text(text, analysis)],
-      nav: [breadcrumb(read.ancestors(text.id)), context(read.previous(text.id), read.next(text.id))]
+      nav: [breadcrumb(read.ancestors(text.id), read.previous(text.id), read.next(text.id))]
     })
   }
 }

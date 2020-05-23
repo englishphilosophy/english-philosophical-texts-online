@@ -70,6 +70,11 @@ const statements: Statement[] = [
     affiliation: 'University of St Andrews, UK'
   },
   {
+    text: 'As someone teaching in a philosophy department in Central Europe, I see this is a priceless resource. It promises to enable researchers and students to access works of philosophers, many of which are not easy to track down in libraries in Prague. The search features are a great help in navigating the texts and penetrating them for specific themes. We have found the sister site Hume Texts Online very useful too, and it has played its part in the current surge of interest in Hume’s thought in Czechia.',
+    from: 'James Hill',
+    affiliation: 'Charles University, Prague'
+  },
+  {
     text: 'Just writing to say that I have found the resources at <i>Hume Texts Online</i> excellent in support of teaching and research. Firstly, it is extremely helpful to have well-managed versions of these texts online – this makes it very easy for students to access the material without concerns about copyright. I am about to teach an online only course on this material, taken by international students, and <i>Hume Texts Online</i> will be even more useful in this regard. Secondly, I love it that this resource makes this material available for free and for everyone with access to the internet – there are plenty of people out there who are interested in this material, and it is great to be able to point them (or have google point them) to texts that are freely available and edited and curated by excellent scholars in the field. I wholeheartedly approve of the proposal to expand this resource to cover more early modern texts (and more!).',
     from: 'Gerry Hough',
     affiliation: 'University of Aberdeen, UK'
@@ -94,9 +99,19 @@ const statements: Statement[] = [
     affiliation: 'Università del Piemonte Orientale, Italy'
   },
   {
+    text: 'I am writing this to communicate my appreciation and support for your English Philosophical Texts Online project. I would also like to thank you for the huge benefit I have received from Hume Texts Online.',
+    from: 'Naohito Mori',
+    affiliation: 'Kochi University, Japan'
+  },
+  {
     text: '<i>Hume Texts Online</i> has transformed Hume scholarship. No need now to speed read passages of tattered volumes to find where Hume said such and such; no need to pack those tattered volumes for conference trips; no need tentatively to suggest to students that if they were to buy one Hume text for their course, they could go for a second-hand copy of…. The proposal to cover a wider range of early modern texts in English in a similar way is tremendously exciting.',
     from: 'Dan O’Brien',
     affiliation: 'Oxford Brookes University, UK'
+  },
+  {
+    text: 'Being a regular reader of the Hume Texts Online site I would like to thank you for organizing and maintaining this extraordinary and beautiful (very nice layout, indeed) on line resource. In our days of turmoil, I believe Hume’s thinking and life are great inspirations for us all. I strongly wish you will be able to maintain this critical repository; and even expand it, as I read you are planning.',
+    from: 'José Pérez de Lama',
+    affiliation: 'Universidad de Sevilla, Spain'
   },
   {
     text: 'I am tremendously excited to begin using <i>English Philosophical Texts Online</i>, a wonderful resource. Some of the texts covered here may be found on the Liberty Fund’s <i>Online Library of Liberty</i>, but only some, and their site is not the most user-friendly. I look forward to being able to do sophisticated searches and comparative textual analysis at <i>EPTO</i>, and I will have my spring 2020 students in eighteenth-century British literature (along with some philosophy) read parts of Mandeville’s <i>Fable</i> at this new resource.',

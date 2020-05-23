@@ -59,7 +59,7 @@ export default `
     display: flex;
     flex-direction: column;
     position: sticky;
-    top: 1em;
+    top: 5em;
     padding: 1em;
   }
 

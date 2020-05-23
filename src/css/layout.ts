@@ -71,13 +71,12 @@ body > nav {
   background-image: url('${images.leviathan}');
   background-size: cover;
   background-position: center;
-  display: flex;
-  flex-wrap: wrap;
-  min-height: 4em;
+  position: sticky;
+  top: 0;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.25);
 }
 
 body > nav hgroup {
-  flex: 1;
   background: ${colours.transblack};
   color: ${colours.white};
 }
@@ -130,7 +129,7 @@ footer a {
   color: ${colours.beige};
 }
 
-@media (min-width: 58rem) {
+@media (min-width: 59rem) {
   header {
     display: flex;
     justify-content: space-between;
@@ -149,6 +148,7 @@ footer a {
 
   body.home > nav {
     padding: 10em 1em 1em;
+    position: initial;
   }
 
   main section {
@@ -158,7 +158,9 @@ footer a {
   footer {
     padding-top: 6em;
   }
+}
 
+@media (min-width: 62rem) {
   footer section {
     padding: 2em 3em;
   }

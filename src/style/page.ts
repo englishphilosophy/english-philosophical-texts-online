@@ -61,7 +61,7 @@ function header (section: string): Element {
   return new Element('header', { children: [
     new Element('hgroup', { children: [
       new Element('h1', { innerHTML: 'English Philosophical Texts Online' }),
-      new Element('h2', { innerHTML: 'An free online library of early modern English-language philosophical texts' })
+      new Element('h2', { innerHTML: 'A free online library of early modern English-language philosophical texts' })
     ] }),
     new Element('nav', { children: [
       sectionLink('/', 'Texts', section),

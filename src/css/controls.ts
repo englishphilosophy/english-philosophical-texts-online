@@ -9,12 +9,18 @@ export default `
   display: grid;
   grid-gap: .5em;
   grid-template-columns: 1fr;
-  padding: 1em;
+  padding: .5em;
 }
 
 @media (min-width: 34rem) {
   .controls {
     grid-template-columns: 1fr auto;
+  }
+}
+
+@media (min-width: 59rem) {
+  .controls {
+    padding: 1em;
   }
 }
 `

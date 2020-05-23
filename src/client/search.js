@@ -25,7 +25,10 @@ export default function init () {
   
     if (response.ok) {
       const json = await response.json()
-      searchForm.nextElementSibling.innerHTML = results(json[0]).innerHTML
+      const resultsDiv = searchForm.nextElementSibling
+      resultsDiv.innerHTML = results(json[0]).innerHTML
+      resultsDiv.classList.remove('hidden')
+      resultsDiv.querySelector('.results').classList.add('active') // activate first sub results
     }
   }
   

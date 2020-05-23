@@ -12,10 +12,8 @@ import * as about from './about.ts'
 import * as usage from './usage.ts'
 
 type T_Section = 'title'|'content'|'search'|'summary'|'names'|'citations'|'foreign'|'lemmas'|'about'
-type T_Sections = [T_Section, T_Section, T_Section]
 
 type A_Section = 'about'|'works'|'search'|'summary'|'names'|'citations'|'foreign'|'lemmas'
-type A_Sections = [A_Section, A_Section, A_Section]
 
 export function text (text: Text, analysis: Analysis): Element {
   return new Element('div', { class: 'reader', children: [
@@ -97,38 +95,50 @@ function section (content: Element, select?: Element): Element {
 }
 
 function textSelect (text: Text, section: T_Section): Element {
-  return new Element('select', { class: 'section-menu', disabled: true, 'data-text': text.id, children: [
-    new Element('optgroup', { label: 'Text', children: [
-      option((text.texts.length > 0 ? 'Table of Contents' : 'Text'), 'content', section === 'content'),
-      option('Search', 'search', section === 'search')
-    ] }),
-    new Element('optgroup', { label: 'Analysis', children: [
-      option('Word usage summary', 'summary', section === 'summary'),
-      option('Named people', 'names', section === 'names'),
-      option('Citations', 'citations', section === 'citations'),
-      option('Foreign text', 'foreign', section === 'foreign'),
-      option('Lemmas', 'lemmas', section === 'lemmas')
-    ] }),
-    new Element('optgroup', { label: 'About', children: [
-      option('About', 'about', section === 'about')
-    ] })
-  ] })
+  return new Element('select', {
+    class: 'section-menu',
+    disabled: true,
+    'data-text': text.id,
+    'aria-label': 'Area',
+    children: [
+      new Element('optgroup', { label: 'Text', children: [
+        option((text.texts.length > 0 ? 'Table of Contents' : 'Text'), 'content', section === 'content'),
+        option('Search', 'search', section === 'search')
+      ] }),
+      new Element('optgroup', { label: 'Analysis', children: [
+        option('Word usage summary', 'summary', section === 'summary'),
+        option('Named people', 'names', section === 'names'),
+        option('Citations', 'citations', section === 'citations'),
+        option('Foreign text', 'foreign', section === 'foreign'),
+        option('Lemmas', 'lemmas', section === 'lemmas')
+      ] }),
+      new Element('optgroup', { label: 'About', children: [
+        option('About', 'about', section === 'about')
+      ] })
+    ]
+  })
 }
 
 function authorSelect (author: Author, section: A_Section): Element {
-  return new Element('select', { class: 'section-menu', disabled: true, 'data-author': author.id, children: [
-    new Element('optgroup', { label: 'Author', children: [
-      option('Works', 'works', section === 'works'),
-      option('Search', 'search', section === 'search')
-    ] }),
-    new Element('optgroup', { label: 'Analysis', children: [
-      option('Word usage summary', 'summary', section === 'summary'),
-      option('Named people', 'names', section === 'names'),
-      option('Citations', 'citations', section === 'citations'),
-      option('Foreign text', 'foreign', section === 'foreign'),
-      option('Lemmas', 'lemmas', section === 'lemmas')
-    ] })
-  ] })
+  return new Element('select', {
+    class: 'section-menu',
+    disabled: true,
+    'data-author': author.id,
+    'aria-label': 'Area',
+    children: [
+      new Element('optgroup', { label: 'Author', children: [
+        option('Works', 'works', section === 'works'),
+        option('Search', 'search', section === 'search')
+      ] }),
+      new Element('optgroup', { label: 'Analysis', children: [
+        option('Word usage summary', 'summary', section === 'summary'),
+        option('Named people', 'names', section === 'names'),
+        option('Citations', 'citations', section === 'citations'),
+        option('Foreign text', 'foreign', section === 'foreign'),
+        option('Lemmas', 'lemmas', section === 'lemmas')
+      ] })
+    ]
+  })
 }
 
 function option (innerHTML: string, value: string, selected: boolean): Element {

@@ -46,21 +46,23 @@ function query (id: number, label: string): Element {
         type: 'text',
         name: `query${id}1`,
         id: `query${id}1`,
+        'aria-label': `Query ${id} first term`,
         required: (id === 1) ? 'required' : undefined
       }),
-      new Element('select', { name: `query${id}op`, children: [
+      new Element('select', { name: `query${id}op`, 'aria-label': `Query ${id} operator`, children: [
         new Element('option', { value: 'and', innerHTML: 'AND' }),
         new Element('option', { value: 'or', innerHTML: 'OR' })
       ] }),
       new Element('input', {
         type: 'text',
-        name: `query${id}2`
+        name: `query${id}2`,
+        'aria-label': `Query ${id} second term`
       })
     ] })
   ] })
 }
 
-const resultsPlaceholder = new Element('div', { class: 'results' })
+const resultsPlaceholder = new Element('div', { class: 'results hidden' })
 
 function displayResult (result: Result): Element {
   const children = [

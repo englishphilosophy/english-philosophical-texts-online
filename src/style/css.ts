@@ -5,11 +5,9 @@ import layout from '../css/layout.ts'
 import about from '../css/about.ts'
 import blocks from '../css/blocks.ts'
 import breadcrumb from '../css/breadcrumb.ts'
-import context from '../css/context.ts'
 import controls from '../css/controls.ts'
 import info from '../css/info.ts'
 import library from '../css/library.ts'
-import misc from '../css/misc.ts'
 import reader from '../css/reader.ts'
 import search from '../css/search.ts'
 import toc from '../css/toc.ts'
@@ -28,9 +26,7 @@ ${reader}
 ${about}
 ${blocks}
 ${breadcrumb}
-${context}
 ${info}
-${misc}
 ${search}
 ${toc}
 ${usage}
