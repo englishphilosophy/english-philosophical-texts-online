@@ -19,7 +19,6 @@ export default `
 .trail {
   flex: 1;
   display: flex;
-  overflow-y: auto;
 }
 
 .trail .crumb {
@@ -35,6 +34,5 @@ export default `
   flex: 1;
   display: flex;
   justify-content: flex-end;
-  overflow-y: auto;
 }
 `
