@@ -138,21 +138,29 @@ export function data (request: Request): JsonResponse {
   return new JsonResponse(readFileStrSync(path))
 }
 
-/** Returns any TS file from the `src` directory, bundled as JS (or a 404 error) */
+/**
+ * Returns a JS file from the `build` directory (if it exists), or a TS file
+ * from the `src` directory, bundled as JS (or a 404 error)
+ */
 export async function javascript (request: Request): Promise<JavascriptResponse> {
-  const filePath = request.path.replace(/^\/js/, './src').replace(/\.js$/, '.ts')
-  if (!existsSync(filePath)) {
+  const filePath = request.path.replace(/^\/js\//, '')
+  const buildPath = `./build/${filePath}`
+  const srcPath = `./src/${filePath.replace(/\.js$/, '.ts')}`
+  if (existsSync(buildPath)) {
+    return new JavascriptResponse(readFileStrSync(buildPath))
+  }
+  if (!existsSync(srcPath)) {
     throw new HttpError(404, 'File not found.')
   }
   const compilerOptions = { lib: ['dom', 'es6', 'es2017'], removeComments: true }
-  const [diagnostics, javascript] = await Deno.bundle(filePath, undefined, compilerOptions)
+  const [diagnostics, javascript] = await Deno.bundle(srcPath, undefined, compilerOptions)
   if (diagnostics) {
     throw new HttpError(500, `<p>Bad javascript.</p> <pre>${JSON.stringify(diagnostics, null, 2)}</pre>`)
   }
   return new JavascriptResponse(javascript)
 }
 
-/** Renders an error as an HTML page. */
+/** Renders an HTTP error as an HTML page. */
 export function error (error: HttpError): HtmlResponse {
   const response = new Page({ section: 'Error', main: [
     new Element('h1', { innerHTML: `${error.status} Error` }),
