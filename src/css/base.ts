@@ -90,6 +90,7 @@ table {
   border-collapse: collapse;
   width: 100%;
   overflow-x: auto;
+  margin-bottom: 1em;
 }
 
 thead tr {
@@ -106,6 +107,7 @@ th {
 }
 
 th, td {
+  vertical-align: top;
   padding: .25em .5em;
 }
 `
