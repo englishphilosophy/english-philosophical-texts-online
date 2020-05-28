@@ -3,29 +3,29 @@ import {
 } from '../../deps_client.ts'
 
 export const emplTitles = [
-  { id: 'DT', title: 'Of the Delicacy of Taste and Passion' },
-  { id: 'LP', title: 'Of the Liberty of the Press' },
-  { id: 'PR', title: 'That Politics may be reduced to a Science' },
-  { id: 'FP', title: 'Of the First Principles of Government' },
-  { id: 'OG', title: 'Of the Origin of Government' },
-  { id: 'IP', title: 'Of the Independency of Parliament' },
-  { id: 'BG', title: 'Whether the British Government inclines more to Absolute Monarchy, or to a Republic' },
-  { id: 'PG', title: 'Of Parties in General' },
-  { id: 'PGB', title: 'Of the Parties of Great Britain' },
-  { id: 'SE', title: 'Of Superstition and Enthusiasm' },
-  { id: 'DM', title: 'Of the Dignity or Meanness of Human Nature' },
-  { id: 'CL', title: 'Of Civil Liberty' },
-  { id: 'El', title: 'Of Eloquence' },
-  { id: 'RP', title: 'Of the Rise and Progress of the Arts and Sciences' },
-  { id: 'Ep', title: 'The Epicurean' },
-  { id: 'Sto', title: 'The Stoic' },
-  { id: 'Pl', title: 'The Platonist' },
-  { id: 'Sc', title: 'The Sceptic' },
-  { id: 'PD', title: 'Of Polygamy and Divorces' },
-  { id: 'SR', title: 'Of Simplicity and Refinement in Writing' },
-  { id: 'NC', title: 'Of National Characters' },
-  { id: 'Tr', title: 'Of Tragedy' },
-  { id: 'ST', title: 'Of the Standard of Taste' }
+  'Of the Delicacy of Taste and Passion',
+  'Of the Liberty of the Press',
+  'That Politics may be reduced to a Science',
+  'Of the First Principles of Government',
+  'Of the Origin of Government',
+  'Of the Independency of Parliament',
+  'Whether the British Government inclines more to Absolute Monarchy, or to a Republic',
+  'Of Parties in General',
+  'Of the Parties of Great Britain',
+  'Of Superstition and Enthusiasm',
+  'Of the Dignity or Meanness of Human Nature',
+  'Of Civil Liberty',
+  'Of Eloquence',
+  'Of the Rise and Progress of the Arts and Sciences',
+  'The Epicurean',
+  'The Stoic',
+  'The Platonist',
+  'The Sceptic',
+  'Of Polygamy and Divorces',
+  'Of Simplicity and Refinement in Writing',
+  'Of National Characters',
+  'Of Tragedy',
+  'Of the Standard of Taste' 
 ]
 
 export const dissertationTitles = [
@@ -38,40 +38,90 @@ export const dissertationTitles = [
   'Dissertation, section 6'
 ]
 
+const religionAuthorScores = [
+  ['Norris', 0.017574432],
+  ['Conway', 0.013989768],
+  ['Hobbes', 0.011956958],
+  ['Butler', 0.010595097],
+  ['Astell', 0.008094501],
+  ['Shaftesbury', 0.00444186],
+  ['Berkeley', 0.00299003],
+  ['Hutcheson', 0.002979988],
+  ['Locke', 0.002663299],
+  ['Mandeville', 0.002406602],
+  ['Hume', 0.001915714],
+  ['Drake', 0.001104697]
+]
+
+const religionTextScores = [
+  ['Hume', 'Natural History of Religion', 0.018083265],
+  ['Norris', 'Letters Concerning the Love of God, Between the Author of the Proposal to the Ladies and Mr. John Norris [Norris’s part]', 0.017574432],
+  ['Astell', 'Letters Concerning the Love of God, Between the Author of the Proposal to the Ladies and Mr. John Norris [Astell’s part]', 0.015074935],
+  ['Butler', 'The Analogy of Religion', 0.014861825],
+  ['Conway', 'The Principles of the Most Ancient and Modern Philosophy', 0.013989768],
+  ['Hobbes', 'Leviathan, or The Matter, Forme, & Power of a Common-Wealth Ecclesiastical and Civill', 0.012737385],
+  ['Shaftesbury', 'A Letter Concerning Enthusiasm', 0.011595191],
+  ['Hume', 'Dialogues concerning Natural Religion', 0.009040334],
+  ['Astell', 'A Serious Proposal to the Ladies, for the Advancement of their True and Greatest Interest', 0.00808451],
+  ['Hume', 'A Letter from a Gentleman to His Friend in Edinburgh', 0.007410768],
+  ['Butler', 'Fifteen Sermons Preached at the Rolls Chapel, to which are added Six Sermons Preached on Publick Occasions', 0.006403047],
+  ['Shaftesbury', 'Miscellaneous Reflections on the preceding Treatises, and other Critical Subjects', 0.00559448],
+  ['Shaftesbury', 'The Moralists, a Philosophical Rhapsody', 0.005431316],
+  ['Astell', 'Six Familiar Essays', 0.005241352],
+  ['Berkeley', 'Three Dialogues between Hylas and Philonous', 0.004615883],
+  ['Shaftesbury', 'An Inquiry Concerning Virtue or Merit', 0.004565181],
+  ['Hume', 'An Enquiry Concerning Human Understanding', 0.00425667],
+  ['Hobbes', 'Humane Nature; or, the Fundamental Elements of Policie', 0.004236105],
+  ['Hume', 'Essays, Withdrawn and Unpublished', 0.004058938],
+  ['Hutcheson', 'An Essay on the Nature and Conduct of the Passions and Affections, with Illustrations on the Moral Sense', 0.003824468],
+  ['Berkeley', 'A Treatise Concerning the Principles of Human Knowledge', 0.003428729],
+  ['Astell', 'Reflections Upon Marriage', 0.003189793],
+  ['Mandeville', 'The Fable of the Bees, Part 2', 0.00288806],
+  ['Locke', 'An Essay Concerning Human Understanding', 0.002663299],
+  ['Hutcheson', 'An Inquiry into the Original of Our Ideas of Beauty and Virtue', 0.002111413],
+  ['Shaftesbury', 'Sensus Communis: An Essay on the Freedom of Wit and Humour', 0.001986492],
+  ['Mandeville', 'The Fable of the Bees', 0.001897793],
+  ['Hume', 'Essays, Moral, Political, and Literary, Part 1', 0.001729985],
+  ['Hume', 'The History of England', 0.001639577],
+  ['Shaftesbury', 'A Notion of the Historical Draught or Tablature of the Judgment of Hercules', 0.001496846],
+  ['Shaftesbury', 'Soliloquy; or, Advice to an Author', 0.001450248],
+  ['Drake', 'Essay in Defense of the Female Sex', 0.001104697],
+  ['Hume', 'An Enquiry Concerning the Principles of Morals', 0.000865179],
+  ['Hume', 'A Treatise Concerning Human Nature', 0.000719628],
+  ['Hume', 'My Own Life', 0.000677048],
+  ['Hume', 'Abstract of the Treatise', 0.00063012],
+  ['Hume', 'Essays, Moral, Political, and Literary, Part 2', 0.000558496],
+  ['Hume', 'Dissertation on the Passions', 0.000372821],
+  ['Shaftesbury', 'Letter Concerning the Art, or Science of Design', 0.000313873],
+  ['Berkeley', 'Essay Towards a New Theory of Vision', 0.000149321]
+]
+
 export function emplTable (id: number): Element {
-  const essay = emplTitles[id]
   const scores = emplScores[id]
-  if (!essay || !scores) {
-    return new Element('p', { innerHTML: 'Array index out of range.' })
-  }
-  const data = scores
-    .map((score, index) => Object.assign({ score }, emplTitles[index]))
-    .filter(x => x.score > 0)
-    .sort((x, y) => y.score - x.score)
-  return new Element('table', { children: [
-    new Element('thead', { children: [
-      new Element('tr', { children: [
-        new Element('th', { innerHTML: 'Comparison text' }),
-        new Element('th', { innerHTML: 'Similarity&nbsp;score' })
-      ] })
-    ] }),
-    new Element('tbody', { children: data.map(x => {
-      return new Element('tr', { children: [
-        new Element('td', { innerHTML: x.title }),
-        new Element('td', { innerHTML: (x.score * 10000).toString(10).slice(0, 6).padEnd(6, '0') })
-      ] })
-    }) })
-  ] })
+  return table(emplTitles, scores)
 }
 
 export function dissertationTable (id: number): Element {
-  const essay = emplTitles[id]
   const scores = dissertationScores.map(x => x[id])
-  if (!essay || !scores) {
+  return table(emplTitles, scores)
+}
+
+export const religiousAuthorsTable = table(
+  religionAuthorScores.map(x => x[0] as string),
+  religionAuthorScores.map(x => x[1] as number)
+)
+
+export const religiousTextsTable = table(
+  religionTextScores.map(x => `${x[0]}, <i>${x[1]}</i>`),
+  religionTextScores.map(x => x[2] as number)
+)
+
+function table (titles: string[], scores?: number[]): Element {
+  if (!scores) {
     return new Element('p', { innerHTML: 'Array index out of range.' })
   }
   const data = scores
-    .map((score, index) => ({ title: emplTitles[index].title, score }))
+    .map((score, index) => ({ title:titles[index], score }))
     .sort((x, y) => y.score - x.score)
   return new Element('table', { children: [
     new Element('thead', { children: [

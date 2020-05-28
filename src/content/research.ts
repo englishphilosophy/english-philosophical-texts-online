@@ -2,7 +2,14 @@ import {
   Element
 } from '../../deps_client.ts'
 
-import { dissertationTable, dissertationTitles, emplTable, emplTitles } from './similarity.ts'
+import {
+  dissertationTable,
+  dissertationTitles,
+  emplTable,
+  emplTitles,
+  religiousAuthorsTable,
+  religiousTextsTable
+} from './similarity.ts'
 
 /** Content for the main research page. */
 const research = new Element('div', { class: 'content', children: [
@@ -24,12 +31,12 @@ const similarity = new Element('div', { class: 'content', children: [
     'data-table': 'empl-similarity',
     css: { width: '100%', 'margin-bottom': '1em' },
     children: emplTitles.map((x, index) => {
-      return new Element('option', { value: index.toString(10), innerHTML: x.title })
+      return new Element('option', { value: index.toString(10), innerHTML: x })
     })
   }),
   emplTable(0),
   new Element('h2', { innerHTML: 'Hume’s <i>Essays</i> and the <i>Four Dissertations</i>' }),
-  new Element('p', { innerHTML: 'The results of the previous test seem to confirm that the measure is working as intended, since related essays are indeed scoring higher against each other than comparatively unrelated essays. If we now run the same calculation with the essays against Hume’s <i>Dissertation on the Passions</i>, both as a whole and against its individual sections, the results are potentially interesting. Most striking is the very high similarity between <i>Of Tragedy</i> and section 6 of the <i>Dissertation on the Passions</i>. These two sections of Hume’s work were originally side by side in his <i>Four Dissertations</i> of 1757, but he separated them soon after (for the 1758 edition of his <i>Essays and Treatises</i>). The results here suggest that separation may have been unfortunate.' }),
+  new Element('p', { innerHTML: 'The results of the previous test seem to confirm that the measure is working as intended, since related essays are indeed scoring higher against each other than comparatively unrelated essays. If we now run the same calculation with the <i>Essays</i> measured against Hume’s <i>Dissertation on the Passions</i>, both as a whole and against its individual sections, the results are potentially interesting. Most striking is the very high similarity between <i>Of Tragedy</i> and section 6 of the <i>Dissertation on the Passions</i>. These two parts of Hume’s opus were originally side by side in his <i>Four Dissertations</i> of 1757, but he separated them soon after (for the 1758 edition of his <i>Essays and Treatises</i>). The results here suggest that separation may have been unfortunate.' }),
   new Element('select', {
     'data-table': 'dissertation-similarity',
     css: { width: '100%', 'margin-bottom': '1em' },
@@ -43,7 +50,17 @@ const similarity = new Element('div', { class: 'content', children: [
 /** Content for the topics page. */
 const topics = new Element('div', { class: 'content', children: [
   new Element('h1', { innerHTML: 'Topic Frequency' }),
-  new Element('p', { innerHTML: 'Details to be added soon.' }),
+  new Element('h2', { innerHTML: 'Topics' }),
+  new Element('p', { innerHTML: 'It has been suggested that women philosophers of the early modern period were more interested in religion than men. How might one assess this hypothesis? In the absence of a computer and a large digital corpus, there is not much to be done besides reading widely, and forming an impression as best one can. With the tools we plan to develope here, however, it will be possible to take some more objective measurements.' }),
+  new Element('p', { innerHTML: 'For the purposes of computation, we can define a <i>topic</i> to be a set of words and phrases, each with a positive numeric weighting. We can then measure the extent to which a given work is concerned with this topic by taking the relative frequency of each of these words and phrases in the work, multiplying it by its weighting, and summing the result. In due course we intend to allow users of this site to create arbitrary topics of this kind, and assess how concerned with that topic any given work is, according to this measure.' }),
+  new Element('h2', { innerHTML: 'Modelling religion' }),
+  new Element('p', { innerHTML: 'The software we have developed so far does not yet allow for multi-word phrases. For illustrative purposes, we have created a relatively crude topic to represent relgion, consisiting of thirty words of equal weighting: ‘atheism’, ‘atheist’, ‘christ’, ‘christian’, ‘christianity’, ‘cosmogony’, ‘deity’, ‘divine’, ‘divinity’, ‘eternal’, ‘eternity’, ‘god’, ‘gospel’, ‘messiah’, ‘miracle’, ‘miraculous’, ‘prophecy’, ‘prophet’, ‘providence’, ‘religion’, ‘religious’, ‘revelation’, ‘scripture’, ‘sin’, ‘soul’, ‘temptation’, ‘theism’, ‘theist’, ‘theological’, and ‘theology’. We then calculated how ‘religious’ each author and work in our corpus is, as measured against this model. The results are shown below. The data so far are inconclusive. We hope to be able to deliver some interesting results when we have more texts and more refined measurements.' }),
+  new Element('p', { innerHTML: 'Some general comments about the results are in order. First, that Norris should presently top the list of religious authors, while not itself an implausible result, is explained in large part by the fact that the high-scoring <i>Letters Concerning the Love of God</i> is the only work of his we yet have in our corpus. Conway comes second for a similar reason; the <i>Principles of the Most Ancient and Modern Philosophy</i>, number 4 on the list of most religious works, is her only published work. That Hume should be second to last is obviously wildly off key, but there is a very simple reason for this: although he wrote a lot about religion (including the most religious work by this measure), he also wrote a lot of other things, including an enormous <i>History of England</i> (which is an order of magnitude larger than any other work we currently have in our corpus). The sheer size of his opus thus drags his average down.' }),
+  new Element('p', { innerHTML: 'In general, because this measure is based on <em>relative</em> word frequencies, there is a bias in favour of shorter texts and authors who wrote less (or for whom we do not yet have so many works in our corpus). Taking <em>absolute</em> word frequencies instead would not solve this problem, but simply result in the opposite bias. There are better ways to account for things like these, which we intend to incorporate into our software over the coming years.' }),
+  new Element('h2', { innerHTML: 'Religious authors' }),
+  religiousAuthorsTable,
+  new Element('h2', { innerHTML: 'Religious texts' }),
+  religiousTextsTable
 ] })
 
 /** An array of research pages. */
