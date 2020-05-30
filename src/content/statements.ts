@@ -6,6 +6,11 @@ type Statement = {
 
 const statements: Statement[] = [
   {
+    text: 'This open-access resource is very welcome: it offers an impressive collection ranging from well-known canonical texts to currently neglected early modern voices which deserve to be heard.',
+    from: 'Maria Rosa Antognazza',
+    affiliation: 'King’s College London, UK'
+  },
+  {
     text: '<i>Hume Texts Online</i> was an invaluable resource for me when writing my book on Hume, to be published by Princeton University Press in 2021. To have a wider range of such texts available at <i>English Philosophical Texts Online</i> would vastly improve the ability of academics and writers around the world to conduct their research more easily and more thoroughly.',
     from: 'Julian Baggini',
     affiliation: 'Royal Institute of Philosophy, UK'
@@ -73,6 +78,11 @@ const statements: Statement[] = [
     text: 'As someone teaching in a philosophy department in Central Europe, I see this is a priceless resource. It promises to enable researchers and students to access works of philosophers, many of which are not easy to track down in libraries in Prague. The search features are a great help in navigating the texts and penetrating them for specific themes. We have found the sister site Hume Texts Online very useful too, and it has played its part in the current surge of interest in Hume’s thought in Czechia.',
     from: 'James Hill',
     affiliation: 'Charles University, Prague'
+  },
+  {
+    text: '<i>English Philosophical Texts Online</i> is an excellent new initiative with great potential for further development in the future. If integrated into a network of cognate projects in and outside Oxford, it could become even more powerful and significant. I look forward to helping to engineer that integration in coming years.',
+    from: 'Howard Hotson',
+    affiliation: 'University of Oxford, UK'
   },
   {
     text: 'Just writing to say that I have found the resources at <i>Hume Texts Online</i> excellent in support of teaching and research. Firstly, it is extremely helpful to have well-managed versions of these texts online – this makes it very easy for students to access the material without concerns about copyright. I am about to teach an online only course on this material, taken by international students, and <i>Hume Texts Online</i> will be even more useful in this regard. Secondly, I love it that this resource makes this material available for free and for everyone with access to the internet – there are plenty of people out there who are interested in this material, and it is great to be able to point them (or have google point them) to texts that are freely available and edited and curated by excellent scholars in the field. I wholeheartedly approve of the proposal to expand this resource to cover more early modern texts (and more!).',

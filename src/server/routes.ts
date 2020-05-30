@@ -7,7 +7,7 @@ import {
   HtmlResponse,
   JavascriptResponse,
   JsonResponse,
-  FileResponse,
+  OkResponse,
   Status
 } from '../../deps.ts'
 
@@ -23,15 +23,15 @@ import * as read from './read.ts'
 import * as searchApi from './search.ts'
 
 /** Returns the favicon. */
-export async function favicon (request: Request): Promise<FileResponse> {
+export async function favicon (request: Request): Promise<OkResponse> {
   const buffer = await Deno.readFile('favicon.ico')
-  return new FileResponse(buffer, 'image/ico')
+  return new OkResponse('image/ico', buffer)
 }
 
 /** Returns the JPG of the frontispiece of the Leviathan. */
-export async function leviathan (request: Request): Promise<FileResponse> {
+export async function leviathan (request: Request): Promise<OkResponse> {
   const buffer = await Deno.readFile('leviathan.jpg')
-  return new FileResponse(buffer, 'image/jpg')
+  return new OkResponse('image/jpg', buffer)
 }
 
 /** Returns the home page. */
