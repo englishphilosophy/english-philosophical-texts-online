@@ -1,4 +1,4 @@
-import * as colours from '../style/colours.ts'
+import * as colours from '../colours.ts'
 
 export default `
 .controls {

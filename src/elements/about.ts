@@ -1,29 +1,32 @@
 import {
   Author,
+  element,
   Element,
   Text
 } from '../../deps_client.ts'
 
 import * as misc from './misc.ts'
 
+/** Maps an author to HTML summary information. */
 export function author (author: Author): Element {
-  return new Element('div', { class: 'section-content about', children: [
-    new Element('h2', { innerHTML: `${misc.fullname(author)} (${author.birth}-${author.death})` }),
-    new Element('h4', { innerHTML: `${author.nationality}, ${author.sex}` }),
+  return element('div', { class: 'section-content about', children: [
+    element('h2', { innerHTML: `${misc.fullname(author)} (${author.birth}-${author.death})` }),
+    element('h4', { innerHTML: `${author.nationality}, ${author.sex}` }),
   ] })
 }
 
+/** Maps a text to HTML summary information. */
 export function text (text: Text): Element {
   const children = [
-    new Element('p', { innerHTML: text.sourceDesc }),
-    new Element('h4', { innerHTML: 'First published' }),
-    new Element('p', { innerHTML: text.published.map(x => x.toString(10)).join(', ') }),
-    new Element('h4', { innerHTML: 'Copytext' }),
-    new Element('p', { innerHTML: text.copytext.map(x => x.toString(10)).join(', ') })
+    element('p', { innerHTML: text.sourceDesc }),
+    element('h4', { innerHTML: 'First published' }),
+    element('p', { innerHTML: text.published.map(x => x.toString(10)).join(', ') }),
+    element('h4', { innerHTML: 'Copytext' }),
+    element('p', { innerHTML: text.copytext.map(x => x.toString(10)).join(', ') })
   ]
   if (text.sourceUrl) {
-    children.push(new Element('h4', { innerHTML: 'Source' }))
-    children.push(new Element('p', { children: [new Element('a', { href: text.sourceUrl, innerHTML: text.sourceUrl })] }))
+    children.push(element('h4', { innerHTML: 'Source' }))
+    children.push(element('p', { children: [element('a', { href: text.sourceUrl, innerHTML: text.sourceUrl })] }))
   }
-  return new Element('div', { class: 'section-content about', children })
+  return element('div', { class: 'section-content about', children })
 }

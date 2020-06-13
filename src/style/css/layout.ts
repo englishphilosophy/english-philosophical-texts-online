@@ -1,6 +1,6 @@
-import * as colours from '../style/colours.ts'
-import * as fonts from '../style/fonts.ts'
-import * as images from '../style/images.ts'
+import * as colours from '../colours.ts'
+import * as fonts from '../fonts.ts'
+import * as images from '../images.ts'
 
 export default `
 html {

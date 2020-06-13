@@ -1,9 +1,6 @@
-type Statement = {
-  text: string
-  from: string
-  affiliation?: string
-}
+import { Statement } from '../types/statement.ts'
 
+/** Statements of support. */
 const statements: Statement[] = [
   {
     text: 'This open-access resource is very welcome: it offers an impressive collection ranging from well-known canonical texts to currently neglected early modern voices which deserve to be heard.',

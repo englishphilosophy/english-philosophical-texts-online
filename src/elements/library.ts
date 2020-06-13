@@ -1,10 +1,12 @@
 import {
+  element,
   Element,
   Author
 } from '../../deps_client.ts'
 
 import * as misc from './misc.ts'
 
+/** Creates the library (list of authors) for the home page. */
 export default function library (authors: Author[], search?: string, order: string = 'published'): Element {
   if (search && search.length > 0) {
     authors = authors.filter(author => misc.fullname(author).match(misc.regexp(search)))
@@ -22,23 +24,24 @@ export default function library (authors: Author[], search?: string, order: stri
       break
   }
   
-  return new Element('div', {
+  return element('div', {
     id: 'library',
     class: 'library',
     children: (authors.length > 0)
       ? authors.map(x => author(x, search))
-      : [new Element('p', { innerHTML: 'No matching authors.' })]
+      : [element('p', { innerHTML: 'No matching authors.' })]
   })
 }
 
+/** Creates an HTML element for an author in the library. */
 function author (author: Author, search?: string): Element {
-  return new Element('a', { class: 'author', href: misc.url(author),
+  return element('a', { class: 'author', href: misc.url(author),
     children: [
-      new Element('h6', { innerHTML: `${misc.fullname(author, search)} (${author.birth}-${author.death})` }),
-      new Element('div', { class: 'details', children: [
-        new Element('div', { innerHTML: `Nationality: ${author.nationality}` }),
-        new Element('div', { innerHTML: `Sex: ${author.sex}` }),
-        new Element('div', { innerHTML: `Texts in library: ${author.texts.filter(x => x.imported).length} / ${author.texts.length}` })
+      element('h6', { innerHTML: `${misc.fullname(author, search)} (${author.birth}-${author.death})` }),
+      element('div', { class: 'details', children: [
+        element('div', { innerHTML: `Nationality: ${author.nationality}` }),
+        element('div', { innerHTML: `Sex: ${author.sex}` }),
+        element('div', { innerHTML: `Texts in library: ${author.texts.filter(x => x.imported).length} / ${author.texts.length}` })
       ] })
     ]
   })

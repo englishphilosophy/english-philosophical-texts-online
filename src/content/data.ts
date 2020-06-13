@@ -1,7 +1,9 @@
 import {
+  element,
   Element
 } from '../../deps_client.ts'
 
+/** Titles from Hume.EMPL.1. */
 export const emplTitles = [
   'Of the Delicacy of Taste and Passion',
   'Of the Liberty of the Press',
@@ -28,6 +30,7 @@ export const emplTitles = [
   'Of the Standard of Taste' 
 ]
 
+/** Titles for Hume.DP. */
 export const dissertationTitles = [
   'Dissertation on the Passions',
   'Dissertation, section 1',
@@ -38,6 +41,7 @@ export const dissertationTitles = [
   'Dissertation, section 6'
 ]
 
+/** Religious scores for authors. */
 const religionAuthorScores = [
   ['Norris', 0.017574432],
   ['Conway', 0.013989768],
@@ -53,6 +57,7 @@ const religionAuthorScores = [
   ['Drake', 0.001104697]
 ]
 
+/** Religious scores for texts. */
 const religionTextScores = [
   ['Hume', 'Natural History of Religion', 0.018083265],
   ['Norris', 'Letters Concerning the Love of God, Between the Author of the Proposal to the Ladies and Mr. John Norris [Norris’s part]', 0.017574432],
@@ -96,49 +101,55 @@ const religionTextScores = [
   ['Berkeley', 'Essay Towards a New Theory of Vision', 0.000149321]
 ]
 
+/** Creates a table of Hume.EMPL.1 similarity scores. */
 export function emplTable (id: number): Element {
   const scores = emplScores[id]
   return table(emplTitles, scores)
 }
 
+/** Creates a table of Hume.DP vs Hume.EMPL.1 similarity scores. */
 export function dissertationTable (id: number): Element {
   const scores = dissertationScores.map(x => x[id])
   return table(emplTitles, scores)
 }
 
+/** Creates a table of authors and religious scores. */
 export const religiousAuthorsTable = table(
   religionAuthorScores.map(x => x[0] as string),
   religionAuthorScores.map(x => x[1] as number)
 )
 
+/** Creates a table of texts and religious scores. */
 export const religiousTextsTable = table(
   religionTextScores.map(x => `${x[0]}, <i>${x[1]}</i>`),
   religionTextScores.map(x => x[2] as number)
 )
 
+/** Creates a table of scores. */
 function table (titles: string[], scores?: number[]): Element {
   if (!scores) {
-    return new Element('p', { innerHTML: 'Array index out of range.' })
+    return element('p', { innerHTML: 'Array index out of range.' })
   }
   const data = scores
     .map((score, index) => ({ title:titles[index], score }))
     .sort((x, y) => y.score - x.score)
-  return new Element('table', { children: [
-    new Element('thead', { children: [
-      new Element('tr', { children: [
-        new Element('th', { innerHTML: 'Comparison text' }),
-        new Element('th', { innerHTML: 'Similarity&nbsp;score' })
+  return element('table', { children: [
+    element('thead', { children: [
+      element('tr', { children: [
+        element('th', { innerHTML: 'Comparison text' }),
+        element('th', { innerHTML: 'Similarity&nbsp;score' })
       ] })
     ] }),
-    new Element('tbody', { children: data.map(x => {
-      return new Element('tr', { children: [
-        new Element('td', { innerHTML: x.title }),
-        new Element('td', { innerHTML: (x.score * 10000).toString(10).slice(0, 6).padEnd(6, '0') })
+    element('tbody', { children: data.map(x => {
+      return element('tr', { children: [
+        element('td', { innerHTML: x.title }),
+        element('td', { innerHTML: (x.score * 10000).toString(10).slice(0, 6).padEnd(6, '0') })
       ] })
     }) })
   ] })
 }
 
+/** Hume.EMPL.1 similarity scores. */
 const emplScores = [
   [-1, 0.000158711, 0.000187015, 0.000186675, 0.000203503, 0.000168862, 0.000192877, 0.000180398, 0.000170192, 0.000186219, 0.000278702, 0.000201981, 0.000256948, 0.000249509, 0.000286248, 0.0002676, 0.00026203, 0.000324266, 0.000211737, 0.00027576, 0.000219561, 0.00030412, 0.000344483],
   [0.000158711, -1, 0.000378793, 0.00044729, 0.00040313, 0.000412568, 0.000509871, 0.000315198, 0.000544412, 0.000283593, 0.000184491, 0.000435742, 0.000218237, 0.000331547, 0.000165556, 0.000186212, 0.000156516, 0.000184224, 0.000266013, 0.000207098, 0.000261467, 0.000189866, 0.000180901],
@@ -165,6 +176,7 @@ const emplScores = [
   [0.000344483, 0.000180901, 0.000183714, 0.000216719, 0.000209062, 0.000183381, 0.000190201, 0.000196848, 0.000213761, 0.000200151, 0.000258707, 0.000191628, 0.000253334, 0.000225018, 0.000199083, 0.000214189, 0.000274566, 0.000267109, 0.000187845, 0.00031033, 0.00021216, 0.000241917, -1]
 ]
 
+/** Hume.DP vs Hume.EMPL.1 similarity scores. */
 const dissertationScores = [
   [0.000305073, 0.00029507, 0.000289262, 0.000359033, 0.000281077, 0.000318686, 0.000340124],
   [0.00021495, 0.000237439, 0.000200596, 0.000197599, 0.000222487, 0.000227103, 0.000230999],

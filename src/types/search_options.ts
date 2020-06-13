@@ -1,5 +1,5 @@
 /** Text search options. */
-export type Options = {
+export type SearchOptions = {
   ignorePunctuation: boolean
   wholeWords: boolean
   variantSpellings: boolean

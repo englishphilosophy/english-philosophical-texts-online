@@ -1,28 +1,28 @@
 import {
+  element,
   Element,
   Author,
   Analysis,
   Text
 } from '../../deps_client.ts'
 
+import { AuthorSection, TextSection } from '../types/section.ts'
 import blocks from './blocks.ts'
 import toc from './toc.ts'
 import * as search from './search.ts'
 import * as about from './about.ts'
 import * as usage from './usage.ts'
 
-type T_Section = 'title'|'content'|'search'|'summary'|'names'|'citations'|'foreign'|'lemmas'|'about'
-
-type A_Section = 'about'|'works'|'search'|'summary'|'names'|'citations'|'foreign'|'lemmas'
-
+/** Create the HTML content for a text display. */
 export function text (text: Text, analysis: Analysis): Element {
-  return new Element('div', { class: 'reader', children: [
+  return element('div', { class: 'reader', children: [
     section(textContent(text, analysis, 'title')),
     section(textContent(text, analysis, 'content'), textSelect(text, 'content'))
   ] })
 }
 
-export function textContent (text: Text, analysis: Analysis, section: T_Section): Element {
+/** Create the HTML content for a section of a text display. */
+export function textContent (text: Text, analysis: Analysis, section: TextSection): Element {
   switch (section) {
     case 'title':
       return blocks(text.blocks.slice(0, 1))
@@ -31,7 +31,7 @@ export function textContent (text: Text, analysis: Analysis, section: T_Section)
       return text.texts.length ? toc(text) : blocks(text.blocks.slice(1))
 
     case 'search':
-      return search.element(text.id)
+      return search.search(text.id)
 
     case 'summary':
       return usage.summary(analysis)
@@ -53,14 +53,16 @@ export function textContent (text: Text, analysis: Analysis, section: T_Section)
   }
 }
 
+/** Create the HTML content for an author display. */
 export function author (author: Author, analysis: Analysis): Element {
-  return new Element('div', { class: 'reader', children: [
+  return element('div', { class: 'reader', children: [
     section(authorContent(author, analysis, 'about')),
     section(authorContent(author, analysis, 'works'), authorSelect(author, 'works'))
   ] })
 }
 
-export function authorContent (author: Author, analysis: Analysis, section: A_Section): Element {
+/** Create the HTML content for a section of an author display. */
+export function authorContent (author: Author, analysis: Analysis, section: AuthorSection): Element {
   switch (section) {
     case 'about':
       return about.author(author)
@@ -69,7 +71,7 @@ export function authorContent (author: Author, analysis: Analysis, section: A_Se
       return toc(author)
 
     case 'search':
-      return search.element(author.id)
+      return search.search(author.id)
 
     case 'summary':
       return usage.summary(analysis)
@@ -89,48 +91,48 @@ export function authorContent (author: Author, analysis: Analysis, section: A_Se
 }
 
 function section (content: Element, select?: Element): Element {
-  return new Element('div', { class: 'section-wrapper', children: [
-    new Element('div', { class: 'section', children: select ? [select, content] : [content] })
+  return element('div', { class: 'section-wrapper', children: [
+    element('div', { class: 'section', children: select ? [select, content] : [content] })
   ] })
 }
 
-function textSelect (text: Text, section: T_Section): Element {
-  return new Element('select', {
+function textSelect (text: Text, section: TextSection): Element {
+  return element('select', {
     class: 'section-menu',
     disabled: true,
     'data-text': text.id,
     'aria-label': 'Area',
     children: [
-      new Element('optgroup', { label: 'Text', children: [
+      element('optgroup', { label: 'Text', children: [
         option((text.texts.length > 0 ? 'Table of Contents' : 'Text'), 'content', section === 'content'),
         option('Search', 'search', section === 'search')
       ] }),
-      new Element('optgroup', { label: 'Analysis', children: [
+      element('optgroup', { label: 'Analysis', children: [
         option('Word usage summary', 'summary', section === 'summary'),
         option('Named people', 'names', section === 'names'),
         option('Citations', 'citations', section === 'citations'),
         option('Foreign text', 'foreign', section === 'foreign'),
         option('Lemmas', 'lemmas', section === 'lemmas')
       ] }),
-      new Element('optgroup', { label: 'About', children: [
+      element('optgroup', { label: 'About', children: [
         option('About', 'about', section === 'about')
       ] })
     ]
   })
 }
 
-function authorSelect (author: Author, section: A_Section): Element {
-  return new Element('select', {
+function authorSelect (author: Author, section: AuthorSection): Element {
+  return element('select', {
     class: 'section-menu',
     disabled: true,
     'data-author': author.id,
     'aria-label': 'Area',
     children: [
-      new Element('optgroup', { label: 'Author', children: [
+      element('optgroup', { label: 'Author', children: [
         option('Works', 'works', section === 'works'),
         option('Search', 'search', section === 'search')
       ] }),
-      new Element('optgroup', { label: 'Analysis', children: [
+      element('optgroup', { label: 'Analysis', children: [
         option('Word usage summary', 'summary', section === 'summary'),
         option('Named people', 'names', section === 'names'),
         option('Citations', 'citations', section === 'citations'),
@@ -142,5 +144,5 @@ function authorSelect (author: Author, section: A_Section): Element {
 }
 
 function option (innerHTML: string, value: string, selected: boolean): Element {
-  return new Element('option', { value, innerHTML, selected: selected ? 'selected' : undefined })
+  return element('option', { value, innerHTML, selected: selected ? 'selected' : undefined })
 }

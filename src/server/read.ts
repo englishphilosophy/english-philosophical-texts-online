@@ -74,6 +74,15 @@ export function text (id: string, type: 'texts'|'html'|'search'|'analysis' = 'te
   return existsSync(path) ? new Text(readJsonSync(path)) : undefined
 }
 
+/** Looks up an analysis by ID. */
+export function analysis (id: string): Analysis|undefined {
+  let path = `${dataDir}/analysis/${id.toLowerCase().replace(/\./g, '/')}.json`
+  if (!existsSync(path)) {
+    path = path.replace(/\.json$/, '/index.json')
+  }
+  return existsSync(path) ? readJsonSync(path) as Analysis : undefined
+}
+
 /** Returns an array of a text's ancestors, given its ID.
  * 
  * If the ID is malformed, some of the elements of the array could be
@@ -132,13 +141,4 @@ function lastDescendant (t: Text): Text|undefined {
     }
   }
   return t
-}
-
-/** Looks up an analysis by ID. */
-export function analysis (id: string): Analysis|undefined {
-  let path = `${dataDir}/analysis/${id.toLowerCase().replace(/\./g, '/')}.json`
-  if (!existsSync(path)) {
-    path = path.replace(/\.json$/, '/index.json')
-  }
-  return existsSync(path) ? readJsonSync(path) as Analysis : undefined
 }

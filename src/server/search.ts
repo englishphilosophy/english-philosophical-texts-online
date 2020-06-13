@@ -7,7 +7,7 @@ import {
 } from '../../deps.ts'
 
 import { Query } from '../types/query.ts'
-import { Options } from '../types/options.ts'
+import { SearchOptions } from '../types/search_options.ts'
 import { Result } from '../types/result.ts'
 import * as read from './read.ts'
 
@@ -36,7 +36,7 @@ export function parseQuery (query1: Query|null, query2: Query|null, operator: st
  * by the recursion to filter out subtexts by a different author from the author
  * of the text being searched.
  */
-export function runQuery (ids: string[], query: Query, options: Options, author: string|null = null): Result[] {
+export function runQuery (ids: string[], query: Query, options: SearchOptions, author: string|null = null): Result[] {
   const results = []
   const lexicon = options.variantSpellings ? read.reducedLexicon() : {}
   for (const id of ids) {
@@ -53,7 +53,7 @@ export function runQuery (ids: string[], query: Query, options: Options, author:
 }
 
 /** Gets search matches from a text (recursively calling runQuery on sub-texts). */
-function matches (text: Text, query: Query, options: Options, lexicon: any): Result {
+function matches (text: Text, query: Query, options: SearchOptions, lexicon: any): Result {
   // initialise the result object
   const result: Result = {
     id: text.id,
@@ -84,13 +84,13 @@ function matches (text: Text, query: Query, options: Options, lexicon: any): Res
 }
 
 /** Creates a matched block for display, with search matches highlighted. */
-function matchedBlock (block: Block, query: Query, options: Options, lexicon: any): Block {
+function matchedBlock (block: Block, query: Query, options: SearchOptions, lexicon: any): Block {
   block.content = block.content.replace(regex(query, options, lexicon), '<mark>$1</mark>')
   return block
 }
 
 /** Determines whether some content contains a match for a search query. */
-function hit (content: string, query: Query, options: Options, lexicon: any): boolean {
+function hit (content: string, query: Query, options: SearchOptions, lexicon: any): boolean {
   // match string queries directly
   if (typeof query === 'string') {
     return (content.match(regex(query, options, lexicon)) !== null)
@@ -110,12 +110,12 @@ function hit (content: string, query: Query, options: Options, lexicon: any): bo
 }
 
 /** Creates a regular expression from a search query. */
-function regex (query: Query, options: Options, lexicon: any): RegExp {
+function regex (query: Query, options: SearchOptions, lexicon: any): RegExp {
   return new RegExp(`(${regexString(query, options, lexicon)})`, 'gi')
 }
 
 /** Creates the string for a regular expression from the search query. */
-function regexString (query: Query, options: Options, lexicon: any): string {
+function regexString (query: Query, options: SearchOptions, lexicon: any): string {
   if (typeof query === 'string') {
     if (options.ignorePunctuation) {
       query = query.replace(/[.,:;?!()]/g, '')

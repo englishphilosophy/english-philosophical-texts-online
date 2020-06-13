@@ -1,41 +1,41 @@
 import {
+  element,
   Element
 } from '../../deps_client.ts'
 
-type Page = {
-  id: string
-  title: string
-  url: string
-}
+import { PageDetails } from '../types/page_details.ts'
 
-export default function info (pageId: string, pages: Page[], content: Element): Element {
-  return new Element('div', { class: 'info', children: [
-    new Element('select', {
+/** Create HTML content for an info page (i.e. a research or about page). */
+export default function info (pageId: string, pages: PageDetails[], content: Element): Element {
+  return element('div', { class: 'info', children: [
+    element('select', {
       disabled: true,
       class: 'submenu',
       'aria-label': 'Page',
       children: pages.map(x => option(x, pageId))
     }),
     content,
-    new Element('nav', {
+    element('nav', {
       class: 'submenu',
-      children: [new Element('div', { children: pages.map(x => link(x, pageId)) })]
+      children: [element('div', { children: pages.map(x => link(x, pageId)) })]
     })
   ] })
 }
 
-function option (page: Page, pageId: string): Element {
+/** Creates an option element for a navigation select menu. */
+function option (page: PageDetails, pageId: string): Element {
   const selected = page.id === pageId
-  return new Element('option', {
+  return element('option', {
     selected: selected ? 'selected' : undefined,
     value: page.url,
     innerHTML: page.title
   })
 }
 
-function link (page: Page, pageId: string): Element {
+/** Creates a link for a navigation list. */
+function link (page: PageDetails, pageId: string): Element {
   const active = page.id === pageId
-  return new Element('a', {
+  return element('a', {
     class: active ? 'active': undefined,
     href: page.url,
     innerHTML: page.title

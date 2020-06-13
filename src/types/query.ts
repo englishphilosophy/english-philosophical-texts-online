@@ -1,7 +1,7 @@
 /** A search query. */
 export type Query = string|ComplexQuery
 
-/** A complex search query (can be arbitrarily complex). */
+/** A complex search query. */
 export type ComplexQuery = {
   query1: Query
   query2: Query
