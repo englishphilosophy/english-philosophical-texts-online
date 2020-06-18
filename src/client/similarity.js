@@ -1,4 +1,4 @@
-import { dissertationTable, emplTable } from '../content/similarity.ts'
+import { dissertationTable, emplTable } from '../content/data.ts'
 
 export default function init() {
   const emplSelect = document.querySelector('[data-table="empl-similarity"]')
