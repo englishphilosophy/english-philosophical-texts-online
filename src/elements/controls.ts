@@ -1,6 +1,4 @@
-import {
-  element
-} from '../../deps_client.ts'
+import { element } from '../../deps_client.ts'
 
 /** Controls for the library on the home page. */
 export default element('div', { class: 'controls', children: [

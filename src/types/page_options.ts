@@ -1,6 +1,4 @@
-import {
-  Element
-} from '../../deps.ts'
+import type { Element } from '../../deps.ts'
 
 /** Page options (used to create entire HTML pages). */
 export type PageOptions = {

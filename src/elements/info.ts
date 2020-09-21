@@ -1,9 +1,6 @@
-import {
-  element,
-  Element
-} from '../../deps_client.ts'
-
-import { PageDetails } from '../types/page_details.ts'
+import type { Element } from '../../deps_client.ts'
+import type { PageDetails } from '../types/page_details.ts'
+import { element } from '../../deps_client.ts'
 
 /** Create HTML content for an info page (i.e. a research or about page). */
 export default function info (pageId: string, pages: PageDetails[], content: Element): Element {

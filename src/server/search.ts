@@ -1,14 +1,10 @@
 // BUG: with ignorePuncuation OFF and wholeWords ON, search does not match
 // queries with punctuation in the right place
 
-import {
-  Block,
-  Text
-} from '../../deps.ts'
-
-import { Query } from '../types/query.ts'
-import { SearchOptions } from '../types/search_options.ts'
-import { Result } from '../types/result.ts'
+import type { Block, Text } from '../../deps.ts'
+import type { Query } from '../types/query.ts'
+import type { SearchOptions } from '../types/search_options.ts'
+import type { Result } from '../types/result.ts'
 import * as read from './read.ts'
 
 /** Generates a search query object from form parameters. */

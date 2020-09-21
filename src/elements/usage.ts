@@ -1,9 +1,5 @@
-import {
-  element,
-  Element,
-  Analysis,
-  Lemma
-} from '../../deps_client.ts'
+import type { Element, Analysis, Lemma } from '../../deps_client.ts'
+import { element } from '../../deps_client.ts'
 
 export function summary (analysis: Analysis): Element {
   const isAuthor = analysis.id.split('.').length === 1

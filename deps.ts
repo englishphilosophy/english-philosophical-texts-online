@@ -1,20 +1,20 @@
 export {
   exists,
-  existsSync,
-  readFileStrSync,
-  readJsonSync,
-  writeFileStrSync
-} from 'https://deno.land/std@v0.57.0/fs/mod.ts'
+  existsSync
+} from 'https://deno.land/std@v0.70.0/fs/mod.ts'
 
 export {
   parse as parseYaml
-} from 'https://deno.land/std@v0.57.0/encoding/yaml.ts'
+} from 'https://deno.land/std@v0.70.0/encoding/yaml.ts'
 
 export {
   element,
-  Element,
+  Element
+} from 'https://raw.githubusercontent.com/merivale/elementary/v0.4.0/mod.ts'
+
+export type {
   TagName
-} from 'https://raw.githubusercontent.com/merivale/elementary/v0.3.0/mod.ts'
+} from 'https://raw.githubusercontent.com/merivale/elementary/v0.4.0/mod.ts'
 
 export {
   App,
@@ -26,7 +26,7 @@ export {
   JsonResponse,
   OkResponse,
   Status
-} from 'https://raw.githubusercontent.com/merivale/womble/v0.3.0/mod.ts'
+} from 'https://raw.githubusercontent.com/merivale/womble/v0.5.0/mod.ts'
 
 import Author from '../english-philosophical-texts/bin/types/author.ts'
 import Block from '../english-philosophical-texts/bin/types/block.ts'
@@ -37,7 +37,7 @@ export {
   Text
 }
 
-export {
+export type {
   Analysis,
   Lemma
 } from '../english-philosophical-texts/bin/types/analysis.ts'

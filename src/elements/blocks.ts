@@ -1,9 +1,5 @@
-import {
-  element,
-  Element,
-  Block
-} from '../../deps_client.ts'
-
+import type { Element, Block } from '../../deps_client.ts'
+import { element } from '../../deps_client.ts'
 import * as misc from './misc.ts'
 
 /** Maps an array of blocks (i.e. paragraphs or footnotes) to HTML display. */

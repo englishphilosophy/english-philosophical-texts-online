@@ -1,4 +1,4 @@
-import { Statement } from '../types/statement.ts'
+import type { Statement } from '../types/statement.ts'
 
 /** Statements of support. */
 const statements: Statement[] = [

@@ -1,10 +1,5 @@
-import {
-  Author,
-  element,
-  Element,
-  Text
-} from '../../deps_client.ts'
-
+import type { Author, Element, Text } from '../../deps_client.ts'
+import { element } from '../../deps_client.ts'
 import * as misc from './misc.ts'
 
 /** Maps an author to HTML summary information. */

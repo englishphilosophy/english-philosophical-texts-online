@@ -1,10 +1,5 @@
-import {
-  element,
-  Element,
-  Author,
-  Text
-} from '../../deps_client.ts'
-
+import type { Element, Author, Text } from '../../deps_client.ts'
+import { element } from '../../deps_client.ts'
 import * as misc from './misc.ts'
 
 /** Maps ancestors and adjacent texts to an HTML breadcrumb display. */

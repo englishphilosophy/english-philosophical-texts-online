@@ -1,10 +1,6 @@
-import {
-  element,
-  Element,
-  Block
-} from '../../deps_client.ts'
-
-import { Result } from '../types/result.ts'
+import type { Element } from '../../deps_client.ts'
+import type { Result } from '../types/result.ts'
+import { element, Block } from '../../deps_client.ts'
 import blocks from './blocks.ts'
 
 export function search (id: string): Element {

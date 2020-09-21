@@ -1,7 +1,5 @@
-import {
-  element,
-  Element
-} from '../../deps_client.ts'
+import type { Element } from '../../deps_client.ts'
+import { element } from '../../deps_client.ts'
 
 /** Titles from Hume.EMPL.1. */
 export const emplTitles = [

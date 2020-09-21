@@ -1,7 +1,5 @@
 import {
   existsSync,
-  readJsonSync,
-  readFileStrSync,
   parseYaml,
   Author,
   Text,
@@ -13,7 +11,7 @@ const dataDir = '../english-philosophical-texts/build'
 
 /** Returns the raw lexicon as an object. */
 export function lexicon (): any {
-  return parseYaml(readFileStrSync('../english-philosophical-texts/lexicon.yml'))
+  return parseYaml(Deno.readTextFileSync('../english-philosophical-texts/lexicon.yml'))
 }
 
 /** Returns a map of words to lemmas (derived from the lexicon).
@@ -50,13 +48,13 @@ export function reducedLexicon (): Array<Array<string>> {
 
 /* Returns an array of all authors. */
 export function authors (): Author[] {
-  const data = readJsonSync(`${dataDir}/index.json`) as any
+  const data = JSON.parse(Deno.readTextFileSync(`${dataDir}/index.json`)) as any
   return data.texts.map((x: any) => new Author(x))
 }
 
 /* Looks up an author by ID. */
 export function author (id: string): Author|undefined {
-  const data = readJsonSync(`${dataDir}/index.json`) as any
+  const data = JSON.parse(Deno.readTextFileSync(`${dataDir}/index.json`)) as any
   const author = data.texts.find((x: any) => x.id.toLowerCase() === id.toLowerCase())
   return author ? new Author(author) : undefined
 }
@@ -71,7 +69,7 @@ export function text (id: string, type: 'texts'|'html'|'search'|'analysis' = 'te
   if (!existsSync(path)) {
     path = path.replace(/\.json$/, '/index.json')
   }
-  return existsSync(path) ? new Text(readJsonSync(path)) : undefined
+  return existsSync(path) ? new Text(JSON.parse(Deno.readTextFileSync(path))) : undefined
 }
 
 /** Looks up an analysis by ID. */
@@ -80,7 +78,7 @@ export function analysis (id: string): Analysis|undefined {
   if (!existsSync(path)) {
     path = path.replace(/\.json$/, '/index.json')
   }
-  return existsSync(path) ? readJsonSync(path) as Analysis : undefined
+  return existsSync(path) ? JSON.parse(Deno.readTextFileSync(path)) as Analysis : undefined
 }
 
 /** Returns an array of a text's ancestors, given its ID.

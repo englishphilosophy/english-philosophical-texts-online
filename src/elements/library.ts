@@ -1,9 +1,5 @@
-import {
-  element,
-  Element,
-  Author
-} from '../../deps_client.ts'
-
+import type { Element, Author } from '../../deps_client.ts'
+import { element } from '../../deps_client.ts'
 import * as misc from './misc.ts'
 
 /** Creates the library (list of authors) for the home page. */

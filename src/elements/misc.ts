@@ -1,8 +1,4 @@
-import {
-  Author,
-  Text,
-  Block
-} from '../../deps_client.ts'
+import { Author, Text, Block } from '../../deps_client.ts'
 
 /** Creates an HTML link element for an author, text, or block. */
 export function link (data: Author|Text|Block): string {

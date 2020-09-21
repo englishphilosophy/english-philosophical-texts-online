@@ -1,9 +1,6 @@
-import {
-  element,
-  Element
-} from '../../deps.ts'
-
-import { PageOptions } from '../types/page_options.ts'
+import { element } from '../../deps.ts'
+import type { Element } from '../../deps.ts'
+import type { PageOptions } from '../types/page_options.ts'
 import css from './css.ts'
 
 /** Generates an HTML document with the given options. */

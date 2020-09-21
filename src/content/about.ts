@@ -1,11 +1,6 @@
-import {
-  element,
-  Element,
-  Author,
-  Text
-} from '../../deps_client.ts'
-
-import { PageDetails } from '../types/page_details.ts'
+import type { Element, Author, Text } from '../../deps_client.ts'
+import type { PageDetails } from '../types/page_details.ts'
+import { element } from '../../deps_client.ts'
 import * as misc from '../elements/misc.ts'
 import statements from './statements.ts'
 

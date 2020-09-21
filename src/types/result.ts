@@ -1,6 +1,4 @@
-import {
-  Block
-} from '../../deps_client.ts'
+import type { Block } from '../../deps_client.ts'
 
 /** A search result. */
 export type Result = {

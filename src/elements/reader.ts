@@ -1,12 +1,6 @@
-import {
-  element,
-  Element,
-  Author,
-  Analysis,
-  Text
-} from '../../deps_client.ts'
-
-import { AuthorSection, TextSection } from '../types/section.ts'
+import type { Element, Author, Analysis, Text } from '../../deps_client.ts'
+import type { AuthorSection, TextSection } from '../types/section.ts'
+import { element } from '../../deps_client.ts'
 import blocks from './blocks.ts'
 import toc from './toc.ts'
 import * as search from './search.ts'

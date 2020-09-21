@@ -1,9 +1,6 @@
-import {
-  element
-} from '../../deps_client.ts'
-
+import type { PageDetails } from '../types/page_details.ts'
+import { element } from '../../deps_client.ts'
 import * as data from './data.ts'
-import { PageDetails } from '../types/page_details.ts'
 
 /** Research page titles. */
 export const titles = {
