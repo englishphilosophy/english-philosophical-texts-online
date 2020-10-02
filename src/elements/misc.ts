@@ -8,7 +8,8 @@ export function link (data: Author|Text|Block): string {
   if (data instanceof Text) {
     return `<a href="${url(data)}">${title(data)}</a>`
   }
-  return `<a href="${url(data)}">${data.id}</a>`
+  let id = data.author ? data.id.replace(/^[a-zA-Z]+\./, `${data.author}.`) : data.id
+  return `<a href="${url(data)}">${id}</a>`
 }
 
 /** Create the (local) URL for an author, text, or block. */
@@ -23,7 +24,7 @@ export function fullname (author: Author, search?: string): string {
   const fullname = author.title
     ? `${author.title} [${author.forename} ${author.surname}]`
     : `${author.forename} ${author.surname}`
-    
+
   return (search && search.length > 0)
     ? fullname.replace(regexp(search), '<mark>$1</mark>')
     : fullname
