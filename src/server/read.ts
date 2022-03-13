@@ -1,5 +1,4 @@
 import {
-  existsSync,
   parseYaml,
   Author,
   Text,
@@ -7,11 +6,11 @@ import {
 } from '../../deps.ts'
 
 /** The path to the data directory (relative to the main process). */
-const dataDir = '../english-philosophical-texts/build'
+const dataDir = './texts'
 
 /** Returns the raw lexicon as an object. */
 export function lexicon (): any {
-  return parseYaml(Deno.readTextFileSync('../english-philosophical-texts/lexicon.yml'))
+  return parseYaml(Deno.readTextFileSync('./texts/lexicon.yml'))
 }
 
 /** Returns a map of words to lemmas (derived from the lexicon).
@@ -66,19 +65,31 @@ export function author (id: string): Author|undefined {
  */
 export function text (id: string, type: 'texts'|'html'|'search'|'analysis' = 'texts'): Text|undefined {
   let path = `${dataDir}/${type}/${id.toLowerCase().replace(/\./g, '/')}.json`
-  if (!existsSync(path)) {
-    path = path.replace(/\.json$/, '/index.json')
+  try {
+    return new Text(JSON.parse(Deno.readTextFileSync(path)))
+  } catch {
+    try {
+      path = path.replace(/\.json$/, '/index.json')
+      return new Text(JSON.parse(Deno.readTextFileSync(path)))
+    } catch {
+      return undefined
+    }
   }
-  return existsSync(path) ? new Text(JSON.parse(Deno.readTextFileSync(path))) : undefined
 }
 
 /** Looks up an analysis by ID. */
 export function analysis (id: string): Analysis|undefined {
   let path = `${dataDir}/analysis/${id.toLowerCase().replace(/\./g, '/')}.json`
-  if (!existsSync(path)) {
-    path = path.replace(/\.json$/, '/index.json')
+  try {
+    return JSON.parse(Deno.readTextFileSync(path)) as Analysis
+  } catch {
+    try {
+      path = path.replace(/\.json$/, '/index.json')
+      return JSON.parse(Deno.readTextFileSync(path)) as Analysis
+    } catch {
+      return undefined
+    }
   }
-  return existsSync(path) ? JSON.parse(Deno.readTextFileSync(path)) as Analysis : undefined
 }
 
 /** Returns an array of a text's ancestors, given its ID.
@@ -89,12 +100,12 @@ export function analysis (id: string): Analysis|undefined {
  */
 export function ancestors (id: string): Text[] {
   return id.split('.')
-    .map((value, index, array) => array.slice(0, index + 1).join('.'))
+    .map((_, index, array) => array.slice(0, index + 1).join('.'))
     .map(id => text(id)) as Text[]
 }
 
 /** Returns the next section (or whatever) of a text. */
-export function next (id: string, down: boolean = true): Text|undefined {
+export function next (id: string, down = true): Text|undefined {
   const t = text(id)
   if (t) {
     if (t.texts && t.texts.length > 0 && down) {

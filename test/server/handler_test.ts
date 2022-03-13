@@ -4,7 +4,6 @@ import {
 } from '../../test_deps.ts'
 
 import {
-  Response,
   Status
 } from '../../deps.ts'
 
@@ -40,9 +39,9 @@ Deno.test({
 
 Deno.test({
   name: 'server/handler:author',
-  async fn () {
-    for (const author of await read.authors()) {
-      const response = await handler.author(author.id)
+  fn () {
+    for (const author of read.authors()) {
+      const response = handler.author(author.id)
       assert(response instanceof Response)
       assertEquals(response.status, Status.OK)
       assertEquals(response.headers.get('content-type'), 'text/html')
@@ -52,10 +51,10 @@ Deno.test({
 
 Deno.test({
   name: 'server/handler:text',
-  async fn () {
-    for (const author of await read.authors()) {
+  fn () {
+    for (const author of read.authors()) {
       for (const text of author.texts) {
-        const response = await handler.text(text.id)
+        const response = handler.text(text.id)
         assert(response instanceof Response)
         assertEquals(response.status, Status.OK)
         assertEquals(response.headers.get('content-type'), 'text/html')

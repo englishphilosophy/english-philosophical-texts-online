@@ -1,7 +1,5 @@
 import {
   HttpError,
-  Request,
-  Response,
   Status
 } from '../../deps.ts'
 
@@ -9,75 +7,77 @@ import * as handler from './handler.ts'
 
 /** The web application. */
 export default async function epto (request: Request): Promise<Response> {
+  const url = new URL(request.url)
+
   // favicon
-  if (request.path === '/favicon.ico') {
+  if (url.pathname === '/favicon.ico') {
     return handler.favicon()
   }
 
   // home page
-  if (request.path === '/') {
+  if (url.pathname === '/') {
     return handler.home()
   }
 
   // search api
-  if (request.path === '/search') {
+  if (url.pathname === '/search') {
     if (request.method !== 'POST') {
       throw new HttpError(Status.MethodNotAllowed, 'Search requests must be sent with the POST method.')
     }
-    return handler.search(await request.getFormBody())
+    return handler.search(await request.formData())
   }
 
   // author pages
-  const authorTest = request.path.match(/^\/texts\/([a-z]+)$/)
+  const authorTest = url.pathname.match(/^\/texts\/([a-z]+)$/)
   if (authorTest) {
     return handler.author(authorTest[1])
   }
 
   // text pages
-  const textTest = request.path.match(/^\/texts\/([a-z0-9/]+)$/)
+  const textTest = url.pathname.match(/^\/texts\/([a-z0-9/]+)$/)
   if (textTest) {
     return handler.text(textTest[1])
   }
 
   // research pages
-  if (request.path === '/research') {
+  if (url.pathname === '/research') {
     return handler.research('research')
   }
-  if (request.path === '/research/similarity') {
+  if (url.pathname === '/research/similarity') {
     return handler.research('similarity')
   }
-  if (request.path === '/research/topics') {
+  if (url.pathname === '/research/topics') {
     return handler.research('topics')
   }
 
   // about pages
-  if (request.path === '/about') {
+  if (url.pathname === '/about') {
     return handler.about('about')
   }
-  if (request.path === '/about/corpus') {
+  if (url.pathname === '/about/corpus') {
     return handler.about('corpus')
   }
-  if (request.path === '/about/principles') {
+  if (url.pathname === '/about/principles') {
     return handler.about('principles')
   }
-  if (request.path === '/about/permissions') {
+  if (url.pathname === '/about/permissions') {
     return handler.about('permissions')
   }
-  if (request.path === '/about/contact') {
+  if (url.pathname === '/about/contact') {
     return handler.about('contact')
   }
-  if (request.path === '/about/support') {
+  if (url.pathname === '/about/support') {
     return handler.about('support')
   }
 
   // javascript files
-  const javascriptTest = request.path.match(/^\/js\/([a-z/]+\.js)$/)
+  const javascriptTest = url.pathname.match(/^\/js\/([a-z/]+\.js)$/)
   if (javascriptTest) {
     return handler.javascript(javascriptTest[1])
   }
 
   // json
-  const jsonTest = request.path.match(/^\/data\/([a-z/0-9]+\.json)$/)
+  const jsonTest = url.pathname.match(/^\/data\/([a-z/0-9]+\.json)$/)
   if (jsonTest) {
     return handler.json(jsonTest[1])
   }
