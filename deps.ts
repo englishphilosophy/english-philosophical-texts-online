@@ -27,9 +27,9 @@ export {
   headers
 } from 'https://raw.githubusercontent.com/merivale/womble/v0.7.0/mod.ts'
 
-import Author from '../english-philosophical-texts/bin/types/author.ts'
-import Block from '../english-philosophical-texts/bin/types/block.ts'
-import Text from '../english-philosophical-texts/bin/types/text.ts'
+import Author from './bin/types/author.ts'
+import Block from './bin/types/block.ts'
+import Text from './bin/types/text.ts'
 export {
   Author,
   Block,
@@ -39,4 +39,4 @@ export {
 export type {
   Analysis,
   Lemma
-} from '../english-philosophical-texts/bin/types/analysis.ts'
+} from './bin/types/analysis.ts'
