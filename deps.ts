@@ -1,9 +1,4 @@
 export {
-  exists,
-  existsSync
-} from 'https://deno.land/std@v0.129.0/fs/mod.ts'
-
-export {
   parse as parseYaml
 } from 'https://deno.land/std@v0.129.0/encoding/yaml.ts'
 

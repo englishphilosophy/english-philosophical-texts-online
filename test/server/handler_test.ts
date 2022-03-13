@@ -39,8 +39,8 @@ Deno.test({
 
 Deno.test({
   name: 'server/handler:author',
-  fn () {
-    for (const author of read.authors()) {
+  async fn () {
+    for (const author of await read.authors()) {
       const response = handler.author(author.id)
       assert(response instanceof Response)
       assertEquals(response.status, Status.OK)
@@ -51,8 +51,8 @@ Deno.test({
 
 Deno.test({
   name: 'server/handler:text',
-  fn () {
-    for (const author of read.authors()) {
+  async fn () {
+    for (const author of await read.authors()) {
       for (const text of author.texts) {
         const response = handler.text(text.id)
         assert(response instanceof Response)

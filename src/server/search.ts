@@ -32,16 +32,16 @@ export function parseQuery (query1: Query|null, query2: Query|null, operator: st
  * by the recursion to filter out subtexts by a different author from the author
  * of the text being searched.
  */
-export function runQuery (ids: string[], query: Query, options: SearchOptions, author: string|null = null): Result[] {
+export async function runQuery (ids: string[], query: Query, options: SearchOptions, author: string|null = null): Promise<Result[]> {
   const results = []
   const lexicon = options.variantSpellings ? read.reducedLexicon() : {}
   for (const id of ids) {
-    const text = read.text(id, 'search')
+    const text = await read.text(id, 'search')
     if (text) {
       const isAuthor = (text.id.split('.').length === 1)
       const isDifferentAuthor = author && (text.id.indexOf(author) !== 0)
       if ((text.imported || isAuthor) && !isDifferentAuthor) {
-        results.push(matches(text, query, options, lexicon))
+        results.push(await matches(text, query, options, lexicon))
       }
     }
   }
@@ -49,7 +49,7 @@ export function runQuery (ids: string[], query: Query, options: SearchOptions, a
 }
 
 /** Gets search matches from a text (recursively calling runQuery on sub-texts). */
-function matches (text: Text, query: Query, options: SearchOptions, lexicon: any): Result {
+async function matches (text: Text, query: Query, options: SearchOptions, lexicon: any): Promise<Result> {
   // initialise the result object
   const result: Result = {
     id: text.id,
@@ -61,7 +61,7 @@ function matches (text: Text, query: Query, options: SearchOptions, lexicon: any
 
   // either search subtexts recursively for matches
   if (text.texts.length > 0) {
-    result.results = runQuery(text.texts.map(x => x.id), query, options, text.id.split('.')[0])
+    result.results = await runQuery(text.texts.map(x => x.id), query, options, text.id.split('.')[0])
     for (const subResult of result.results) {
       result.total += subResult.total
     }

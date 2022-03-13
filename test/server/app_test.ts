@@ -44,7 +44,7 @@ Deno.test({
 Deno.test({
   name: 'app /texts/{author}',
   async fn () {
-    for (const author of read.authors()) {
+    for (const author of await read.authors()) {
       const path = author.id.toLowerCase()
       const request = new Request(`https://localhost/texts/${path}`, { method: 'GET' })
       const response = await app(request)
@@ -56,7 +56,7 @@ Deno.test({
 Deno.test({
   name: 'app /texts/{author}/{text}',
   async fn () {
-    for (const author of read.authors()) {
+    for (const author of await read.authors()) {
       for (const text of author.texts) {
         const path = text.id.toLowerCase().replace(/\./g, '/')
         const request = new Request(`https://localhost/texts/${path}`, { method: 'GET' })
