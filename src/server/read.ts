@@ -5,12 +5,17 @@ import {
   Analysis
 } from '../../deps.ts'
 
-/** The path to the data directory (relative to the main process). */
-const dataDir = './texts'
+const dataUrl = 'https://raw.githubusercontent.com/englishphilosophy/english-philosophical-texts/master/build'
+
+async function fetchData (path: string): Promise<string> {
+  const request = new Request(`${dataUrl}/${path}`)
+  const response = await fetch(request)
+  return await response.text()
+}
 
 /** Returns the raw lexicon as an object. */
 export async function lexicon (): Promise<any> {
-  return parseYaml(await Deno.readTextFile('./texts/lexicon.yml'))
+  return parseYaml(await fetchData('../lexicon.yml'))
 }
 
 /** Returns a map of words to lemmas (derived from the lexicon).
@@ -47,13 +52,13 @@ export async function reducedLexicon (): Promise<Array<Array<string>>> {
 
 /* Returns an array of all authors. */
 export async function authors (): Promise<Author[]> {
-  const data = JSON.parse(await Deno.readTextFile(`${dataDir}/index.json`)) as any
+  const data = JSON.parse(await fetchData('index.json')) as any
   return data.texts.map((x: any) => new Author(x))
 }
 
 /* Looks up an author by ID. */
 export async function author (id: string): Promise<Author|undefined> {
-  const data = JSON.parse(await Deno.readTextFile(`${dataDir}/index.json`)) as any
+  const data = JSON.parse(await fetchData('index.json')) as any
   const author = data.texts.find((x: any) => x.id.toLowerCase() === id.toLowerCase())
   return author ? new Author(author) : undefined
 }
@@ -64,13 +69,13 @@ export async function author (id: string): Promise<Author|undefined> {
  * `ancestors` function below. (Should I change this??)
  */
 export async function text (id: string, type: 'texts'|'html'|'search'|'analysis' = 'texts'): Promise<Text|undefined> {
-  let path = `${dataDir}/${type}/${id.toLowerCase().replace(/\./g, '/')}.json`
+  let path = `${type}/${id.toLowerCase().replace(/\./g, '/')}.json`
   try {
-    return new Text(JSON.parse(await Deno.readTextFile(path)))
+    return new Text(JSON.parse(await fetchData(path)))
   } catch {
     try {
       path = path.replace(/\.json$/, '/index.json')
-      return new Text(JSON.parse(await Deno.readTextFile(path)))
+      return new Text(JSON.parse(await fetchData(path)))
     } catch {
       return undefined
     }
@@ -79,13 +84,13 @@ export async function text (id: string, type: 'texts'|'html'|'search'|'analysis'
 
 /** Looks up an analysis by ID. */
 export async function analysis (id: string): Promise<Analysis|undefined> {
-  let path = `${dataDir}/analysis/${id.toLowerCase().replace(/\./g, '/')}.json`
+  let path = `analysis/${id.toLowerCase().replace(/\./g, '/')}.json`
   try {
-    return JSON.parse(await Deno.readTextFile(path)) as Analysis
+    return JSON.parse(await fetchData(path)) as Analysis
   } catch {
     try {
       path = path.replace(/\.json$/, '/index.json')
-      return JSON.parse(await Deno.readTextFile(path)) as Analysis
+      return JSON.parse(await fetchData(path)) as Analysis
     } catch {
       return undefined
     }
