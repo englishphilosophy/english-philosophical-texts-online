@@ -1,4 +1,4 @@
-import type { Element, Author, Text } from '../../deps_client.ts'
+import type { Element, Author, TextStub } from '../../deps_client.ts'
 import type { PageDetails } from '../types/page_details.ts'
 import { element } from '../../deps_client.ts'
 import * as misc from '../elements/misc.ts'
@@ -33,12 +33,12 @@ export const about = element('div', { class: 'content', children: [
 ] })
 
 /** Returns content for the corpus page (based on live corpus data). */
-export function corpus (authors: Author[]): Element {
+export const corpus = (authors: Author[]): Element => {
   const maleAuthors = authors.filter(a => a.sex === 'Male')
   const femaleAuthors = authors.filter(a => a.sex === 'Female')
   const authorsWithTexts = authors.filter(a => a.texts.some(t => t.imported))
 
-  const texts = authors.reduce((sofar: Text[], current) => sofar.concat(current.texts), [])
+  const texts = authors.reduce((sofar: TextStub[], current) => sofar.concat(current.texts), [])
   const importedTexts = texts.filter(x => x.imported)
   const duplicatedTexts = texts.filter(x => x.duplicate)
 

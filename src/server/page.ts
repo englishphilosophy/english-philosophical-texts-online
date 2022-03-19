@@ -16,7 +16,7 @@ import * as researchContent from '../content/research.ts'
 import info from '../elements/info.ts'
 
 /** Creates HTML for the home page. */
-export function home (authors: Author[]): Element {
+export const home = (authors: Author[]): Element => {
   return layout({
     section: 'Texts',
     bodyClass: 'home',
@@ -26,7 +26,7 @@ export function home (authors: Author[]): Element {
 }
 
 /** Creates HTML for an author page. */
-export function author (author: Author, analysis: Analysis): Element {
+export const author = (author: Author, analysis: Analysis): Element => {
   return layout({
     section: 'Texts',
     main: [reader.author(author, analysis)],
@@ -35,16 +35,16 @@ export function author (author: Author, analysis: Analysis): Element {
 }
 
 /** Creates HTML for a text page. */
-export function text (text: Text, analysis: Analysis, ancestors: Text[], previous?: Text, next?: Text): Element {
+export const text = (text: Text, analysis: Analysis): Element => {
   return layout({
     section: 'Texts',
     main: [reader.text(text, analysis)],
-    nav: [breadcrumb(ancestors, previous, next)]
+    nav: [breadcrumb(text.ancestors, text.prev, text.next)]
   })
 }
 
 /** Creates HTML for a research page. */
-export function research (id: 'research'|'similarity'|'topics'): Element {
+export const research = (id: 'research' | 'similarity' | 'topics'): Element => {
   return layout({
     section: 'Research',
     nav: [new Element('hgroup', { children: [
@@ -55,7 +55,7 @@ export function research (id: 'research'|'similarity'|'topics'): Element {
 }
 
 /** Creates HTML for an about page. */
-export function about (id: 'about'|'principles'|'permissions'|'contact'|'support'): Element {
+export const about = (id: 'about' | 'principles' | 'permissions' | 'contact' | 'support'): Element => {
   return layout({
     section: 'About',
     nav: [new Element('hgroup', { children: [
@@ -66,7 +66,7 @@ export function about (id: 'about'|'principles'|'permissions'|'contact'|'support
 }
 
 /** Creates HTML for the corpus page. */
-export function corpus (authors: Author[]): Element {
+export const corpus = (authors: Author[]): Element => {
   return layout({
     section: 'About',
     nav: [new Element('hgroup', { children: [
@@ -77,7 +77,7 @@ export function corpus (authors: Author[]): Element {
 }
 
 /** Creates HTML for an error page. */
-export function error (error: HttpError): Element {
+export const error = (error: HttpError): Element => {
   return layout({ section: 'Error', main: [
     new Element('h1', { innerHTML: `${error.status} Error` }),
     new Element('p', { innerHTML: error.message })

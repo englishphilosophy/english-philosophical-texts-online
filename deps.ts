@@ -22,16 +22,22 @@ export {
   headers
 } from 'https://raw.githubusercontent.com/merivale/womble/v0.7.0/mod.ts'
 
-import Author from './bin/types/author.ts'
-import Block from './bin/types/block.ts'
-import Text from './bin/types/text.ts'
-export {
-  Author,
-  Block,
-  Text
-}
-
 export type {
   Analysis,
-  Lemma
-} from './bin/types/analysis.ts'
+  Author,
+  Block,
+  Data,
+  FlatLexicon,
+  Lemma,
+  Lexicon,
+  ReducedLexicon,
+  Text,
+  TextStub
+} from 'https://raw.githubusercontent.com/englishphilosophy/english-philosophical-texts/master/mod.ts'
+
+export {
+  isAuthor,
+  isBlock,
+  isText,
+  isTextStub
+} from 'https://raw.githubusercontent.com/englishphilosophy/english-philosophical-texts/master/mod.ts'

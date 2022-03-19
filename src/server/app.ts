@@ -1,12 +1,8 @@
-import {
-  HttpError,
-  Status
-} from '../../deps.ts'
-
+import { HttpError, Status } from '../../deps.ts'
 import * as handler from './handler.ts'
 
 /** The web application. */
-export default async function epto (request: Request): Promise<Response> {
+export default async (request: Request): Promise<Response> => {
   const url = new URL(request.url)
 
   // favicon
@@ -74,12 +70,6 @@ export default async function epto (request: Request): Promise<Response> {
   const javascriptTest = url.pathname.match(/^\/js\/([a-z/]+\.js)$/)
   if (javascriptTest) {
     return handler.javascript(javascriptTest[1])
-  }
-
-  // json
-  const jsonTest = url.pathname.match(/^\/data\/([a-z/0-9]+\.json)$/)
-  if (jsonTest) {
-    return handler.json(jsonTest[1])
   }
 
   // no matching path

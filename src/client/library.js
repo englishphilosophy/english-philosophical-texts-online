@@ -1,5 +1,5 @@
 import library from '../elements/library.ts'
-import * as read from './read.ts'
+import * as read from '../server/read.ts'
 
 export default async function init () {
   const searchInput = document.querySelector('[data-action="filter-authors"]')

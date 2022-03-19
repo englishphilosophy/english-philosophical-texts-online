@@ -11,83 +11,6 @@ function init() {
         });
     }
 }
-class Block {
-    id = '';
-    author;
-    type = '';
-    pages;
-    speaker;
-    content = '';
-    constructor(data){
-        if (data) {
-            if (data.id) this.id = data.id;
-            if (data.author) this.author = data.author;
-            if (data.type) this.type = data.type;
-            if (data.pages) this.pages = data.pages;
-            if (data.speaker) this.speaker = data.speaker;
-            if (data.content) this.content = data.content;
-        }
-    }
-}
-class Text {
-    id = '';
-    imported = false;
-    duplicate;
-    parent;
-    title = '';
-    breadcrumb = '';
-    published = [];
-    copytext = [];
-    sourceDesc = '';
-    sourceUrl = '';
-    texts = [];
-    blocks = [];
-    constructor(data){
-        if (data) {
-            if (data.id) this.id = data.id;
-            if (data.imported) this.imported = data.imported;
-            if (data.duplicate) this.duplicate = data.duplicate;
-            if (data.parent) this.parent = data.parent;
-            if (data.title) this.title = data.title;
-            if (data.breadcrumb) this.breadcrumb = data.breadcrumb;
-            if (data.published) this.published = data.published;
-            if (data.copytext) this.copytext = data.copytext;
-            if (data.sourceDesc) this.sourceDesc = data.sourceDesc;
-            if (data.sourceUrl) this.sourceUrl = data.sourceUrl;
-            if (data.texts) this.texts = data.texts.map((x)=>new Text(x)
-            );
-            if (data.blocks) this.blocks = data.blocks.map((x)=>new Block(x)
-            );
-        }
-    }
-}
-class Author {
-    id = '';
-    forename = '';
-    surname = '';
-    title;
-    birth = 0;
-    death = 0;
-    published = 0;
-    nationality = '';
-    sex = 'Male';
-    texts = [];
-    constructor(data){
-        if (data) {
-            if (data.id) this.id = data.id;
-            if (data.forename) this.forename = data.forename;
-            if (data.surname) this.surname = data.surname;
-            if (data.title) this.title = data.title;
-            if (data.birth) this.birth = data.birth;
-            if (data.death) this.death = data.death;
-            if (data.published) this.published = data.published;
-            if (data.nationality) this.nationality = data.nationality;
-            if (data.sex) this.sex = data.sex;
-            if (data.texts) this.texts = data.texts.map((x)=>new Text(x)
-            );
-        }
-    }
-}
 const selfClosingTags = [
     'br',
     'hr',
@@ -269,65 +192,45 @@ class Element {
         return this.tagName === 'html' ? '<!doctype html>' + this.outerHTML : this.outerHTML;
     }
 }
-function link(data) {
-    if (data instanceof Author) {
+const isAuthor = (data)=>'forename' in data
+;
+const isText = (data)=>'blocks' in data
+;
+const isTextStub = (data)=>'breadcrumb' in data
+;
+const isBlock = (data)=>'content' in data
+;
+const link = (data)=>{
+    if (isAuthor(data)) {
         return `<a href="${url(data)}">${fullname(data)}</a>`;
     }
-    if (data instanceof Text) {
+    if (isText(data) || isTextStub(data)) {
         return `<a href="${url(data)}">${title(data)}</a>`;
     }
-    let id = data.author ? data.id.replace(/^[a-zA-Z]+\./, `${data.author}.`) : data.id;
+    const id = data.author ? data.id.replace(/^[a-zA-Z]+\./, `${data.author}.`) : data.id;
     return `<a href="${url(data)}">${id}</a>`;
-}
-function url(data) {
-    return data instanceof Block && data.type !== 'title' ? `/texts/${data.id.toLowerCase().replace(/\.([^\.]*)$/, '#$1').replace(/\./g, '/')}` : `/texts/${data.id.toLowerCase().replace(/\./g, '/')}`;
-}
-function fullname(author3, search1) {
+};
+const url = (data)=>{
+    return isBlock(data) ? `/texts/${data.id.toLowerCase().replace(/\.([^\.]*)$/, '#$1').replace(/\./g, '/')}` : `/texts/${data.id.toLowerCase().replace(/\./g, '/')}`;
+};
+const fullname = (author3, search1)=>{
     const fullname1 = author3.title ? `${author3.title} [${author3.forename} ${author3.surname}]` : `${author3.forename} ${author3.surname}`;
     return search1 && search1.length > 0 ? fullname1.replace(regexp(search1), '<mark>$1</mark>') : fullname1;
-}
-function regexp(search2) {
+};
+const regexp = (search2)=>{
     return new RegExp(`\\b(${search2})`, 'i');
-}
-function title(text2) {
+};
+const title = (text2)=>{
     return `${text2.title} (${text2.published.map((x)=>x.toString(10)
     ).join(', ')})`;
-}
-function library(authors1, search3, order = 'published') {
-    if (search3 && search3.length > 0) {
-        authors1 = authors1.filter((author1)=>fullname(author1).match(regexp(search3))
-        );
-    }
-    authors1.sort((a, b)=>a.id.localeCompare(b.id, 'en')
-    );
-    switch(order){
-        case 'published':
-            authors1.sort((a, b)=>a.published - b.published
-            );
-            break;
-        case 'birth':
-            authors1.sort((a, b)=>a.birth - b.birth
-            );
-            break;
-    }
-    return element('div', {
-        id: 'library',
-        class: 'library',
-        children: authors1.length > 0 ? authors1.map((x)=>author(x, search3)
-        ) : [
-            element('p', {
-                innerHTML: 'No matching authors.'
-            })
-        ]
-    });
-}
-function author(author2, search4) {
+};
+const author = (author2, search3)=>{
     return element('a', {
         class: 'author',
         href: url(author2),
         children: [
             element('h6', {
-                innerHTML: `${fullname(author2, search4)} (${author2.birth}-${author2.death})`
+                innerHTML: `${fullname(author2, search3)} (${author2.birth}-${author2.death})`
             }),
             element('div', {
                 class: 'details',
@@ -346,28 +249,68 @@ function author(author2, search4) {
             })
         ]
     });
-}
-async function authors() {
-    const response = await window.fetch('/data/index.json');
-    const library1 = await response.json();
-    return library1.texts.map((x)=>new Author(x)
+};
+const __default = (authors1, search4, order = 'published')=>{
+    if (search4 && search4.length > 0) {
+        authors1 = authors1.filter((author1)=>fullname(author1).match(regexp(search4))
+        );
+    }
+    authors1.sort((a, b)=>a.id.localeCompare(b.id, 'en')
     );
-}
-async function author1(id) {
-    const response = await window.fetch('/data/index.json');
-    const library2 = await response.json();
-    const author11 = library2.texts.find((x)=>x.id.toLowerCase() === id.toLowerCase()
-    );
-    return author11 ? new Author(author11) : undefined;
-}
-async function text(id) {
-    const response = await window.fetch(`/data/html/${id.toLowerCase().replace(/\./g, '/')}.json`);
-    return response.ok ? new Text(await response.json()) : undefined;
-}
-async function analysis(id) {
-    const response = await window.fetch(`/data/analysis/${id.toLowerCase().replace(/\./g, '/')}.json`);
-    return response.ok ? await response.json() : undefined;
-}
+    switch(order){
+        case 'published':
+            authors1.sort((a, b)=>a.published - b.published
+            );
+            break;
+        case 'birth':
+            authors1.sort((a, b)=>a.birth - b.birth
+            );
+            break;
+    }
+    return element('div', {
+        id: 'library',
+        class: 'library',
+        children: authors1.length > 0 ? authors1.map((x)=>author(x, search4)
+        ) : [
+            element('p', {
+                innerHTML: 'No matching authors.'
+            })
+        ]
+    });
+};
+const authors = async ()=>{
+    return JSON.parse(await fetchData('authors')).texts;
+};
+const author1 = async (id)=>{
+    const sanitizedId = id.toLowerCase().replaceAll('.', '');
+    try {
+        return JSON.parse(await fetchData(`text/${sanitizedId}`));
+    } catch  {
+        return undefined;
+    }
+};
+const text = async (id, type = 'html')=>{
+    try {
+        return JSON.parse(await fetchData(`/${type}/${id.toLowerCase().replaceAll('.', '/')}`));
+    } catch  {
+        return undefined;
+    }
+};
+const analysis = async (id)=>{
+    try {
+        return JSON.parse(await fetchData(`analysis/${id.toLowerCase().replaceAll('.', '/')}`));
+    } catch  {
+        return undefined;
+    }
+};
+const fetchData = async (path)=>{
+    const request = new Request(`${dataUrl}/${path}`);
+    console.log(request);
+    const response = await fetch(request);
+    console.log(response);
+    return await response.text();
+};
+const dataUrl = 'https://ept.deno.dev';
 async function init1() {
     const searchInput = document.querySelector('[data-action="filter-authors"]');
     const orderSelect = document.querySelector('[data-action="order-authors"]');
@@ -375,7 +318,7 @@ async function init1() {
     if (searchInput && orderSelect && libraryDiv) {
         const authors2 = await authors();
         function update() {
-            libraryDiv.innerHTML = library(authors2, searchInput.value, orderSelect.value).innerHTML;
+            libraryDiv.innerHTML = __default(authors2, searchInput.value, orderSelect.value).innerHTML;
         }
         searchInput.addEventListener('keyup', update);
         orderSelect.addEventListener('change', update);
@@ -391,13 +334,7 @@ function init2() {
         selectMenu.removeAttribute('disabled');
     }
 }
-function blocks1(blocks) {
-    return element('div', {
-        class: 'section-content blocks',
-        children: blocks.map(block)
-    });
-}
-function block(block1) {
+const block = (block1)=>{
     return element('div', {
         class: 'block',
         id: block1.id.split('.').pop(),
@@ -409,26 +346,32 @@ function block(block1) {
             content(block1)
         ]
     });
-}
-function content(block2) {
+};
+const content = (block2)=>{
     const innerHTML = block2.speaker ? `<i>${block2.speaker}</i>. ${block2.content}` : block2.content;
     return element('div', {
         class: 'content',
         innerHTML
     });
-}
-function toc(text3) {
+};
+const __default1 = (blocks)=>{
+    return element('div', {
+        class: 'section-content blocks',
+        children: blocks.map(block)
+    });
+};
+const tocEntry = (textStub)=>{
+    return element('li', {
+        innerHTML: textStub.imported ? link(textStub) : title(textStub)
+    });
+};
+const __default2 = (text3)=>{
     return element('ul', {
         class: 'section-content toc',
         children: text3.texts.map(tocEntry)
     });
-}
-function tocEntry(text4) {
-    return element('li', {
-        innerHTML: text4.imported ? link(text4) : title(text4)
-    });
-}
-function search(id) {
+};
+const search = (id)=>{
     return element('div', {
         class: 'section-content search',
         children: [
@@ -436,8 +379,8 @@ function search(id) {
             resultsPlaceholder
         ]
     });
-}
-function results(result) {
+};
+const results = (result)=>{
     if (!result) {
         return element('div', {
             class: 'results',
@@ -450,8 +393,8 @@ function results(result) {
             displayResult(result)
         ]
     });
-}
-function form(id) {
+};
+const form = (id)=>{
     return element('form', {
         class: 'search-form',
         children: [
@@ -496,8 +439,8 @@ function form(id) {
             })
         ]
     });
-}
-function query(id, label) {
+};
+const query = (id, label)=>{
     return element('div', {
         class: 'group',
         children: [
@@ -539,11 +482,11 @@ function query(id, label) {
             })
         ]
     });
-}
+};
 const resultsPlaceholder = element('div', {
     class: 'results hidden'
 });
-function displayResult(result) {
+const displayResult = (result)=>{
     const children = [
         element('h4', {
             class: 'title',
@@ -559,8 +502,7 @@ function displayResult(result) {
         children.push(element('div', {
             class: 'results',
             children: [
-                blocks1(result.blocks.map((x)=>new Block(x)
-                ))
+                __default1(result.blocks)
             ]
         }));
     }
@@ -574,21 +516,21 @@ function displayResult(result) {
         class: 'result',
         children
     });
-}
-function author2(author12) {
+};
+const author2 = (author11)=>{
     return element('div', {
         class: 'section-content about',
         children: [
             element('h2', {
-                innerHTML: `${fullname(author12)} (${author12.birth}-${author12.death})`
+                innerHTML: `${fullname(author11)} (${author11.birth}-${author11.death})`
             }),
             element('h4', {
-                innerHTML: `${author12.nationality}, ${author12.sex}`
+                innerHTML: `${author11.nationality}, ${author11.sex}`
             }), 
         ]
     });
-}
-function text1(text11) {
+};
+const text1 = (text11)=>{
     const children = [
         element('p', {
             innerHTML: text11.sourceDesc
@@ -625,10 +567,10 @@ function text1(text11) {
         class: 'section-content about',
         children
     });
-}
-function summary(analysis1) {
-    const isAuthor = analysis1.id.split('.').length === 1;
-    const titleText = isAuthor ? 'The collected works of this author contain:' : 'This text contains:';
+};
+const summary = (analysis1)=>{
+    const isAuthor1 = analysis1.id.split('.').length === 1;
+    const titleText = isAuthor1 ? 'The collected works of this author contain:' : 'This text contains:';
     return element('div', {
         class: 'section-content usage',
         children: [
@@ -654,8 +596,8 @@ function summary(analysis1) {
             })
         ]
     });
-}
-function names(analysis2) {
+};
+const names = (analysis2)=>{
     return element('div', {
         class: 'section-content usage',
         children: [
@@ -667,8 +609,8 @@ function names(analysis2) {
             })
         ]
     });
-}
-function citations(analysis3) {
+};
+const citations = (analysis3)=>{
     return element('div', {
         class: 'section-content usage',
         children: [
@@ -680,8 +622,8 @@ function citations(analysis3) {
             })
         ]
     });
-}
-function foreignText(analysis4) {
+};
+const foreignText = (analysis4)=>{
     return element('div', {
         class: 'section-content usage',
         children: [
@@ -693,8 +635,8 @@ function foreignText(analysis4) {
             })
         ]
     });
-}
-function lemmas(analysis5) {
+};
+const lemmas = (analysis5)=>{
     return element('div', {
         class: 'section-content usage',
         children: [
@@ -721,17 +663,17 @@ function lemmas(analysis5) {
             })
         ]
     });
-}
+};
 const warning = element('p', {
     class: 'warning',
     innerHTML: 'These data are provisional. Their accuracy depends on software that is still being developed, and manual markup that is still being inputted and checked.'
 });
-function item(innerHTML) {
+const item = (innerHTML)=>{
     return element('li', {
         innerHTML
     });
-}
-function lemmaRow(lemma) {
+};
+const lemmaRow = (lemma)=>{
     return element('tr', {
         children: [
             element('td', {
@@ -745,13 +687,13 @@ function lemmaRow(lemma) {
             })
         ]
     });
-}
-function textContent(text2, analysis6, section1) {
+};
+const textContent = (text2, analysis6, section1)=>{
     switch(section1){
         case 'title':
-            return blocks1(text2.blocks.slice(0, 1));
+            return __default1(text2.blocks.slice(0, 1));
         case 'content':
-            return text2.texts.length ? toc(text2) : blocks1(text2.blocks.slice(1));
+            return text2.texts.length ? __default2(text2) : __default1(text2.blocks.slice(1));
         case 'search':
             return search(text2.id);
         case 'summary':
@@ -767,13 +709,13 @@ function textContent(text2, analysis6, section1) {
         case 'about':
             return text1(text2);
     }
-}
-function authorContent(author21, analysis7, section2) {
+};
+const authorContent = (author21, analysis7, section2)=>{
     switch(section2){
         case 'about':
             return author2(author21);
         case 'works':
-            return toc(author21);
+            return __default2(author21);
         case 'search':
             return search(author21.id);
         case 'summary':
@@ -787,7 +729,7 @@ function authorContent(author21, analysis7, section2) {
         case 'lemmas':
             return lemmas(analysis7);
     }
-}
+};
 function init3() {
     const searchForm = document.querySelector('.search-form');
     async function search5(event) {
@@ -836,11 +778,11 @@ async function init4() {
         });
     }
     if (textMenus.length > 0) {
-        const text5 = await text(textMenus[0].dataset.text);
+        const text4 = await text(textMenus[0].dataset.text);
         const analysis10 = await analysis(textMenus[0].dataset.text);
         textMenus.forEach((select)=>{
             select.addEventListener('change', ()=>{
-                select.nextElementSibling.outerHTML = textContent(text5, analysis10, select.value).outerHTML;
+                select.nextElementSibling.outerHTML = textContent(text4, analysis10, select.value).outerHTML;
                 init3();
             });
             select.removeAttribute('disabled');
@@ -1124,22 +1066,7 @@ const religionTextScores = [
         0.000149321
     ]
 ];
-function emplTable(id) {
-    const scores = emplScores[id];
-    return table(emplTitles, scores);
-}
-function dissertationTable(id) {
-    const scores = dissertationScores.map((x)=>x[id]
-    );
-    return table(emplTitles, scores);
-}
-table(religionAuthorScores.map((x)=>x[0]
-), religionAuthorScores.map((x)=>x[1]
-));
-table(religionTextScores.map((x)=>`${x[0]}, <i>${x[1]}</i>`
-), religionTextScores.map((x)=>x[2]
-));
-function table(titles, scores) {
+const table = (titles, scores)=>{
     if (!scores) {
         return element('p', {
             innerHTML: 'Array index out of range.'
@@ -1183,7 +1110,22 @@ function table(titles, scores) {
             })
         ]
     });
-}
+};
+const emplTable = (id)=>{
+    const scores = emplScores[id];
+    return table(emplTitles, scores);
+};
+const dissertationTable = (id)=>{
+    const scores = dissertationScores.map((x)=>x[id]
+    );
+    return table(emplTitles, scores);
+};
+table(religionAuthorScores.map((x)=>x[0]
+), religionAuthorScores.map((x)=>x[1]
+));
+table(religionTextScores.map((x)=>`${x[0]}, <i>${x[1]}</i>`
+), religionTextScores.map((x)=>x[2]
+));
 const emplScores = [
     [
         -1,

@@ -1,11 +1,11 @@
-import type { Element, Author, Text } from '../../deps_client.ts'
+import type { Element, Author, Text, TextStub } from '../../deps_client.ts'
 import { element } from '../../deps_client.ts'
 import * as misc from './misc.ts'
 
-export default function toc (text: Author|Text): Element {
+export default (text: Author | Text): Element => {
   return element('ul', { class: 'section-content toc', children: text.texts.map(tocEntry) })
 }
 
-function tocEntry (text: Text): Element {
-  return element('li', { innerHTML: text.imported ? misc.link(text) : misc.title(text) })
+const tocEntry = (textStub: TextStub): Element => {
+  return element('li', { innerHTML: textStub.imported ? misc.link(textStub) : misc.title(textStub) })
 }

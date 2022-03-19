@@ -3,7 +3,7 @@ import { element } from '../../deps_client.ts'
 import * as misc from './misc.ts'
 
 /** Maps an author to HTML summary information. */
-export function author (author: Author): Element {
+export const author = (author: Author): Element => {
   return element('div', { class: 'section-content about', children: [
     element('h2', { innerHTML: `${misc.fullname(author)} (${author.birth}-${author.death})` }),
     element('h4', { innerHTML: `${author.nationality}, ${author.sex}` }),
@@ -11,7 +11,7 @@ export function author (author: Author): Element {
 }
 
 /** Maps a text to HTML summary information. */
-export function text (text: Text): Element {
+export const text = (text: Text): Element => {
   const children = [
     element('p', { innerHTML: text.sourceDesc }),
     element('h4', { innerHTML: 'First published' }),

@@ -1,7 +1,7 @@
 import type { Statement } from '../types/statement.ts'
 
 /** Statements of support. */
-const statements: Statement[] = [
+export default [
   {
     text: 'This open-access resource is very welcome: it offers an impressive collection ranging from well-known canonical texts to currently neglected early modern voices which deserve to be heard.',
     from: 'Maria Rosa Antognazza',
@@ -195,6 +195,4 @@ const statements: Statement[] = [
     from: 'Jennifer Welchman',
     affiliation: 'University of Alberta, Canada'
   }
-]
-
-export default statements
+] as Statement[]

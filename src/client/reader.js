@@ -1,5 +1,5 @@
 import { authorContent, textContent } from '../elements/reader.ts'
-import * as read from './read.ts'
+import * as read from '../server/read.ts'
 import search from './search.js'
 
 export default async function init () {

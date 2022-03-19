@@ -3,21 +3,21 @@ import type { Result } from '../types/result.ts'
 import { element, Block } from '../../deps_client.ts'
 import blocks from './blocks.ts'
 
-export function search (id: string): Element {
+export const search = (id: string): Element => {
   return element('div', { class: 'section-content search', children: [
     form(id),
     resultsPlaceholder
   ] })
 }
 
-export function results (result?: Result): Element {
+export const results = (result?: Result): Element => {
   if (!result) {
     return element('div', { class: 'results', innerHTML: 'No paragraphs matched your search criteria.' })
   }
   return element('div', { class: 'results', children: [displayResult(result)] })
 }
 
-function form (id: string): Element {
+const form = (id: string): Element => {
   return element('form', { class: 'search-form', children: [
     element('input', { type: 'hidden', name: 'id', value: id }),
     query(1, 'For paragraphs that contain:'),
@@ -36,7 +36,7 @@ function form (id: string): Element {
 ] })
 }
 
-function query (id: number, label: string): Element {
+const query = (id: number, label: string): Element => {
   return element('div', { class: 'group', children: [
     element('label', { class: 'label', for: `query${id}1`, innerHTML: label }),
     element('div', { class: 'inputs', children: [
@@ -62,7 +62,7 @@ function query (id: number, label: string): Element {
 
 const resultsPlaceholder = element('div', { class: 'results hidden' })
 
-function displayResult (result: Result): Element {
+const displayResult = (result: Result): Element => {
   const children = [
     element('h4', { class: 'title', innerHTML: result.title }),
     element('p', {
@@ -74,7 +74,7 @@ function displayResult (result: Result): Element {
   if (result.blocks.length > 0) {
     // results come from JSON send to the browser, so blocks won't be instances of
     // the block class
-    children.push(element('div', { class: 'results', children: [blocks(result.blocks.map(x => new Block(x)))] }))
+    children.push(element('div', { class: 'results', children: [blocks(result.blocks)] }))
   }
   if (result.results.length > 0) {
     children.push(element('div', { class: 'results', children: result.results.map(displayResult) }))

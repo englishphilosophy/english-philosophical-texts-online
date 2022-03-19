@@ -99,32 +99,8 @@ const religionTextScores = [
   ['Berkeley', 'Essay Towards a New Theory of Vision', 0.000149321]
 ]
 
-/** Creates a table of Hume.EMPL.1 similarity scores. */
-export function emplTable (id: number): Element {
-  const scores = emplScores[id]
-  return table(emplTitles, scores)
-}
-
-/** Creates a table of Hume.DP vs Hume.EMPL.1 similarity scores. */
-export function dissertationTable (id: number): Element {
-  const scores = dissertationScores.map(x => x[id])
-  return table(emplTitles, scores)
-}
-
-/** Creates a table of authors and religious scores. */
-export const religiousAuthorsTable = table(
-  religionAuthorScores.map(x => x[0] as string),
-  religionAuthorScores.map(x => x[1] as number)
-)
-
-/** Creates a table of texts and religious scores. */
-export const religiousTextsTable = table(
-  religionTextScores.map(x => `${x[0]}, <i>${x[1]}</i>`),
-  religionTextScores.map(x => x[2] as number)
-)
-
 /** Creates a table of scores. */
-function table (titles: string[], scores?: number[]): Element {
+const table = (titles: string[], scores?: number[]): Element => {
   if (!scores) {
     return element('p', { innerHTML: 'Array index out of range.' })
   }
@@ -146,6 +122,30 @@ function table (titles: string[], scores?: number[]): Element {
     }) })
   ] })
 }
+
+/** Creates a table of Hume.EMPL.1 similarity scores. */
+export const emplTable = (id: number): Element => {
+  const scores = emplScores[id]
+  return table(emplTitles, scores)
+}
+
+/** Creates a table of Hume.DP vs Hume.EMPL.1 similarity scores. */
+export const dissertationTable = (id: number): Element => {
+  const scores = dissertationScores.map(x => x[id])
+  return table(emplTitles, scores)
+}
+
+/** Creates a table of authors and religious scores. */
+export const religiousAuthorsTable = table(
+  religionAuthorScores.map(x => x[0] as string),
+  religionAuthorScores.map(x => x[1] as number)
+)
+
+/** Creates a table of texts and religious scores. */
+export const religiousTextsTable = table(
+  religionTextScores.map(x => `${x[0]}, <i>${x[1]}</i>`),
+  religionTextScores.map(x => x[2] as number)
+)
 
 /** Hume.EMPL.1 similarity scores. */
 const emplScores = [

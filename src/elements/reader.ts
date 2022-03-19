@@ -8,7 +8,7 @@ import * as about from './about.ts'
 import * as usage from './usage.ts'
 
 /** Create the HTML content for a text display. */
-export function text (text: Text, analysis: Analysis): Element {
+export const text = (text: Text, analysis: Analysis): Element => {
   return element('div', { class: 'reader', children: [
     section(textContent(text, analysis, 'title')),
     section(textContent(text, analysis, 'content'), textSelect(text, 'content'))
@@ -16,7 +16,7 @@ export function text (text: Text, analysis: Analysis): Element {
 }
 
 /** Create the HTML content for a section of a text display. */
-export function textContent (text: Text, analysis: Analysis, section: TextSection): Element {
+export const textContent = (text: Text, analysis: Analysis, section: TextSection): Element => {
   switch (section) {
     case 'title':
       return blocks(text.blocks.slice(0, 1))
@@ -48,7 +48,7 @@ export function textContent (text: Text, analysis: Analysis, section: TextSectio
 }
 
 /** Create the HTML content for an author display. */
-export function author (author: Author, analysis: Analysis): Element {
+export const author = (author: Author, analysis: Analysis): Element => {
   return element('div', { class: 'reader', children: [
     section(authorContent(author, analysis, 'about')),
     section(authorContent(author, analysis, 'works'), authorSelect(author, 'works'))
@@ -56,7 +56,7 @@ export function author (author: Author, analysis: Analysis): Element {
 }
 
 /** Create the HTML content for a section of an author display. */
-export function authorContent (author: Author, analysis: Analysis, section: AuthorSection): Element {
+export const authorContent = (author: Author, analysis: Analysis, section: AuthorSection): Element => {
   switch (section) {
     case 'about':
       return about.author(author)
@@ -84,13 +84,13 @@ export function authorContent (author: Author, analysis: Analysis, section: Auth
   }
 }
 
-function section (content: Element, select?: Element): Element {
+const section = (content: Element, select?: Element): Element => {
   return element('div', { class: 'section-wrapper', children: [
     element('div', { class: 'section', children: select ? [select, content] : [content] })
   ] })
 }
 
-function textSelect (text: Text, section: TextSection): Element {
+const textSelect = (text: Text, section: TextSection): Element => {
   return element('select', {
     class: 'section-menu',
     disabled: true,
@@ -115,7 +115,7 @@ function textSelect (text: Text, section: TextSection): Element {
   })
 }
 
-function authorSelect (author: Author, section: AuthorSection): Element {
+const authorSelect = (author: Author, section: AuthorSection): Element => {
   return element('select', {
     class: 'section-menu',
     disabled: true,
@@ -137,6 +137,6 @@ function authorSelect (author: Author, section: AuthorSection): Element {
   })
 }
 
-function option (innerHTML: string, value: string, selected: boolean): Element {
+const option = (innerHTML: string, value: string, selected: boolean): Element => {
   return element('option', { value, innerHTML, selected: selected ? 'selected' : undefined })
 }

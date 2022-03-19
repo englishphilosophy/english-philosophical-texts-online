@@ -3,7 +3,7 @@ import type { PageDetails } from '../types/page_details.ts'
 import { element } from '../../deps_client.ts'
 
 /** Create HTML content for an info page (i.e. a research or about page). */
-export default function info (pageId: string, pages: PageDetails[], content: Element): Element {
+export default (pageId: string, pages: PageDetails[], content: Element): Element => {
   return element('div', { class: 'info', children: [
     element('select', {
       disabled: true,
@@ -20,7 +20,7 @@ export default function info (pageId: string, pages: PageDetails[], content: Ele
 }
 
 /** Creates an option element for a navigation select menu. */
-function option (page: PageDetails, pageId: string): Element {
+const option = (page: PageDetails, pageId: string): Element => {
   const selected = page.id === pageId
   return element('option', {
     selected: selected ? 'selected' : undefined,
@@ -30,7 +30,7 @@ function option (page: PageDetails, pageId: string): Element {
 }
 
 /** Creates a link for a navigation list. */
-function link (page: PageDetails, pageId: string): Element {
+const link = (page: PageDetails, pageId: string): Element => {
   const active = page.id === pageId
   return element('a', {
     class: active ? 'active': undefined,

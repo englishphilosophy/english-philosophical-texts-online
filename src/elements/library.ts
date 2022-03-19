@@ -3,7 +3,7 @@ import { element } from '../../deps_client.ts'
 import * as misc from './misc.ts'
 
 /** Creates the library (list of authors) for the home page. */
-export default function library (authors: Author[], search?: string, order: string = 'published'): Element {
+export default (authors: Author[], search?: string, order = 'published'): Element => {
   if (search && search.length > 0) {
     authors = authors.filter(author => misc.fullname(author).match(misc.regexp(search)))
   }
@@ -30,7 +30,7 @@ export default function library (authors: Author[], search?: string, order: stri
 }
 
 /** Creates an HTML element for an author in the library. */
-function author (author: Author, search?: string): Element {
+const author = (author: Author, search?: string): Element => {
   return element('a', { class: 'author', href: misc.url(author),
     children: [
       element('h6', { innerHTML: `${misc.fullname(author, search)} (${author.birth}-${author.death})` }),

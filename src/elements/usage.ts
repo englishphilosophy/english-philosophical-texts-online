@@ -1,7 +1,7 @@
 import type { Element, Analysis, Lemma } from '../../deps_client.ts'
 import { element } from '../../deps_client.ts'
 
-export function summary (analysis: Analysis): Element {
+export const summary = (analysis: Analysis): Element => {
   const isAuthor = analysis.id.split('.').length === 1
   const titleText = isAuthor
     ? 'The collected works of this author contain:'
@@ -18,7 +18,7 @@ export function summary (analysis: Analysis): Element {
   ] })
 }
 
-export function names (analysis: Analysis): Element {
+export const names = (analysis: Analysis): Element => {
   return element('div', { class: 'section-content usage', children: [
     warning,
     (analysis.names.length > 0)
@@ -27,7 +27,7 @@ export function names (analysis: Analysis): Element {
   ] })
 }
 
-export function citations (analysis: Analysis): Element {
+export const citations = (analysis: Analysis): Element => {
   return element('div', { class: 'section-content usage', children: [
     warning,
     (analysis.citations.length > 0)
@@ -36,7 +36,7 @@ export function citations (analysis: Analysis): Element {
   ] })
 }
 
-export function foreignText (analysis: Analysis): Element {
+export const foreignText = (analysis: Analysis): Element => {
   return element('div', { class: 'section-content usage', children: [
     warning,
     (analysis.foreignText.length > 0)
@@ -45,7 +45,7 @@ export function foreignText (analysis: Analysis): Element {
   ] })
 }
 
-export function lemmas (analysis: Analysis): Element {
+export const lemmas = (analysis: Analysis): Element => {
   return element('div', { class: 'section-content usage', children: [
     warning,
     element('table', { children: [
@@ -61,11 +61,11 @@ export function lemmas (analysis: Analysis): Element {
 
 const warning = element('p', { class: 'warning', innerHTML: 'These data are provisional. Their accuracy depends on software that is still being developed, and manual markup that is still being inputted and checked.' })
 
-function item (innerHTML: string): Element {
+const item = (innerHTML: string): Element => {
   return element('li', { innerHTML })
 }
 
-function lemmaRow (lemma: Lemma): Element {
+const lemmaRow = (lemma: Lemma): Element => {
   return element('tr', { children: [
     element('td', { innerHTML: lemma.label }),
     element('td', { innerHTML: lemma.frequency.toString(10) }),
