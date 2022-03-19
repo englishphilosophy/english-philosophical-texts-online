@@ -17,7 +17,7 @@ export default function init () {
     }
     const query = fields.join('&')
   
-    const response = await window.fetch('/search', {
+    const response = await fetch('/search', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: query

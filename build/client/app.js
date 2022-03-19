@@ -291,7 +291,7 @@ const author1 = async (id)=>{
 };
 const text = async (id, type = 'html')=>{
     try {
-        return JSON.parse(await fetchData(`/${type}/${id.toLowerCase().replaceAll('.', '/')}`));
+        return JSON.parse(await fetchData(`${type}/${id.toLowerCase().replaceAll('.', '/')}`));
     } catch  {
         return undefined;
     }
@@ -305,9 +305,7 @@ const analysis = async (id)=>{
 };
 const fetchData = async (path)=>{
     const request = new Request(`${dataUrl}/${path}`);
-    console.log(request);
     const response = await fetch(request);
-    console.log(response);
     return await response.text();
 };
 const dataUrl = 'https://ept.deno.dev';
@@ -744,7 +742,7 @@ function init3() {
             fields.push(`${encodeURIComponent(field1.name)}=${field1.checked ? 'on' : 'off'}`);
         }
         const query1 = fields.join('&');
-        const response = await window.fetch('/search', {
+        const response = await fetch('/search', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
