@@ -85,13 +85,6 @@ Deno.test({
 })
 
 Deno.test({
-  name: 'server/handler:json',
-  async fn () {
-    // TODO
-  }
-})
-
-Deno.test({
   name: 'server/handler:error',
   async fn () {
     // TODO

@@ -1,10 +1,6 @@
 export {
-  parse as parseYaml
-} from 'https://deno.land/std@v0.129.0/encoding/yaml.ts'
-
-export {
   Server
-} from 'https://deno.land/std@v0.129.0/http/server.ts'
+} from 'https://deno.land/std@0.132.0/http/server.ts'
 
 export {
   element,

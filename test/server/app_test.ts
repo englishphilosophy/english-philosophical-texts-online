@@ -128,20 +128,6 @@ Deno.test({
 })
 
 Deno.test({
-  name: 'app /data',
-  async fn () {
-    const request = new Request('https://localhost/data/html/hume.json', { method: 'GET' })
-    const response = await app(request)
-    assertEquals(response, await handler.json('html/hume.json'))
-
-    assertRejects(async () => {
-      const request = new Request('https://localhost/data/foo/bar/baz.json', { method: 'GET' })
-      await app(request)
-    }, HttpError, 'JSON file not found.')
-  }
-})
-
-Deno.test({
   name: 'app 404',
   fn () {
     assertRejects(async () => {

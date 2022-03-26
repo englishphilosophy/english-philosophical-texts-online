@@ -26,15 +26,23 @@ export const authors = async (): Promise<Author[]> => {
 export const author = async (id: string): Promise<Author | undefined> => {
   const sanitizedId = id.toLowerCase().replaceAll('.', '')
   try {
-    return JSON.parse(await fetchData(`text/${sanitizedId}`)) as Author
+    const response = JSON.parse(await fetchData(`html/${sanitizedId}`))
+    if (response.error) {
+      return undefined
+    }
+    return response as Author
   } catch {
     return undefined
   }
 }
 
-export const text = async (id: string, type: 'html' | 'text' = 'html'): Promise<Text | undefined> => {
+export const text = async (id: string, type: 'html' | 'mit' = 'html'): Promise<Text | undefined> => {
   try {
-    return JSON.parse(await fetchData(`${type}/${id.toLowerCase().replaceAll('.', '/')}`)) as Text
+    const result = JSON.parse(await fetchData(`${type}/${id.toLowerCase().replaceAll('.', '/')}`))
+    if (result.error) {
+      return undefined
+    }
+    return result as Text
   } catch {
     return undefined
   }
@@ -42,7 +50,11 @@ export const text = async (id: string, type: 'html' | 'text' = 'html'): Promise<
 
 export const analysis = async (id: string): Promise<Analysis | undefined> => {
   try {
-    return JSON.parse(await fetchData(`analysis/${id.toLowerCase().replaceAll('.', '/')}`)) as Analysis
+    const result = JSON.parse(await fetchData(`analysis/${id.toLowerCase().replaceAll('.', '/')}`))
+    if (result.error) {
+      return undefined
+    }
+    return result as Analysis
   } catch {
     return undefined
   }
