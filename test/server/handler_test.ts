@@ -37,31 +37,31 @@ Deno.test({
   }
 })
 
-Deno.test({
-  name: 'server/handler:author',
-  async fn () {
-    for (const author of await read.authors()) {
-      const response = handler.author(author.id)
+for (const author of await read.authors()) {
+  Deno.test({
+    name: `server/handler:author:${author.id}`,
+    async fn () {
+      const response = await handler.author(author.id)
       assert(response instanceof Response)
       assertEquals(response.status, Status.OK)
       assertEquals(response.headers.get('content-type'), 'text/html')
     }
-  }
-})
+  })
+}
 
-Deno.test({
-  name: 'server/handler:text',
-  async fn () {
-    for (const author of await read.authors()) {
-      for (const text of author.texts) {
-        const response = handler.text(text.id)
+for (const author of await read.authors()) {
+  for (const text of author.texts) {
+    Deno.test({
+      name: `server/handler:text:${text.id}`,
+      async fn () {
+        const response = await handler.text(text.id)
         assert(response instanceof Response)
         assertEquals(response.status, Status.OK)
         assertEquals(response.headers.get('content-type'), 'text/html')
       }
-    }
+    })
   }
-})
+}
 
 Deno.test({
   name: 'server/handler:research',

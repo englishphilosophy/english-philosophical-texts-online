@@ -1,7 +1,6 @@
 import {
   assertEquals,
   assertRejects,
-  assertThrows
 } from '../../test_deps.ts'
 
 import {
@@ -17,7 +16,7 @@ Deno.test({
   async fn () {
     const request = new Request('https://localhost/favicon.ico', { method: 'GET' })
     const response = await app(request)
-    assertEquals(response, await handler.favicon())
+    await assertResponseEquals(response, await handler.favicon())
   }
 })
 
@@ -26,7 +25,7 @@ Deno.test({
   async fn () {
     const request = new Request('https://localhost/', { method: 'GET' })
     const response = await app(request)
-    assertEquals(response, await handler.home())
+    assertResponseEquals(response, await handler.home())
   }
 })
 
@@ -41,46 +40,46 @@ Deno.test({
   }
 })
 
-Deno.test({
-  name: 'app /texts/{author}',
-  async fn () {
-    for (const author of await read.authors()) {
+for (const author of await read.authors()) {
+  Deno.test({
+    name: `app /texts/${author.id}`,
+    async fn () {
       const path = author.id.toLowerCase()
       const request = new Request(`https://localhost/texts/${path}`, { method: 'GET' })
       const response = await app(request)
-      assertEquals(response, handler.author(path))
+      assertResponseEquals(response, await handler.author(path))
     }
-  }
-})
+  })
+}
 
-Deno.test({
-  name: 'app /texts/{author}/{text}',
-  async fn () {
-    for (const author of await read.authors()) {
-      for (const text of author.texts) {
+for (const author of await read.authors()) {
+  for (const text of author.texts) {
+    Deno.test({
+      name: `app /texts/${author.id}/${text.id}`,
+      async fn () {
         const path = text.id.toLowerCase().replace(/\./g, '/')
         const request = new Request(`https://localhost/texts/${path}`, { method: 'GET' })
         const response = await app(request)
-        assertEquals(response, handler.text(path))
+        assertResponseEquals(response, await handler.text(path))
       }
-    }
+    })
   }
-})
+}
 
 Deno.test({
   name: 'app /research',
   async fn () {
     const request1 = new Request('https://localhost/research', { method: 'GET' })
     const response1 = await app(request1)
-    assertEquals(response1, handler.research('research'))
+    assertResponseEquals(response1, handler.research('research'))
 
     const request2 = new Request('https://localhost/research/similarity', { method: 'GET' })
     const response2 = await app(request2)
-    assertEquals(response2, handler.research('similarity'))
+    assertResponseEquals(response2, handler.research('similarity'))
 
     const request3 = new Request('https://localhost/research/topics', { method: 'GET' })
     const response3 = await app(request3)
-    assertEquals(response3, handler.research('topics'))
+    assertResponseEquals(response3, handler.research('topics'))
   }
 })
 
@@ -89,27 +88,27 @@ Deno.test({
   async fn () {
     const request1 = new Request('https://localhost/about', { method: 'GET' })
     const response1 = await app(request1)
-    assertEquals(response1, handler.about('about'))
+    assertResponseEquals(response1, await handler.about('about'))
 
     const request2 = new Request('https://localhost/about/corpus', { method: 'GET' })
     const response2 = await app(request2)
-    assertEquals(response2, handler.about('corpus'))
+    assertResponseEquals(response2, await handler.about('corpus'))
 
     const request3 = new Request('https://localhost/about/principles', { method: 'GET' })
     const response3 = await app(request3)
-    assertEquals(response3, handler.about('principles'))
+    assertResponseEquals(response3, await handler.about('principles'))
 
     const request4 = new Request('https://localhost/about/permissions', { method: 'GET' })
     const response4 = await app(request4)
-    assertEquals(response4, handler.about('permissions'))
+    assertResponseEquals(response4, await handler.about('permissions'))
 
     const request5 = new Request('https://localhost/about/contact', { method: 'GET' })
     const response5 = await app(request5)
-    assertEquals(response5, handler.about('contact'))
+    assertResponseEquals(response5, await handler.about('contact'))
 
     const request6 = new Request('https://localhost/about/support', { method: 'GET' })
     const response6 = await app(request6)
-    assertEquals(response6, handler.about('support'))
+    assertResponseEquals(response6, await handler.about('support'))
   }
 })
 
@@ -118,7 +117,7 @@ Deno.test({
   async fn () {
     const request = new Request('https://localhost/js/client/app.js', { method: 'GET' })
     const response = await app(request)
-    assertEquals(response, await handler.javascript('client/app.js'))
+    assertResponseEquals(response, await handler.javascript('client/app.js'))
 
     assertRejects(async () => {
       const request = new Request('https://localhost/js/foo/bar/baz.js', { method: 'GET' })
@@ -136,3 +135,11 @@ Deno.test({
     }, HttpError, 'Page not found.')
   }
 })
+
+const assertResponseEquals = async (actual: Response, expected: Response): Promise<void> => {
+  actual.headers.delete("date")
+  expected.headers.delete("date")
+  assertEquals(actual.headers, expected.headers)
+  assertEquals(actual.status, expected.status)
+  assertEquals((await actual.blob()).size, (await expected.blob()).size)
+}
