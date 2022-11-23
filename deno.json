@@ -1,0 +1,7 @@
+{
+  "tasks": {
+    "test": "deno test --allow-read --allow-write --allow-env",
+    "build": "deno run --allow-read --allow-write --allow-env --allow-net --allow-run bin/build.ts",
+    "run": "deno run --allow-read --allow-write --allow-env --allow-net bin/server.ts"
+  }
+}
