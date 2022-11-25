@@ -1,6 +1,6 @@
 export {
   Server
-} from 'https://deno.land/std@0.132.0/http/server.ts'
+} from 'https://deno.land/std@0.166.0/http/server.ts'
 
 export {
   element,
