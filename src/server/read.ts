@@ -1,5 +1,5 @@
 import type { Analysis } from "ept/analysis";
-import type { Lexicon, FlatLexicon, ReducedLexicon } from "ept/lexicon";
+import type { FlatLexicon, Lexicon, ReducedLexicon } from "ept/lexicon";
 import type { Author, Text } from "ept/library";
 
 export const lexicon = (): Promise<Lexicon> =>

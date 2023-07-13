@@ -6,8 +6,6 @@
     "ept/analysis": "https://raw.githubusercontent.com/englishphilosophy/english-philosophical-texts/master/src/types/analysis.ts",
     "ept/lexicon": "https://raw.githubusercontent.com/englishphilosophy/english-philosophical-texts/master/src/types/lexicon.ts",
     "ept/library": "https://raw.githubusercontent.com/englishphilosophy/english-philosophical-texts/master/src/types/library.ts",
-    "elementary": "https://raw.githubusercontent.com/merivale/elementary/v0.4.0/mod.ts",
-    "womble": "https://raw.githubusercontent.com/merivale/womble/v0.7.0/mod.ts",
     "react": "https://esm.sh/react@18.2.0",
     "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
     "react-dom/server": "https://esm.sh/react-dom@18.2.0/server",

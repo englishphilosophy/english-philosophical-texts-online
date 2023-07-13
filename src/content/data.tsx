@@ -1,4 +1,4 @@
-import { type Element, element } from "elementary";
+import React, { type FC, type ReactNode } from "react";
 
 /** Titles from Hume.EMPL.1. */
 export const emplTitles = [
@@ -155,66 +155,67 @@ const religionTextScores = [
 ];
 
 /** Creates a table of scores. */
-const table = (titles: string[], scores?: number[]): Element => {
+const Table: FC<{ titles: ReactNode[]; scores?: number[] }> = ({
+  titles,
+  scores,
+}) => {
   if (!scores) {
-    return element("p", { innerHTML: "Array index out of range." });
+    return <p>Array index out of range.</p>;
   }
+
   const data = scores
     .map((score, index) => ({ title: titles[index], score }))
     .sort((x, y) => y.score - x.score);
-  return element("table", {
-    children: [
-      element("thead", {
-        children: [
-          element("tr", {
-            children: [
-              element("th", { innerHTML: "Comparison text" }),
-              element("th", { innerHTML: "Similarity&nbsp;score" }),
-            ],
-          }),
-        ],
-      }),
-      element("tbody", {
-        children: data.map((x) => {
-          return element("tr", {
-            children: [
-              element("td", { innerHTML: x.title }),
-              element("td", {
-                innerHTML: (x.score * 10000)
-                  .toString(10)
-                  .slice(0, 6)
-                  .padEnd(6, "0"),
-              }),
-            ],
-          });
-        }),
-      }),
-    ],
-  });
+
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Comparison text</th>
+          <th>Similarity&nbsp;score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((x) => (
+          <tr>
+            <td>{x.title}</td>
+            <td>{(x.score * 10000).toString(10).slice(0, 6).padEnd(6, "0")}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
 };
 
 /** Creates a table of Hume.EMPL.1 similarity scores. */
-export const emplTable = (id: number): Element => {
-  const scores = emplScores[id];
-  return table(emplTitles, scores);
-};
+export const EMPLTable: FC<{ id: number }> = ({ id }) => (
+  <Table titles={emplTitles} scores={emplScores[id]} />
+);
 
 /** Creates a table of Hume.DP vs Hume.EMPL.1 similarity scores. */
-export const dissertationTable = (id: number): Element => {
-  const scores = dissertationScores.map((x) => x[id]);
-  return table(emplTitles, scores);
-};
+export const DissertationTable: FC<{ id: number }> = ({ id }) => (
+  <Table titles={emplTitles} scores={dissertationScores.map((x) => x[id])} />
+);
 
 /** Creates a table of authors and religious scores. */
-export const religiousAuthorsTable = table(
-  religionAuthorScores.map((x) => x[0] as string),
-  religionAuthorScores.map((x) => x[1] as number)
+export const ReligiousAuthorsTable: FC = () => (
+  <Table
+    titles={religionAuthorScores.map((x) => x[0] as string)}
+    scores={religionAuthorScores.map((x) => x[1] as number)}
+  />
 );
 
 /** Creates a table of texts and religious scores. */
-export const religiousTextsTable = table(
-  religionTextScores.map((x) => `${x[0]}, <i>${x[1]}</i>`),
-  religionTextScores.map((x) => x[2] as number)
+// TODO: there's some HTML as a string here
+export const ReligiousTextsTable: FC = () => (
+  <Table
+    titles={religionTextScores.map((x) => (
+      <>
+        {x[0]}, <i>{x[1]}</i>
+      </>
+    ))}
+    scores={religionTextScores.map((x) => x[2] as number)}
+  />
 );
 
 /** Hume.EMPL.1 similarity scores. */
