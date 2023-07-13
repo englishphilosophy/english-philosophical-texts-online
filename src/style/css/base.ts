@@ -1,4 +1,4 @@
-import * as colours from '../colours.ts'
+import * as colours from "../colours.ts";
 
 export default `
 * {
@@ -110,4 +110,4 @@ th, td {
   vertical-align: top;
   padding: .25em .5em;
 }
-`
+`;

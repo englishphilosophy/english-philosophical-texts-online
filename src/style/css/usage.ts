@@ -1,4 +1,4 @@
-import * as colours from '../colours.ts'
+import * as colours from "../colours.ts";
 
 export default `
 .usage {
@@ -10,4 +10,4 @@ export default `
   padding: .5em .75em;
   background: ${colours.beige};
 }
-`
+`;

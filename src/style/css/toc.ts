@@ -8,4 +8,4 @@ export default `
 .toc li {
   margin-bottom: .25em;
 }
-`
+`;

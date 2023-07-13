@@ -1,4 +1,4 @@
-import * as colours from '../colours.ts'
+import * as colours from "../colours.ts";
 
 export default `
 .breadcrumb {
@@ -35,4 +35,4 @@ export default `
   display: flex;
   justify-content: flex-end;
 }
-`
+`;

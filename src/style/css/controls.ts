@@ -1,4 +1,4 @@
-import * as colours from '../colours.ts'
+import * as colours from "../colours.ts";
 
 export default `
 .controls {
@@ -23,4 +23,4 @@ export default `
     padding: 1em;
   }
 }
-`
+`;

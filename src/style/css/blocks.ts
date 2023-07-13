@@ -1,5 +1,5 @@
-import * as colours from '../colours.ts'
-import * as fonts from '../fonts.ts'
+import * as colours from "../colours.ts";
+import * as fonts from "../fonts.ts";
 
 export default `
 .blocks {
@@ -69,4 +69,4 @@ export default `
 .block .content ins {
   text-decoration: none;
 }
-`
+`;

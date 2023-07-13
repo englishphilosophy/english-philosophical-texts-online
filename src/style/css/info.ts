@@ -1,4 +1,4 @@
-import * as colours from '../colours.ts'
+import * as colours from "../colours.ts";
 
 export default `
 .info {
@@ -78,4 +78,4 @@ export default `
     text-decoration: none;
   }
 }
-`
+`;

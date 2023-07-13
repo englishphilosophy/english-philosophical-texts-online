@@ -1,4 +1,4 @@
-import * as colours from '../colours.ts'
+import * as colours from "../colours.ts";
 
 export default `
 .reader {
@@ -26,4 +26,4 @@ export default `
     grid-template-columns: 1fr 1fr;
   }
 }
-`
+`;

@@ -1,10 +1,10 @@
-import type { Block } from '../../deps_client.ts'
+import type { Block } from "ept/library";
 
 /** A search result. */
 export type Result = {
-  id: string
-  title: string
-  blocks: Block[]
-  results: Result[]
-  total: number
-}
+  id: string;
+  title: string;
+  blocks: Block[];
+  results: Result[];
+  total: number;
+};

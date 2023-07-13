@@ -1,6 +1,6 @@
-import * as colours from '../colours.ts'
-import * as fonts from '../fonts.ts'
-import * as images from '../images.ts'
+import * as colours from "../colours.ts";
+import * as fonts from "../fonts.ts";
+import * as images from "../images.ts";
 
 export default `
 html {
@@ -165,4 +165,4 @@ footer a {
     padding: 2em 3em;
   }
 }
-`
+`;

@@ -1,48 +1,48 @@
 Deno.test({
-  name: 'server/page:home',
-  async fn () {
+  name: "server/page:home",
+  async fn() {
     // TODO
-  }
-})
+  },
+});
 
 Deno.test({
-  name: 'server/page:author',
-  async fn () {
+  name: "server/page:author",
+  async fn() {
     // TODO
-  }
-})
+  },
+});
 
 Deno.test({
-  name: 'server/page:text',
-  async fn () {
+  name: "server/page:text",
+  async fn() {
     // TODO
-  }
-})
+  },
+});
 
 Deno.test({
-  name: 'server/page:research',
-  async fn () {
+  name: "server/page:research",
+  async fn() {
     // TODO
-  }
-})
+  },
+});
 
 Deno.test({
-  name: 'server/page:about',
-  async fn () {
+  name: "server/page:about",
+  async fn() {
     // TODO
-  }
-})
+  },
+});
 
 Deno.test({
-  name: 'server/page:corpus',
-  async fn () {
+  name: "server/page:corpus",
+  async fn() {
     // TODO
-  }
-})
+  },
+});
 
 Deno.test({
-  name: 'server/page:error',
-  async fn () {
+  name: "server/page:error",
+  async fn() {
     // TODO
-  }
-})
+  },
+});

@@ -1,4 +1,4 @@
-import * as colours from '../colours.ts'
+import * as colours from "../colours.ts";
 
 export default `
 .library {
@@ -47,4 +47,4 @@ export default `
     grid-template-columns: 1fr 1fr;
   }
 }
-`
+`;

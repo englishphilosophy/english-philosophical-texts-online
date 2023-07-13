@@ -1,4 +1,4 @@
-import * as colours from '../colours.ts'
+import * as colours from "../colours.ts";
 
 export default `
 .search {
@@ -79,4 +79,4 @@ export default `
   display: block;
   padding: .5em 0;
 }
-`
+`;
