@@ -50,8 +50,8 @@ const fetchFromEPT = async <Result>(
   url: string,
   init?: RequestInit,
 ): Promise<Safely<Result>> => {
-  const baseUrl = "http://localhost:3001";
-  // const baseUrl = "https://ept.deno.dev";
+  // set to http://localhost:3001 if developing with EPT service locally
+  const baseUrl = "https://ept.deno.dev";
 
   const response = await safely(
     () => fetch(`${baseUrl}/${url}`, init),
