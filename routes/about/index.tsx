@@ -42,24 +42,25 @@ export default () => (
           Furthermore, the editions on these sites do not include universal
           paragraph references, making them of limited use to historians of
           philosophy. By combining these works with new digitisations of as many
-          other works, including several by often neglected female writers, we
-          hope to provide a lasting scholarly resource of unparalleled size in
-          this field.
+          other works again, including several by often neglected female
+          writers, we hope to provide a lasting scholarly resource of
+          unparalleled size in this field.
         </p>
         <p>
           Thanks to the{" "}
           <a href="https://innovation.ox.ac.uk/award-details/john-fell-fund/">
             John Fell Fund
           </a>
-          , we conducted a pilot project last year (2018-19), the principal aim
-          of which was to draw up a list of works, locate the best publicly
-          available digital editions of those works, and to estimate the cost
-          and feasibility of converting these editions into a consistent format
-          and of digitizing the works that remain. We are now applying to the
-          Leverhulme Trust for the necessary funds to see the project through to
-          completion. We continue to seek input from scholars, teachers, and
-          other interested parties, so please <a href="/contact">contact us</a>
-          {" "}
+          , we conducted a pilot project in 2018-19, during which time draw up a
+          list of works, located the best publicly available digital editions of
+          those works, and estimated the cost and feasibility of converting
+          these editions into a consistent format and of digitizing the works
+          that remain. We then applied to the Leverhulme Trust for the necessary
+          funds to see the project through to completion, but unfortunately
+          failed to win a grant. We are now mostly kept busy by other things,
+          but the project is by no means dead - we continue to work on it as and
+          when we are able, and are keeping any eye out for other ways support
+          it more fully. Please <a href="/contact">contact us</a>{" "}
           with any suggestions, queries, or expressions of interest.
         </p>
       </div>
