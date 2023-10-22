@@ -1,6 +1,6 @@
 import { type Handlers, type PageProps } from "$fresh/server.ts";
 import { type Author, type TextStub } from "ept/types";
-import * as read from "../../utils/read.ts";
+import { fetchAuthors } from "../../utils/read.ts";
 import Page from "../../components/Page.tsx";
 import Info from "../../islands/Info.tsx";
 import Link from "../../components/Link.tsx";
@@ -8,8 +8,11 @@ import { aboutPages, aboutTitles } from "./_titles.ts";
 
 export const handler: Handlers<Author[]> = {
   async GET(_, ctx) {
-    const authors = await read.authors();
-    return ctx.render(authors);
+    const authors = await fetchAuthors();
+    if (!authors.ok) {
+      throw new Error(authors.message);
+    }
+    return ctx.render(authors.result);
   },
 };
 
