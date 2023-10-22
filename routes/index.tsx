@@ -1,9 +1,9 @@
-import { type Handlers, type PageProps } from "$fresh/server.ts";
+import type { Handlers, PageProps } from "$fresh/server.ts";
 import { useSignal } from "@preact/signals";
 import Page from "../components/Page.tsx";
 import Controls, { type Order } from "../islands/Controls.tsx";
 import Library from "../islands/Library.tsx";
-import { type Author } from "ept/types";
+import type { Author } from "ept/types";
 import { fetchAuthors } from "../utils/read.ts";
 
 export const handler: Handlers<Author[]> = {

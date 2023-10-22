@@ -1,6 +1,6 @@
-import { type Signal } from "@preact/signals";
-import { type Author } from "ept/types";
-import { type Order } from "./Controls.tsx";
+import type { Signal } from "@preact/signals";
+import type { Author } from "ept/types";
+import type { Order } from "./Controls.tsx";
 import fullname from "../utils/fullname.ts";
 import url from "../utils/url.ts";
 

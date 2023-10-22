@@ -1,4 +1,4 @@
-import { type Author } from "ept/types";
+import type { Author } from "ept/types";
 
 /** Creates the full display name of an author, optionally highlighted by a search match. */
 export default (author: Author, search?: string): string => {

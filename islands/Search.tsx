@@ -1,6 +1,6 @@
 import { useRef } from "preact/hooks";
 import { useSignal } from "@preact/signals";
-import { type Query, type SearchOptions, type SearchResult } from "ept/types";
+import type { Query, SearchOptions, SearchResult } from "ept/types";
 import { fetchSearchResults } from "../utils/read.ts";
 import QueryInput from "../islands/Query.tsx";
 import Results from "../islands/Results.tsx";
