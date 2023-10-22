@@ -1,4 +1,4 @@
-import { type Signal } from "@preact/signals";
+import type { Signal } from "@preact/signals";
 
 type Props = {
   searchTerm: Signal<string>;

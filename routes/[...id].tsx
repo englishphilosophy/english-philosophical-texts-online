@@ -1,6 +1,6 @@
-import { type Handlers, type PageProps } from "$fresh/server.ts";
+import type { Handlers, PageProps } from "$fresh/server.ts";
 import Page from "../components/Page.tsx";
-import { type Analysis, type Author, isAuthor, type Text } from "ept/types";
+import { isAuthor } from "ept/types";
 import { type TextDetails, fetchText } from "../utils/read.ts";
 import Breadcrumb from "../components/Breadcrumb.tsx";
 import AuthorDisplay from "../islands/AuthorDisplay.tsx";

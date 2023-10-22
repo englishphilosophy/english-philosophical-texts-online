@@ -1,4 +1,4 @@
-import { type ComponentChild, type ComponentChildren } from "preact";
+import type { ComponentChild, ComponentChildren } from "preact";
 import css from "../style/css.ts";
 
 export type Section = "About" | "Error" | "Research" | "Texts";

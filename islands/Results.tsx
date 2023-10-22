@@ -1,4 +1,4 @@
-import { type SearchResult } from "ept/types";
+import type { SearchResult } from "ept/types";
 import Blocks from "../components/Blocks.tsx";
 
 type Props = {

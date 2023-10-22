@@ -1,4 +1,4 @@
-import { type Text, type TextStub } from "ept/types";
+import type { Text, TextStub } from "ept/types";
 
 /** Creates the full display title of a text. */
 export default (text: Text | TextStub): string =>
