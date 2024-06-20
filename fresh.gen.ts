@@ -20,12 +20,14 @@ import * as $14 from "./routes/research/similarity.tsx";
 import * as $15 from "./routes/research/topics.tsx";
 import * as $$0 from "./islands/AuthorDisplay.tsx";
 import * as $$1 from "./islands/Controls.tsx";
-import * as $$2 from "./islands/Info.tsx";
-import * as $$3 from "./islands/Library.tsx";
-import * as $$4 from "./islands/Query.tsx";
-import * as $$5 from "./islands/Results.tsx";
-import * as $$6 from "./islands/Search.tsx";
-import * as $$7 from "./islands/TextDisplay.tsx";
+import * as $$2 from "./islands/DissertationSimilarityTable.tsx";
+import * as $$3 from "./islands/EMPLSimilarityTable.tsx";
+import * as $$4 from "./islands/Info.tsx";
+import * as $$5 from "./islands/Library.tsx";
+import * as $$6 from "./islands/Query.tsx";
+import * as $$7 from "./islands/Results.tsx";
+import * as $$8 from "./islands/Search.tsx";
+import * as $$9 from "./islands/TextDisplay.tsx";
 
 const manifest = {
   routes: {
@@ -49,12 +51,14 @@ const manifest = {
   islands: {
     "./islands/AuthorDisplay.tsx": $$0,
     "./islands/Controls.tsx": $$1,
-    "./islands/Info.tsx": $$2,
-    "./islands/Library.tsx": $$3,
-    "./islands/Query.tsx": $$4,
-    "./islands/Results.tsx": $$5,
-    "./islands/Search.tsx": $$6,
-    "./islands/TextDisplay.tsx": $$7,
+    "./islands/DissertationSimilarityTable.tsx": $$2,
+    "./islands/EMPLSimilarityTable.tsx": $$3,
+    "./islands/Info.tsx": $$4,
+    "./islands/Library.tsx": $$5,
+    "./islands/Query.tsx": $$6,
+    "./islands/Results.tsx": $$7,
+    "./islands/Search.tsx": $$8,
+    "./islands/TextDisplay.tsx": $$9,
   },
   baseUrl: import.meta.url,
 };
