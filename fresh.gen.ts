@@ -2,65 +2,68 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $0 from "./routes/[...id].tsx";
-import * as $1 from "./routes/_404.tsx";
-import * as $2 from "./routes/_500.tsx";
-import * as $3 from "./routes/about/_titles.ts";
-import * as $4 from "./routes/about/contact.tsx";
-import * as $5 from "./routes/about/corpus.tsx";
-import * as $6 from "./routes/about/index.tsx";
-import * as $7 from "./routes/about/permissions.tsx";
-import * as $8 from "./routes/about/principles.tsx";
-import * as $9 from "./routes/about/support.tsx";
-import * as $10 from "./routes/index.tsx";
-import * as $11 from "./routes/research/_data.tsx";
-import * as $12 from "./routes/research/_titles.ts";
-import * as $13 from "./routes/research/index.tsx";
-import * as $14 from "./routes/research/similarity.tsx";
-import * as $15 from "./routes/research/topics.tsx";
-import * as $$0 from "./islands/AuthorDisplay.tsx";
-import * as $$1 from "./islands/Controls.tsx";
-import * as $$2 from "./islands/DissertationSimilarityTable.tsx";
-import * as $$3 from "./islands/EMPLSimilarityTable.tsx";
-import * as $$4 from "./islands/Info.tsx";
-import * as $$5 from "./islands/Library.tsx";
-import * as $$6 from "./islands/Query.tsx";
-import * as $$7 from "./islands/Results.tsx";
-import * as $$8 from "./islands/Search.tsx";
-import * as $$9 from "./islands/TextDisplay.tsx";
+import * as $_id_ from "./routes/[...id].tsx";
+import * as $_404 from "./routes/_404.tsx";
+import * as $_500 from "./routes/_500.tsx";
+import * as $_app from "./routes/_app.tsx";
+import * as $about_titles from "./routes/about/_titles.ts";
+import * as $about_contact from "./routes/about/contact.tsx";
+import * as $about_corpus from "./routes/about/corpus.tsx";
+import * as $about_index from "./routes/about/index.tsx";
+import * as $about_permissions from "./routes/about/permissions.tsx";
+import * as $about_principles from "./routes/about/principles.tsx";
+import * as $about_support from "./routes/about/support.tsx";
+import * as $index from "./routes/index.tsx";
+import * as $research_data from "./routes/research/_data.tsx";
+import * as $research_titles from "./routes/research/_titles.ts";
+import * as $research_index from "./routes/research/index.tsx";
+import * as $research_similarity from "./routes/research/similarity.tsx";
+import * as $research_topics from "./routes/research/topics.tsx";
+import * as $AuthorDisplay from "./islands/AuthorDisplay.tsx";
+import * as $Controls from "./islands/Controls.tsx";
+import * as $DissertationSimilarityTable from "./islands/DissertationSimilarityTable.tsx";
+import * as $EMPLSimilarityTable from "./islands/EMPLSimilarityTable.tsx";
+import * as $Info from "./islands/Info.tsx";
+import * as $Library from "./islands/Library.tsx";
+import * as $Query from "./islands/Query.tsx";
+import * as $Results from "./islands/Results.tsx";
+import * as $Search from "./islands/Search.tsx";
+import * as $TextDisplay from "./islands/TextDisplay.tsx";
+import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
-    "./routes/[...id].tsx": $0,
-    "./routes/_404.tsx": $1,
-    "./routes/_500.tsx": $2,
-    "./routes/about/_titles.ts": $3,
-    "./routes/about/contact.tsx": $4,
-    "./routes/about/corpus.tsx": $5,
-    "./routes/about/index.tsx": $6,
-    "./routes/about/permissions.tsx": $7,
-    "./routes/about/principles.tsx": $8,
-    "./routes/about/support.tsx": $9,
-    "./routes/index.tsx": $10,
-    "./routes/research/_data.tsx": $11,
-    "./routes/research/_titles.ts": $12,
-    "./routes/research/index.tsx": $13,
-    "./routes/research/similarity.tsx": $14,
-    "./routes/research/topics.tsx": $15,
+    "./routes/[...id].tsx": $_id_,
+    "./routes/_404.tsx": $_404,
+    "./routes/_500.tsx": $_500,
+    "./routes/_app.tsx": $_app,
+    "./routes/about/_titles.ts": $about_titles,
+    "./routes/about/contact.tsx": $about_contact,
+    "./routes/about/corpus.tsx": $about_corpus,
+    "./routes/about/index.tsx": $about_index,
+    "./routes/about/permissions.tsx": $about_permissions,
+    "./routes/about/principles.tsx": $about_principles,
+    "./routes/about/support.tsx": $about_support,
+    "./routes/index.tsx": $index,
+    "./routes/research/_data.tsx": $research_data,
+    "./routes/research/_titles.ts": $research_titles,
+    "./routes/research/index.tsx": $research_index,
+    "./routes/research/similarity.tsx": $research_similarity,
+    "./routes/research/topics.tsx": $research_topics,
   },
   islands: {
-    "./islands/AuthorDisplay.tsx": $$0,
-    "./islands/Controls.tsx": $$1,
-    "./islands/DissertationSimilarityTable.tsx": $$2,
-    "./islands/EMPLSimilarityTable.tsx": $$3,
-    "./islands/Info.tsx": $$4,
-    "./islands/Library.tsx": $$5,
-    "./islands/Query.tsx": $$6,
-    "./islands/Results.tsx": $$7,
-    "./islands/Search.tsx": $$8,
-    "./islands/TextDisplay.tsx": $$9,
+    "./islands/AuthorDisplay.tsx": $AuthorDisplay,
+    "./islands/Controls.tsx": $Controls,
+    "./islands/DissertationSimilarityTable.tsx": $DissertationSimilarityTable,
+    "./islands/EMPLSimilarityTable.tsx": $EMPLSimilarityTable,
+    "./islands/Info.tsx": $Info,
+    "./islands/Library.tsx": $Library,
+    "./islands/Query.tsx": $Query,
+    "./islands/Results.tsx": $Results,
+    "./islands/Search.tsx": $Search,
+    "./islands/TextDisplay.tsx": $TextDisplay,
   },
   baseUrl: import.meta.url,
-};
+} satisfies Manifest;
 
 export default manifest;

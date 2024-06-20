@@ -1,7 +1,7 @@
-import { ErrorPageProps } from "$fresh/server.ts";
+import { PageProps } from "$fresh/server.ts";
 import Page from "../components/Page.tsx";
 
-export default ({ error }: ErrorPageProps) => (
+export default ({ error }: PageProps) => (
   <Page section="Error">
     <h1>Internal Server Error</h1>
     <p>{error instanceof Error ? error.message : "Something went wrong."}</p>
