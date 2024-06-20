@@ -40,7 +40,7 @@ export default () => (
         <p>
           The software we have developed so far does not yet allow for
           multi-word phrases. For illustrative purposes, we have created a
-          relatively crude topic to represent relgion, consisiting of thirty
+          relatively crude topic to represent religion, consisting of thirty
           words of equal weighting: ‘atheism’, ‘atheist’, ‘christ’, ‘christian’,
           ‘christianity’, ‘cosmogony’, ‘deity’, ‘divine’, ‘divinity’, ‘eternal’,
           ‘eternity’, ‘god’, ‘gospel’, ‘messiah’, ‘miracle’, ‘miraculous’,

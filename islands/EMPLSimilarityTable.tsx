@@ -2,7 +2,7 @@ import { useSignal } from "@preact/signals";
 import Table from "../components/Table.tsx";
 import { emplScores, emplTitles } from "../routes/research/_data.tsx";
 
-const EMPLSimilarityTable = () => {
+export default () => {
   const index = useSignal(0);
 
   return (
@@ -21,5 +21,3 @@ const EMPLSimilarityTable = () => {
     </>
   );
 };
-
-export default EMPLSimilarityTable;

@@ -1,4 +1,4 @@
-import { signal, useSignal } from "@preact/signals";
+import { useSignal } from "@preact/signals";
 import Table from "../components/Table.tsx";
 import {
   dissertationScores,
@@ -6,7 +6,7 @@ import {
   emplTitles,
 } from "../routes/research/_data.tsx";
 
-const DissertationSimilarityTable = () => {
+export default () => {
   const index = useSignal(0);
 
   return (
@@ -28,5 +28,3 @@ const DissertationSimilarityTable = () => {
     </>
   );
 };
-
-export default DissertationSimilarityTable;
