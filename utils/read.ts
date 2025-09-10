@@ -7,7 +7,7 @@ import type {
 } from "ept/types";
 import { type Safely, safely } from "./safely.ts";
 
-const baseUrl = Deno.env.get("EPT_BASE_URL") ?? "http://localhost:3001";
+const baseUrl = "	https://ept-3r708651e8t4.deno.dev";
 
 export type TextDetails = {
   text: Author | Text;
