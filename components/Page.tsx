@@ -42,6 +42,7 @@ const Page = ({
         <link rel="shortcut icon" href="/favicon.ico" />
       </head>
       <body className={bodyClass}>
+        <span dangerouslySetInnerHTML={{ __html: "<!--quick test-->" }} />
         <header>
           <hgroup>
             <h1>English Philosophical Texts Online</h1>
