@@ -7,6 +7,8 @@ import type {
 } from "ept/types";
 import { type Safely, safely } from "./safely.ts";
 
+const baseUrl = Deno.env.get("EPT_BASE_URL") ?? "http://localhost:3001";
+
 export type TextDetails = {
   text: Author | Text;
   analysis: Analysis;
@@ -50,9 +52,6 @@ const fetchFromEPT = async <Result>(
   url: string,
   init?: RequestInit,
 ): Promise<Safely<Result>> => {
-  // set to http://localhost:3001 if developing with EPT service locally
-  const baseUrl = "https://ept.deno.dev";
-
   const response = await safely(
     () => fetch(`${baseUrl}/${url}`, init),
     "Couldn't connect to EPT service.",
